@@ -1,0 +1,79 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button (click)="atras()" defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-padding">Te Llevo App</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-segment color="primary" [(ngModel)]="type" (ionChange)="segmentChanged($event)" value="home" class="ion-padding-horizontal">
+        <ion-segment-button value="home" checked>
+            <ion-label>Inicio</ion-label>
+            <ion-icon name="home-outline"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="nuevo-viaje" class="nuevoViaje">
+            <ion-label>Nuevo Viaje</ion-label>
+            <ion-icon name="add-outline"></ion-icon>
+        </ion-segment-button>
+    </ion-segment>
+
+    <div class="" [ngSwitch]="type">
+        <!-- HOME -->
+        <ion-card class="" *ngSwitchCase="'home'">
+            <ion-card-header>
+                <ion-title class="titulo">Bienvenido {{user}}</ion-title>
+            </ion-card-header>
+            <ion-list-header>
+                <ion-title id="homeTitle">Viajes activos</ion-title>
+            </ion-list-header>
+            <ion-list class="ion-padding-vertical ion-text-center">
+                <ion-item *ngFor="let post of posts">
+                    <ion-label (click)="setPost(post)">
+                        <h4>{{post.title}}</h4>
+                        <p>{{post.body}}</p>
+                        <p>{{post.tarifa}}</p>
+
+                    </ion-label>
+                    <ion-button (click)="eliminarPost(post)">
+                        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                    </ion-button>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+
+        <!-- AGREGAR VIAJE -->
+        <div *ngSwitchCase="'nuevo-viaje'">
+            <ion-card class="ion-padding-vertical ion-text-center">
+                <ion-card-header>
+                    <ion-title class="titulo">Conductores</ion-title>
+                </ion-card-header>
+                <ion-item>
+                    <ion-select placeholder="Seleccione" [(ngModel)]="user">
+                        <ion-select-option *ngFor="let usu of users" [value]="usu">{{usu.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-card-header>
+                    <ion-title id="tituloViajes">Direcciones</ion-title>
+                </ion-card-header>
+                <ion-item class="ion-padding-horizontal">
+                    <ion-label position="floating">¿Donde estás?</ion-label>
+                    <ion-input [(ngModel)]="post.title"></ion-input>
+                </ion-item>
+                <ion-item class="ion-padding-horizontal">
+                    <ion-label position="floating">¿Donde vas?</ion-label>
+                    <ion-textarea [(ngModel)]="post.body"></ion-textarea>
+                </ion-item>
+                <ion-item class="ion-padding-horizontal">
+                    <ion-label position="floating">Tarifa</ion-label>
+                    <ion-input type="number" [(ngModel)]="post.tarifa"></ion-input>
+                </ion-item>
+                <button mat-raised-button color="primary" (click)="guardarViaje()" class="">
+                Guardar viaje
+            </button>
+            </ion-card>
+            <app-geocoder></app-geocoder>
+        </div>
+    </div>
+</ion-content>
