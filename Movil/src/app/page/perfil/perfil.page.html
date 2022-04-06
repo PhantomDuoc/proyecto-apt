@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Conductor</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-router-outlet>
+
+        <ion-card>
+            <ion-list-header>
+                <ion-title>Viajes disponibles</ion-title>
+            </ion-list-header>
+            <ion-list>
+                <ion-item>
+                    <ion-label>
+                        Está en: Sede Duoc UC<br> Va a: {{viaje.voy}} <br>Precio del viaje: ${{viaje.precio}}
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+
+
+    </ion-router-outlet>
+</ion-content>

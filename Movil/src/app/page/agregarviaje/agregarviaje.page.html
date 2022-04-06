@@ -1,0 +1,105 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Viajes</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="login">
+        <ion-card-header>
+            <ion-card-title>Direcciones</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <form [formGroup]="formularioViaje">
+                <ion-grid>
+
+
+                    <div style="position: relative">
+                        <ion-searchbar debounce=500 (ionChange)="search($event)" [value]="selectedAddress"></ion-searchbar>
+                        <div>
+                            <ion-list lines="none" *ngIf="addresses.length > 0">
+                                <ion-item button *ngFor="let address of addresses" (click)="onSelect(address)">
+                                    <ion-icon name="pin"></ion-icon>
+                                    {{address}}
+                                </ion-item>
+                            </ion-list>
+                        </div>
+                    </div>
+
+                </ion-grid>
+                <ion-item class="ion-padding-horizontal">
+                    <ion-label position="floating">¿Donde voy?</ion-label>
+                    <ion-input formControlName="voy" autocomplete="off"></ion-input>
+                </ion-item>
+                <ion-item class="ion-padding-horizontal">
+                    <ion-label position="floating">Precio</ion-label>
+                    <ion-input formControlName="precio" autocomplete="off" type="number"></ion-input>
+                </ion-item>
+            </form>
+
+            <br>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-button shape="round" expand="block" (click)="guardarPost()">Comenzar viaje</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+
+    </ion-card>
+
+
+    <div id="map"></div>
+</ion-content>
+
+
+
+<!-- 
+    <ion-card>
+        <ion-card-header>
+            <ion-title>Direcciones</ion-title>
+        </ion-card-header>
+        <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">¿Donde estoy?</ion-label>
+            <ion-input [(ngModel)]="post.title"></ion-input>
+        </ion-item>
+        <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">¿Donde voy?</ion-label>
+            <ion-textarea [(ngModel)]="post.body"></ion-textarea>
+        </ion-item>
+        <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">Precio Viaje</ion-label>
+            <ion-textarea [(ngModel)]="post.costo"></ion-textarea>
+        </ion-item>
+        <ion-grid>
+            <ion-row>
+
+                <ion-col>
+                    <ion-button shape="round" expand="block" (click)="guardarPost()">Comenzar viaje</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+    <ion-card>
+        <ion-list-header>
+            <ion-title>Historial de viajes</ion-title>
+        </ion-list-header>
+        <ion-list>
+            <ion-item *ngFor="let post of posts">
+                <ion-label (click)="setPost(post)">
+                    <h4>Estoy en: {{post.title}}</h4>
+                    <h4>Voy a: {{post.body}}</h4>
+                    <h4>Costo del viaje: {{post.costo}}</h4>
+
+                </ion-label>
+                <ion-button (click)="eliminarPost(post)">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                </ion-button>
+            </ion-item>
+        </ion-list>
+
+    </ion-card> -->
