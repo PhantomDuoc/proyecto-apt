@@ -16,7 +16,7 @@ mvn archetype:generate -DarchetypeGroupId=cl.coordinador.arquetipos \
 -DarchetypeArtifactId=archetype-rest-microservice-crud \
 -DarchetypeVersion=1.0.0 \
 -DgroupId=cl.coordinador.personas \
--DartifactId=api_personas_rrhh_personas
+-DartifactId=api-personas-rrhh-personas
 
 ```
 
