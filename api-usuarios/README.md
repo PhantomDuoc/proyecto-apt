@@ -86,7 +86,7 @@ curl -s -XPOST 'http://jenkins-cen.coordinador.cl:8080/job/RedHat/createItem?nam
 luego, debemos configurar la integración con Gitlab para el webhook:
 
 ### Creación Integración Gitlab y Jenkins
-http://docs.google.com/document/d/1RpjxSSqdhrJgr-Hv13SrbDBhnECtxDXi9bPfqYC47Ys/edit#heading=h.1n6zdhow586a
+https://docs.google.com/document/d/1RpjxSSqdhrJgr-Hv13SrbDBhnECtxDXi9bPfqYC47Ys/edit#heading=h.1n6zdhow586a
 punto 4.8
 
 ### Primer Push a la rama
