@@ -1,4 +1,4 @@
-package cl.adasoft.departamento.gerencia;
+package cl.coordinador.gerencia.departamento;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -24,8 +24,8 @@ public class CreateServiceApplication {
 	                    .title("API REST PARTICIPANT")
 	                    .version(appVersion)
 	                    .description(appDescription)
-	                    .license(new License().name("AdaSoft").url("http://www.adasoft.cl"))
-	                    .contact(new Contact().name("Hugo Cerdá").email("hugo.cerda@adasoft.cl")));
+	                    .license(new License().name("Coordinador Eléctrico Nacional").url("http://www.coordinador.cl"))
+	                    .contact(new Contact().name("Luis Núñez").email("luis.nunez@coordinador.cl")));
 	}
 
 }

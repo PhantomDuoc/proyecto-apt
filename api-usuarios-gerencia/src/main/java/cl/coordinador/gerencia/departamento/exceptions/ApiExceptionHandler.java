@@ -1,4 +1,4 @@
-package cl.adasoft.departamento.gerencia.exceptions;
+package cl.coordinador.gerencia.departamento.exceptions;
 
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;

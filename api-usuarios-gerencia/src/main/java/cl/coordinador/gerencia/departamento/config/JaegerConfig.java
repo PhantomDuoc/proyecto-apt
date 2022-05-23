@@ -1,4 +1,4 @@
-package cl.adasoft.departamento.gerencia.config;
+package cl.coordinador.gerencia.departamento.config;
 
 import io.jaegertracing.internal.JaegerTracer;
 import org.springframework.context.annotation.Bean;

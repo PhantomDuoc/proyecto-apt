@@ -1,4 +1,4 @@
-package cl.adasoft.departamento.gerencia.models.entity;
+package cl.coordinador.gerencia.departamento.models.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,22 +14,29 @@ import lombok.Data;
 
 @Data 
 @Entity
-@Table(name="user")
-public class Usuario {
+@Table(name="users")
+public class Persona {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotBlank
-	@Size(min = 3, max = 100, message = "The name cannot exceed 100 characters")
-	@Column(name="username", unique= true)
+	@Size(min = 10, max = 100, message = "The name cannot exceed 100 characters")
+	@Column(name="username")
 	private String username;
-	
+
 	@Column(name="password")
 	private String password;
-
+	
 	@Column(name="type")
 	private Long type;
+
+	@Column(name="rut")
+	private Long rut;
+
+	@Column(name="direccion")
+	private String direccion;
+	
 	
 }

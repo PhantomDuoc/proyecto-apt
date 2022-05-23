@@ -44,8 +44,11 @@ Las pruebas podrán ser realizadas mediante postman, se adjunta proyecto para qu
 curl --location -k --request POST 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/create' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "name":"testName",
-    "rut": 11111
+    "username":"testName",
+    "password":"testPass",
+    "rut": 11111,
+    "type": 1,
+    "direccion": "Dirección de prueba xd"
 }'
 ```
 

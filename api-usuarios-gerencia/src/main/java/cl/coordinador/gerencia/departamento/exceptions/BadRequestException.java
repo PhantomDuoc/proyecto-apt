@@ -1,4 +1,4 @@
-package cl.adasoft.departamento.gerencia.exceptions;
+package cl.coordinador.gerencia.departamento.exceptions;
 
 public class BadRequestException extends RuntimeException {
     /**
