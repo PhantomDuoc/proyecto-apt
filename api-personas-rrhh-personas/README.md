@@ -41,7 +41,7 @@ Las pruebas podrán ser realizadas mediante postman, se adjunta proyecto para qu
 
 ###### Crear Registro
 ```
-curl --location -k --request POST 'https://api-personas-rrhh-personas-coordinador-dev.apps.prod-os-1.coordinador.cl/v1/gerencia/departamento/funcionalidad/create' \
+curl --location -k --request POST 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/create' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name":"testName",
@@ -51,22 +51,22 @@ curl --location -k --request POST 'https://api-personas-rrhh-personas-coordinado
 
 ###### Buscar todos los registros
 ```
-curl --location -k --request GET 'https://api-personas-rrhh-personas-coordinador-dev.apps.prod-os-1.coordinador.cl/v1/gerencia/departamento/funcionalidad/findAll'
+curl --location -k --request GET 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/findAll'
 ```
 
 ###### Buscar registro por ID
 ```
-curl --location -k --request GET 'https://api-personas-rrhh-personas-coordinador-dev.apps.prod-os-1.coordinador.cl/v1/gerencia/departamento/funcionalidad/findById/1'
+curl --location -k --request GET 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/findById/1'
 ```
 
 ###### Buscar registro por Rut o por atributo custom
 ```
-curl --location -k --request GET 'https://api-personas-rrhh-personas-coordinador-dev.apps.prod-os-1.coordinador.cl/v1/gerencia/departamento/funcionalidad/findByRut/11111'
+curl --location -k --request GET 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/findByRut/11111'
 ```
 
 ###### Eliminar registro por ID
 ```
-curl --location -k --request DELETE 'https://api-personas-rrhh-personas-coordinador-dev.apps.prod-os-1.coordinador.cl/v1/gerencia/departamento/funcionalidad/delete/8'
+curl --location -k --request DELETE 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/delete/8'
 ```
 
 ### Creación pipeline
@@ -86,7 +86,7 @@ curl -s -XPOST 'http://jenkins-cen.coordinador.cl:8080/job/RedHat/createItem?nam
 luego, debemos configurar la integración con Gitlab para el webhook:
 
 ### Creación Integración Gitlab y Jenkins
-https://docs.google.com/document/d/1RpjxSSqdhrJgr-Hv13SrbDBhnECtxDXi9bPfqYC47Ys/edit#heading=h.1n6zdhow586a
+http://docs.google.com/document/d/1RpjxSSqdhrJgr-Hv13SrbDBhnECtxDXi9bPfqYC47Ys/edit#heading=h.1n6zdhow586a
 punto 4.8
 
 ### Primer Push a la rama
