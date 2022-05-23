@@ -19,10 +19,10 @@ public class JaegerConfig {
         io.jaegertracing.Configuration.SenderConfiguration senderConfig = io.jaegertracing.Configuration.SenderConfiguration
                 .fromEnv()
                 .withEndpoint(
-                        "http://jaeger-all-in-one-inmemory-collector:14268/api/traces");
+                        "http://jaeger-all-in-one-inmemory-collector:6831/api/traces");
 
-        io.jaegertracing.Configuration config = new io.jaegertracing.Configuration("api-personas-rrhh-personas-traces")
-                .withSampler(samplerConfig).withReporter(reporterConfig.withSender(senderConfig));
+        io.jaegertracing.Configuration config = new io.jaegertracing.Configuration("api-usuarios-gerencia-traces")
+                .withSampler(samplerConfig).withReporter(reporterConfig/* .withSender(senderConfig) */);
 
         return config.getTracer();
     }

@@ -107,3 +107,8 @@ a la rama, ya que tenemos la Integración de Gitlab con Jekins.
 
 
 
+Comandos útiles docker
+
+docker run --name postgres -p 6543:5432 -e POSTGRES_PASSWORD=postgrespw -e POSTGRES_USER=postgres -e POSTGRES_DB=gerencia -d postgres:latest
+
+docker run -p 8080:8080 -p 50000:50000 --restart always jenkins/jenkins:lts-jdk11

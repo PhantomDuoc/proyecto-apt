@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -26,17 +27,29 @@ public class Persona {
 	@Column(name="username")
 	private String username;
 
+	@NotBlank
 	@Column(name="password")
 	private String password;
 	
+	@NotBlank
 	@Column(name="type")
 	private Long type;
 
+	@NotBlank
 	@Column(name="rut")
 	private Long rut;
 
+	@NotBlank
 	@Column(name="direccion")
 	private String direccion;
 	
+	@NotBlank
+	@Column(name="email")
+	@Email
+	private String email;
+
+	@NotBlank
+	@Column(name="telefono")
+	private Long telefono;
 	
 }
