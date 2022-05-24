@@ -18,11 +18,11 @@ public class JaegerConfig {
 
         io.jaegertracing.Configuration.SenderConfiguration senderConfig = io.jaegertracing.Configuration.SenderConfiguration
                 .fromEnv()
-                .withEndpoint(
-                        "http://jaeger:6831/api/traces");
+                .withAgentHost("jaeger")
+                .withAgentPort(6831);
 
         io.jaegertracing.Configuration config = new io.jaegertracing.Configuration("api-productos-gerencia-traces")
-                .withSampler(samplerConfig).withReporter(reporterConfig/* .withSender(senderConfig) */);
+                .withSampler(samplerConfig).withReporter(reporterConfig.withSender(senderConfig));
 
         return config.getTracer();
     }
