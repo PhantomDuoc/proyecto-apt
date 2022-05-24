@@ -114,6 +114,9 @@ docker run --name postgres -p 127.0.0.1:6543:5432 -e POSTGRES_PASSWORD=postgresp
 docker run -p 8080:8080 -p 50000:50000 --restart always jenkins/jenkins:lts-jdk11
 
 docker run --name=api-usuarios-gerencia -p 8090:8090 api-usuarios-gerencia:latest
+
+mvn clean install -s configuration/settings.xml
+
 docker build --tag=api-usuarios-gerencia:latest .
 
 docker run -d --name jaeger \
