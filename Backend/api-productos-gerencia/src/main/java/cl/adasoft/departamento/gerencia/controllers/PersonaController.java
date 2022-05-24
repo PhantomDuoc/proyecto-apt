@@ -54,21 +54,21 @@ public class PersonaController {
 	}	
 	
 /* 	Reemplazar por buscar por nombre de usuario
- */	/* @GetMapping("/findById/{id}")
-	public ResponseEntity<Persona> findById(@PathVariable Long id){
-		Persona response = participantService.findById(id);
+ */	@GetMapping("/findByCodigo/{codigo}")
+	public ResponseEntity<Persona> findByRut(@PathVariable Long codigo){
+		Persona response = participantService.findByRut(codigo);
 		
 		if(response == null) {
-			throw new NotFoundException("participant id: " + id);
+			throw new NotFoundException("participant codigo: " + codigo);
 		}
 		
 		return new ResponseEntity<>(response, HttpStatus.OK);
-    } */
+    }
 	
 	
 	@GetMapping("/findById/{id}")
-	public ResponseEntity<Persona>  findById(@PathVariable Long id){
-		Persona response = participantService.findById(id);
+	public Optional<Persona>  findById(@PathVariable Long id){
+		Optional<Persona> response = participantService.findById(id);
 		
 		if(response == null) {
 			throw new NotFoundException("participant id: " + id);

@@ -40,11 +40,19 @@ public class PersonaServiceImp implements IPersonaService {
 	public void delete(Long id) {
 		
 		participantsDao.deleteById(id);
-	}		
+	}	
+
+	@Override
+	@Transactional(readOnly = true)
+	public Persona findByRut(Long codigo) {
+		
+		return participantsDao.findByRut(codigo);
+	}
+	
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Persona findById(Long id) {
+	public Optional<Persona> findById(Long id) {
 		
 		return participantsDao.findById(id);
 	}	

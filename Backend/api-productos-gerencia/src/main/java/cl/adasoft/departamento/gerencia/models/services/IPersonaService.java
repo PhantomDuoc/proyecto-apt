@@ -15,6 +15,8 @@ public interface IPersonaService {
 	
 	public void delete(Long id);	
 	
-	public Persona findById(Long id);
+	public Persona findByRut(Long codigo);
+	
+	public Optional<Persona> findById(Long id);
 
 }

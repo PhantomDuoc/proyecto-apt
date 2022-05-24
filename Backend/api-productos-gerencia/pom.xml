@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>cl.adasoft.productos</groupId>
+	<groupId>cl.adasoft.usuarios</groupId>
 	<artifactId>api-productos-gerencia</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>productos</name>
-	<description>API REST para el control de productos ADASOFT</description>
+	<description>API REST para la gestión de productos ADASOFT</description>
 	
 	<properties>
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>

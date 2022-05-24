@@ -109,8 +109,25 @@ a la rama, ya que tenemos la Integración de Gitlab con Jekins.
 
 Comandos útiles docker
 
-docker run --name postgres -p 6543:5432 -e POSTGRES_PASSWORD=postgrespw -e POSTGRES_USER=postgres -e POSTGRES_DB=gerencia -d postgres:latest
+docker run --name postgres -p 127.0.0.1:6543:5432 -e POSTGRES_PASSWORD=postgrespw -e POSTGRES_USER=postgres -e POSTGRES_DB=gerencia -d postgres:latest
 
 docker run -p 8080:8080 -p 50000:50000 --restart always jenkins/jenkins:lts-jdk11
 
 docker run --name=api-usuarios-gerencia -p 8090:8090 api-usuarios-gerencia:latest
+docker build --tag=api-usuarios-gerencia:latest .
+
+docker run -d --name jaeger \
+  -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
+  -p 5775:5775/udp \
+  -p 6831:6831/udp \
+  -p 6832:6832/udp \
+  -p 5778:5778 \
+  -p 16686:16686 \
+  -p 14250:14250 \
+  -p 14268:14268 \
+  -p 14269:14269 \
+  -p 9411:9411 \
+  jaegertracing/all-in-one:1.9 \
+  --network adasoft-network
+
+docker-compose up

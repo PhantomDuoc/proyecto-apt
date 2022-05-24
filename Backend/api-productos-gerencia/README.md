@@ -41,50 +41,48 @@ Las pruebas podrán ser realizadas mediante postman, se adjunta proyecto para qu
 
 ###### Crear Registro
 ```
-curl --location -k --request POST 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/create' \
+curl --location -k --request POST 'http://localhost:8090/v1/departamento/gerencia/producto/create' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "username":"testName",
-    "password":"testPass",
-    "rut": 11111,
-    "type": 1,
-    "direccion": "Dirección de prueba xd"
+    "nombre":"testName",
+    "codigo":1,
+    "precio": 11111,
 }'
 ```
 
 ###### Buscar todos los registros
 ```
-curl --location -k --request GET 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/findAll'
+curl --location -k --request GET 'http://localhost:8090/v1/departamento/gerencia/producto/findAll'
 ```
 
 ###### Buscar registro por ID
 ```
-curl --location -k --request GET 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/findById/1'
+curl --location -k --request GET 'http://localhost:8090/v1/departamento/gerencia/producto/findById/1'
 ```
 
 ###### Buscar registro por Rut o por atributo custom
 ```
-curl --location -k --request GET 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/findByRut/11111'
+curl --location -k --request GET 'http://localhost:8090/v1/departamento/gerencia/producto/findByRut/11111'
 ```
 
 ###### Eliminar registro por ID
 ```
-curl --location -k --request DELETE 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/delete/8'
+curl --location -k --request DELETE 'http://localhost:8090/v1/departamento/gerencia/producto/delete/8'
 ```
 
 ### Creación pipeline
 
 Ejecutar:
 
-curl -v -X GET http://jenkins-cen.coordinador.cl:8080/crumbIssuer/api/json --user hcerda:hcerda
+curl -v -X GET http://jenkins-cen.coordinador.cl:8090/crumbIssuer/api/json --user hcerda:hcerda
 
 luego
 
-curl -X GET http://jenkins-cen.coordinador.cl:8080/job/RedHat/job/test-deploy/config.xml -u hcerda:hcerda -o config.xml
+curl -X GET http://jenkins-cen.coordinador.cl:8090/job/RedHat/job/test-deploy/config.xml -u hcerda:hcerda -o config.xml
 
 luego, ejecutar:
 
-curl -s -XPOST 'http://jenkins-cen.coordinador.cl:8080/job/RedHat/createItem?name=api-personas-rrhh-personas' --data-binary @config.xml -H "Content-Type:text/xml" --user hcerda:118d424eddde0f7e1cd089ca4c2c4265a6
+curl -s -XPOST 'http://jenkins-cen.coordinador.cl:8090/job/RedHat/createItem?name=api-personas-rrhh-personas' --data-binary @config.xml -H "Content-Type:text/xml" --user hcerda:118d424eddde0f7e1cd089ca4c2c4265a6
 
 luego, debemos configurar la integración con Gitlab para el webhook:
 
@@ -111,6 +109,8 @@ Comandos útiles docker
 
 docker run --name postgres -p 6543:5432 -e POSTGRES_PASSWORD=postgrespw -e POSTGRES_USER=postgres -e POSTGRES_DB=gerencia -d postgres:latest
 
-docker run -p 8080:8080 -p 50000:50000 --restart always jenkins/jenkins:lts-jdk11
+docker run -p 8090:8090 -p 50000:50000 --restart always jenkins/jenkins:lts-jdk11
 
 docker run --name=api-usuarios-gerencia -p 8090:8090 api-usuarios-gerencia:latest
+
+docker build --tag=api-productos-gerencia:latest .

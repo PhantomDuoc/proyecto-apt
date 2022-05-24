@@ -19,9 +19,9 @@ public class JaegerConfig {
         io.jaegertracing.Configuration.SenderConfiguration senderConfig = io.jaegertracing.Configuration.SenderConfiguration
                 .fromEnv()
                 .withEndpoint(
-                        "http://jaeger-all-in-one-inmemory-collector:6831/api/traces");
+                        "http://jaeger:6831/api/traces");
 
-        io.jaegertracing.Configuration config = new io.jaegertracing.Configuration("api-usuarios-gerencia-traces")
+        io.jaegertracing.Configuration config = new io.jaegertracing.Configuration("api-productos-gerencia-traces")
                 .withSampler(samplerConfig).withReporter(reporterConfig/* .withSender(senderConfig) */);
 
         return config.getTracer();
