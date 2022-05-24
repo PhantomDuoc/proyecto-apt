@@ -1,0 +1,21 @@
+version: '3.2'
+services:
+  postgres:
+    restart: always
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+         - POSTGRES_PASSWORD=postgrespw
+         - POSTGRES_USER=postgres
+         - POSTGRES_DB=productos
+# APP**
+  web:
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/productos
+    expose:
+      - 8091
+    ports:
+      - 8091:8091
