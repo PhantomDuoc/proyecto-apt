@@ -1,4 +1,3 @@
-from urllib import response
 from django.shortcuts import render
 import requests
 from core.models import Usuarios
@@ -15,8 +14,8 @@ def index(request):
 
     
 def login(request):
-    return render(request,'core/login.html')
-
+    response=request.get('http://localhost:8091/v1/departamento/gerencia/usuario/findAll').json()
+    return render(request,'core/login.html',{'response':response})
     
 def registro(request):
     return render(request,'core/registro.html')
