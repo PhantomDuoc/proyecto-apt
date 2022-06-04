@@ -131,7 +131,6 @@ docker run -d --name jaeger \
   -p 14269:14269 \
   -p 9411:9411 \
   jaegertracing/all-in-one:1.9 \
-  --network adasoft-network
 
 docker network create adasoft-network
 
