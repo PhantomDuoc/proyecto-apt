@@ -3,7 +3,7 @@ from django.shortcuts import render
 import requests
 from core.models import Usuarios
 
-url='https://api.covid19api.com/countries'
+url='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
 
 
 # Create your views here.
