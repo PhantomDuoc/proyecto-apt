@@ -41,7 +41,7 @@ Las pruebas podrán ser realizadas mediante postman, se adjunta proyecto para qu
 
 ###### Crear Registro
 ```
-curl --location -k --request POST 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/create' \
+curl --location -k --request POST 'http://localhost:8091/v1/departamento/gerencia/usuario/create' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "username":"testName",
@@ -109,7 +109,7 @@ a la rama, ya que tenemos la Integración de Gitlab con Jekins.
 
 Comandos útiles docker
 
-docker run --name postgres -p 127.0.0.1:6543:5432 -e POSTGRES_PASSWORD=postgrespw -e POSTGRES_USER=postgres -e POSTGRES_DB=gerencia -d postgres:latest
+docker run --name postgres -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD=postgrespw -e POSTGRES_USER=postgres -e POSTGRES_DB=gerencia -d postgres:latest
 
 docker run -p 8080:8080 -p 50000:50000 --restart always jenkins/jenkins:lts-jdk11
 
