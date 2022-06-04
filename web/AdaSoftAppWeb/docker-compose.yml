@@ -1,5 +1,4 @@
 version: '3.7'
-
 services: # the different images that will be running as containers
   web: # service name
 #build the image for the web service from the dockerfile in parent directory.  
@@ -14,9 +13,6 @@ services: # the different images that will be running as containers
 
     - static_volume:/home/app/microservice/static
 
-# file where env variables are stored. Used as best practice so as not to expose secret keys
-    env_file: - .env # name of the env file
-
 # name of the image
     image: microservice_app 
 
@@ -26,53 +22,6 @@ services: # the different images that will be running as containers
 
     restart: "on-failure"
 
-# cannot start if db service is not up and running
-    depends_on: - db
-
-
-  db: # service name
-
-# image name of the postgres database. during build, this will be pulled from dockerhub and a container spun up from it.
-    image: postgres:11-alpine 
-
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - postgres_data:/var/lib/postgresql/data/
-
-# access credentials from the .env file
-    environment: 
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
-      - PGPORT=${DB_PORT}
-      - POSTGRES_USER=${POSTGRES_USER}
-
-    restart: "on-failure"
-
-
-  rabbitmq:
-    image: 
-      rabbitmq:3-management-alpine #image to be pulled from dockerhub during building
-    container_name: rabbitmq # container name
-    volumes: # assign static storage for rabbitmq to run
-      rabbitmq: - ./.docker/rabbitmq/etc/:/etc/rabbitmq/
-        - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
-    rabbitmq_logs:  - ./.docker/rabbitmq/logs/:/var/log/rabbitmq/
-    environment: # environment variables from the referenced .env file
-      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE}
-         # auth cretendials
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER} 
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
-    ports: # map external ports to this specific container's internal ports
-      - 5672:5672
-      - 15672:15672
-
-# can only start if web service is running
-    depends_on: 
-      - web
-
 
 volumes:
-  postgres_data:
   static_volume:
-  rabbitmq:
-  rabbitmq_logs:
