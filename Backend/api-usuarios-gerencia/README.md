@@ -133,4 +133,7 @@ docker run -d --name jaeger \
   jaegertracing/all-in-one:1.9 \
   --network adasoft-network
 
+docker network create adasoft-network
+
 docker-compose up -d
+
