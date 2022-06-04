@@ -135,5 +135,9 @@ docker run -d --name jaeger \
 
 docker network create adasoft-network
 
+docker network connect adasoft-network postgres
+
+docker network connect adasoft-network jaeger
+
 docker-compose up -d
 
