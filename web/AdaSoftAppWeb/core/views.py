@@ -1,5 +1,7 @@
+from multiprocessing import context
 from urllib import response
 from django.shortcuts import render
+from django.template import RequestContext
 import requests
 from core.models import Usuarios
 
@@ -15,10 +17,10 @@ def index(request):
 
 
     
-def login(request):
+def login(request):  #login
     response = requests.get(url).json()  #obtenemos la respuesta de la api
-
-    return render(request, 'core/login.html', {'response': response})
+    context = response['content'] #obtenemos el contenido de la respuesta
+    return render(request, 'core/login.html', {'context': context})  #enviamos el contenido a la vista
 
 
 
