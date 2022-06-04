@@ -118,8 +118,8 @@
     
 </header>
  <strong>lista usuario</strong>
-  {% for i in response%}
-    {{i.Country}}
+  {% for user in context%}
+    {{user.username}}
   {% endfor%}
 <footer style="margin-top: 100px;">
   <div class="footer-dark">

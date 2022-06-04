@@ -1,9 +1,11 @@
+from multiprocessing import context
 from urllib import response
 from django.shortcuts import render
+from django.template import RequestContext
 import requests
 from core.models import Usuarios
 
-url='https://api.covid19api.com/countries'
+url='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
 
 
 # Create your views here.
@@ -17,8 +19,8 @@ def index(request):
     
 def login(request):
     response = requests.get(url).json()  #obtenemos la respuesta de la api
-
-    return render(request, 'core/login.html', {'response': response})
+    context = response['content'] #obtenemos el contenido de la respuesta
+    return render(request, 'core/login.html', {'context': context})
 
 
 
