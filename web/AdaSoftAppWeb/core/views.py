@@ -1,7 +1,9 @@
+from urllib import response
 from django.shortcuts import render
 import requests
 from core.models import Usuarios
 
+url='https://api.covid19api.com/countries'
 
 
 # Create your views here.
@@ -14,9 +16,13 @@ def index(request):
 
     
 def login(request):
-    response=request.get('http://localhost:8091/v1/departamento/gerencia/usuario/findAll').json()
-    return render(request,'core/login.html',{'response':response})
-    
+    response = requests.get(url).json()  #obtenemos la respuesta de la api
+
+    return render(request, 'core/login.html', {'response': response})
+
+
+
+
 def registro(request):
     return render(request,'core/registro.html')
 
