@@ -74,5 +74,9 @@ public class Persona {
 
 	@NotBlank
 	@Column(name="fecha_salida")
-	private String fecha_salida;	
+	private String fecha_salida;
+	
+	@NotBlank
+	@Column(name="patente")
+	private String patente;
 }

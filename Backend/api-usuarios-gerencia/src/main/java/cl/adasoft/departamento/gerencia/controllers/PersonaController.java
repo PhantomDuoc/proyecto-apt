@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import io.swagger.v3.oas.annotations.Operation;
 
-@CrossOrigin(origins = "*")   //para permitir el acceso a la api desde cualquier origen
+@CrossOrigin(origins = "http://localhost:8100")   //para permitir el acceso a la api desde cualquier origen
 @RestController  //para que sea un controlador rest
 public class PersonaController {
 	
