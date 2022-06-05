@@ -6,7 +6,7 @@ import requests
 from core.models import Usuarios
 
 url='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
-
+urlUser='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
 
 # Create your views here.
 def index(request):
@@ -70,6 +70,10 @@ def ventas(request):
 def logadm(request):
     return render(request, 'core/logadm.html')    
 
+def usuarios(request):
+    response = requests.get(urlUser).json()  #obtenemos la respuesta de la api
+    contextuser = response['content'] #obtenemos el contenido de la respuesta
+    return render(request, 'core/usuarios.html', {'contextuser': contextuser})    
 
 
 

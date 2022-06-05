@@ -1,0 +1,125 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'core/css/dashboard.css' %}">
+
+<head>
+  <title>Dashboard Administracion</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Updock&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Updock&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@389&display=swap');
+      </style>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+      {% load static %}
+</head>
+<body>
+    <a href="https://icons8.com/icon/1CocjuhZpSKv/edit-account"></a>
+    <div class="container-fluid">
+        <div class="row">    
+            <div id="admin-sidebar" class="col-md-2 p-x-0 p-y-3">
+                <ul class="sidenav admin-sidenav list-unstyled">
+                    <li class="side"><a href="{% url 'dashboard' %}">Administracion</a></li>
+                    <li class="side"><a href="{% url 'inventario' %}">Inventario</a></li>
+                    <li class="side"><a href="{% url 'ventas' %}">Ventas</a></li>
+                    <li class="side"><a href="{% url 'estadistica' %}">Estadistica</a></li>
+                                
+                </ul>
+                
+                
+            </div> <!-- /#admin-sidebar -->
+            <div id="admin-main-control" class="col-md-10 p-x-3 p-y-1">
+                <div class="content-title m-x-auto">
+                   <h1 class="titulopanel"><ion-icon name="construct-outline"></ion-icon>Panel de Administración</h1> 
+                </div>
+                <div class="content-title">
+                  <h1 class="seccionespanel">'Usuarios'</h1> 
+               </div>
+                <div class="card">
+                       
+                    <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Fecha Nac</th>
+                            <th scope="col">Fecha Ingreso</th>
+                            <th scope="col">Fecha Salida</th>
+                            <th scope="col">Opciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in contextuser%} 
+                          <tr>
+                            <th scope="row">{{i.id}}</th>
+                            <td>{{i.username}}</td>
+                            <td>{{i.password}}</td>
+                            <td>{{i.email}}</td>
+                            <td>{{i.direccion}}</td>
+                            <td>{{i.telefono}}</td>
+                            <td>
+                                <div class="options">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACrElEQVRoge2Yv08UQRTHP4CHMTEqFobGXGVMtDD+EUYb9QQUtTTxH8BGpDFWINaWFoRcYaX+AULCEaM5sPQUMRaG2IjFYTxFWIuZJeve7M3s3OzOmtw3ecll7703n7e7b34s9PT/aRAYB6pAA9iS1pDXrkmfQmoUWAcCjX0ERjwxKjUAPEIPHrdZoN8Db5ts4EOb8cD7j0axhw+tkju11CDife62gE94auxxC9gku5oFoK7BXD76yw5zGesD7p5AI2d2AJqWsCprZgGY5xy9m0VSXQEbDsdymWtPugJWHI5Vd5hrT7oCnjkc67nDXMYqAWt038DreNyhjhgA6szLGhDVLPbw0x5429QPPCQ9/AwF2U6HqmDWE2sU4LVJUgmxMZsH3iFW2Kb8PQ+MSZ+eevKsEjAFvAe2EWvJA+CATyhTDQHLqCeIZToUcRpYBFoJwd1aC3gJnNLA1zV57qsCTwI/MgKP2xZwwhI+QJzT2/QiJ/jQnlrCB8AvVQFpT18/gXIkviyvmcZ/sYQPSDie2tzFuUj8XIq434jvTTbwAXBXVcCORQE7wHFppvHdwtdIWOk3LQrYBPZJM4nvFr4u45RasiigGomv+oQHmLQo4Hok/mYHvz/ADel3BHidcpxV4GgneIBjiPnZNOl27I4MyWsq+LGIj/M7H9VEisQLivhFhd9kXvAgTk+6dzm0CUX8nZjPV2A/osmT9jbO4EMNIM6xu5oBzkcGOIRYyG7FfB7L/6/kBR/VJcR3/bSNHbWLMteTvOFDlYDbwBv0TyRuLeAg0If4rJgJfF8K3zJwATgLnAGGEVPiYcQi9k3aW+AVYsX8LP1XDfKvAOeA7ymYctEU+jtvNM/7Uo3O8DUcvvNZSLVN30A0dgUxxRZa04gVfgm4h+iJNL3XU6H1F/tV+Ce+UGPAAAAAAElFTkSuQmCC"/>
+                                </div>
+                                <a href="#">Modificar</a></td>
+
+
+                            <td><a href="#">Eliminar</a></td>
+                          </tr>
+                          {% endfor%}
+                          
+                          
+                        </tbody>
+                      </table>
+                      
+                </div>
+            </div> <!-- /#admin-main-control -->
+        </div> <!-- /.row -->
+    </div> <!-- /.container-fluid -->
+</body>
+
+<footer class="fotterevent">
+  <div class="footer-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-md-3 item">
+          <h5 class="menubar">Cerrar Sesión</h5>
+          <ul class="" fortext>
+            <li><a style="color:#fff;" href="{% url 'logadm' %}">Logout</a></li>
+            
+            
+          </ul>
+        </div>
+        <div class="col-sm-6 col-md-3 item">
+          <h5 class="menubar"></h5>
+          <ul>
+              <p class="card-text"><small class="text-muted"></small></p>
+            
+          </ul>
+        </div>
+        <div class="col-md-6 item text">
+          
+          <p class="card-text"><small class="text-muted">© SushiCola. Todos los derechos reservados.</small></p>
+        </div>
+        <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i
+              class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-whatsapp"></i></a></div> 
+      </div>
+      <p class="copyright"><small class="text-muted">SushiCola © 2022.</small></p>
+    </div>
+
+
+</footer>  
