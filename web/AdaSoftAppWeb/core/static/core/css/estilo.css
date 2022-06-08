@@ -505,5 +505,8 @@ body{
    
 	background: linear-gradient(to right, #ffffff, #000000bd); 
 }
+.perfil{
+    margin-top: 130px !important;
+}
 
     

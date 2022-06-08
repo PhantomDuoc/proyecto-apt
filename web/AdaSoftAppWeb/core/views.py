@@ -7,6 +7,7 @@ from core.models import Usuarios
 
 url='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
 urlUser='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
+urlPerfil="http://localhost:8091/v1/departamento/gerencia/usuario/findAll"
 
 # Create your views here.
 def index(request):
@@ -75,5 +76,13 @@ def usuarios(request):
     contextuser = response['content'] #obtenemos el contenido de la respuesta
     return render(request, 'core/usuarios.html', {'contextuser': contextuser})    
 
+def perfil(request):
+    response = requests.get(urlPerfil).json()  #obtenemos la respuesta de la api
+    contextperfil = response['content'] #obtenemos el contenido de la respuesta
+    return render(request, 'core/perfil.html', {'contextuser': contextperfil})        
 
-
+def repartidores(request):
+    return render(request, 'core/repartidores.html')    
+    
+def administradores(request):
+    return render(request, 'core/administradores.html')        

@@ -64,6 +64,10 @@ body {
 	font-size: 60px;
 	margin-right: 90px;
 }
+.menusec{
+	font-family: 'Updock', cursive;	
+	font-size: 40px;
+}
 
 .side {
 	font-family: 'Bebas Neue', cursive;
@@ -75,9 +79,10 @@ body {
 	border-color: black;
 
 }
-
-td,
-th {
+th{
+	text-align: center;
+}
+td{
 	text-align: center;
 }
 
@@ -240,8 +245,16 @@ img {
 .ventas{
 	margin-left: 200px;
 }
-.options{
+.mod{
 	margin-left: 25px;
 	width: 30px;
 	height: 30px;
+}
+.del{
+	width: 30px;
+	height: 30px;
+	margin-left: 20px;
+}
+.table{
+	font-size:10px;
 }
