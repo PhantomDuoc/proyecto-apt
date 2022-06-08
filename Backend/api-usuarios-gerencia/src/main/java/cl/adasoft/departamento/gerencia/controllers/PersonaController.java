@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,13 +24,13 @@ import cl.adasoft.departamento.gerencia.models.services.IPersonaService;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import io.swagger.v3.oas.annotations.Operation;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class PersonaController {
 	
 	@Autowired 
 	private IPersonaService participantService;
-	
+
 	@GetMapping("/findAll")
 	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")
 	public Page<Persona> findAll(@RequestParam(name="page", defaultValue="0") int page){
