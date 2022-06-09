@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Observable, observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap, map } from 'rxjs/operators'
+import { catchError, tap, map } from 'rxjs/operators';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({
+    'Access-Control-Allow-Origin' :'*',
+    'Content-Type': 'application/json'})
 };
 
-const apiURL = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll";
+const apiUrl = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class Proveedor1Service {
 
   constructor(private http: HttpClient) { }
 
@@ -33,7 +35,7 @@ export class ApiService {
   }
 
   getDataUser(): Observable<any> {
-    return this.http.get(apiURL, httpOptions).pipe(
+    return this.http.get(apiUrl, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }

@@ -14,18 +14,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-content>
-        <ion-list>
-          <ion-item *ngFor="let data of datauser">
-              <ion-label>
-                <h3 ion-text color="primary">usuario: {{data.username}}</h3>
-                <p>email : {{data.email}}</p>
 
-              </ion-label>
-              
-          </ion-item>
-        </ion-list>
-      </ion-content>
 
     <div class="ion-padding wrapper">
 
@@ -46,7 +35,7 @@
 
     <ion-grid class="ion-no-padding">
         <ion-row>
-            <ion-col size="12">
+            <ion-col size="14">
                 <ion-slides [options]="options">
 
                     <ion-slide>
@@ -65,6 +54,7 @@
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star-outline"></ion-icon>
+                                    <ion-button color="success"class="agregar">+</ion-button>
                                 </ion-card-subtitle>
                             </ion-card-content>
                         </ion-card>
@@ -86,6 +76,7 @@
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star-half"></ion-icon>
+                                    <ion-button color="success"class="agregar">+</ion-button>
                                 </ion-card-subtitle>
                             </ion-card-content>
                         </ion-card>
@@ -107,6 +98,7 @@
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
+                                    <ion-button color="success"class="agregar">+</ion-button>
                                 </ion-card-subtitle>
                             </ion-card-content>
                         </ion-card>
@@ -128,6 +120,7 @@
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star-outline"></ion-icon>
                                     <ion-icon name="star-outline"></ion-icon>
+                                    <ion-button color="success"class="agregar">+</ion-button>
                                 </ion-card-subtitle>
                             </ion-card-content>
                         </ion-card>
@@ -306,7 +299,7 @@
 
     <ion-grid class="ion-no-padding">
         <ion-row>
-            <ion-col size="12">
+            <ion-col size="14">
                 <ion-slides [options]="options">
 
                     <ion-slide>
@@ -320,11 +313,13 @@
                                 <ion-card-title class="title">Título gyosas 1</ion-card-title>
                                 <ion-card-subtitle>ingredientes 1</ion-card-subtitle>
                                 <ion-card-subtitle>
+
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
+                                    <ion-button color="success"class="agregar">+</ion-button>
                                 </ion-card-subtitle>
                             </ion-card-content>
                         </ion-card>
@@ -346,6 +341,7 @@
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
+                                    <ion-button color="success"class="agregar">+</ion-button>
                                 </ion-card-subtitle>
                             </ion-card-content>
                         </ion-card>
@@ -367,6 +363,100 @@
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star"></ion-icon>
                                     <ion-icon name="star-half"></ion-icon>
+                                    <ion-button color="success"class="agregar">+</ion-button>
+                                </ion-card-subtitle>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+
+                </ion-slides>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    
+    <div class="ion-padding-horizontal wrapper">
+
+        <ion-grid class="ion-no-padding">
+            <ion-row class="ion-text-center">
+                <ion-col size="12">
+                    <h4 class="title">
+                        Handroll
+                    </h4>
+                </ion-col>
+
+            </ion-row>
+        </ion-grid>
+
+    </div>
+
+    <ion-grid class="ion-no-padding">
+        <ion-row>
+            <ion-col size="14">
+                <ion-slides [options]="options">
+
+                    <ion-slide>
+                        <ion-card class="card">
+                            <ion-card-content class="ion-text-left">
+
+                                <div class="img-wrapper">
+                                    <ion-img src="assets/img/handroll3.jpg"></ion-img>
+                                </div>
+
+                                <ion-card-title class="title">Título Handroll 1</ion-card-title>
+                                <ion-card-subtitle>ingredientes 1</ion-card-subtitle>
+                                <ion-card-subtitle>
+
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-button color="success"class="agregar">+</ion-button>
+                                </ion-card-subtitle>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+
+                    <ion-slide>
+                        <ion-card class="card">
+                            <ion-card-content class="ion-text-left">
+
+                                <div class="img-wrapper">
+                                    <ion-img src="assets/img/handroll1.jpg"></ion-img>
+                                </div>
+
+                                <ion-card-title class="title">Título handroll 2</ion-card-title>
+                                <ion-card-subtitle>ingredientes 2</ion-card-subtitle>
+                                <ion-card-subtitle>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-button color="success"class="agregar">+</ion-button>
+                                </ion-card-subtitle>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+
+                    <ion-slide>
+                        <ion-card class="card">
+                            <ion-card-content class="ion-text-left">
+
+                                <div class="img-wrapper">
+                                    <ion-img src="assets/img/handroll2.jpg"></ion-img>
+                                </div>
+
+                                <ion-card-title class="title">Título handroll 3</ion-card-title>
+                                <ion-card-subtitle>ingredientes 3</ion-card-subtitle>
+                                <ion-card-subtitle>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star"></ion-icon>
+                                    <ion-icon name="star-half"></ion-icon>
+                                    <ion-button color="success"class="agregar">+</ion-button>
                                 </ion-card-subtitle>
                             </ion-card-content>
                         </ion-card>
