@@ -8,6 +8,16 @@ import {
 } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 
+interface LoginResponse {
+  content: {
+    id: number;
+    username: string;
+    password: string;
+    email: string;
+    type: string;
+  };
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -29,13 +39,25 @@ export class LoginPage implements OnInit {
 
   }
 
+  columns = ["ID", "Username", "Password", "Email", "Tipo"];
+  index = ["id", "username", "password", "email", "type"];
+  users : LoginResponse[] = [];
+
   ngOnInit() { 
     this.http.get<any>('https://api.npms.io/v2/search?q=scope:angular').subscribe(data => {
         this.texto = data.total;
         console.log(this.texto);
     })
-    this.getApiTest();
+    /* this.getApiTest(); */
+    this.getApiTest2();
     
+    this.getUsers().subscribe( (response) =>  {
+      this.users = response;
+      console.log("aqui esta el response");
+      console.log(this.users);
+    },  (error) => {
+      console.log("Error ocurred: " + error)
+    });
   }
 
   getApiTest(){
@@ -47,6 +69,21 @@ export class LoginPage implements OnInit {
       this.texto2 = data.username;
       console.log(this.texto2);
     })
+  }
+
+  getApiTest2(){
+    const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    let jsonObject = this.http.get<any>(url, {headers: headers});
+    console.log(jsonObject);
+  }
+
+  getUsers(){
+    const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    return this.http.get<LoginResponse[]>(url, {headers: headers})
   }
 
   login() {
