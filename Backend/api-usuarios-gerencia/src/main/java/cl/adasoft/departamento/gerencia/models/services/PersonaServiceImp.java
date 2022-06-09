@@ -52,47 +52,9 @@ public class PersonaServiceImp implements IPersonaService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Persona> findById(Long rut) {
+	public Optional<Persona> findById(Long id) {
 		
-		return participantsDao.findById(rut);
+		return participantsDao.findById(id);
 	}	
 	
-	@Override
-	@Transactional(readOnly = true)
-	public Page<Persona> findByName(Pageable pageRequest, String name) {
-		
-		return participantsDao.findByNombreContaining(pageRequest, name);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Page<Persona> findByLastName(Pageable pageRequest, String lastName) {
-		
-		return participantsDao.findByApellidoContaining(pageRequest, lastName);
-	}
-
-	@Override
-	public Page<Persona> findByRut(Pageable pageRequest, Long rut) {
-		// TODO Auto-generated method stub
-
-		return participantsDao.findByRut(pageRequest, rut);
-	}
-
-	@Override
-	public Page<Persona> findByEmail(Pageable pageRequest, String email) {
-		// TODO Auto-generated method stub
-		return participantsDao.findByEmail(pageRequest, email);
-	}
-
-	@Override
-	public Page<Persona> findByPhone(Pageable pageRequest, String phone) {
-		// TODO Auto-generated method stub
-		return participantsDao.findByPhone(pageRequest, phone);
-	}
-
-	@Override
-	public Page<Persona> findByAddress(Pageable pageRequest, String address) {
-		// TODO Auto-generated method stub
-		return participantsDao.findByAddress(pageRequest, address);
-	}
 }

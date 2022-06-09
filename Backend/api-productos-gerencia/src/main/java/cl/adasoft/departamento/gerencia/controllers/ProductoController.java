@@ -111,4 +111,14 @@ public class ProductoController {
 		return participants;
 
 	}
+
+	@GetMapping("/findByCodigo/{codigo}")
+	public Page<Producto> findByCodigo(@PathVariable String codigo,
+			@RequestParam(name = "page", defaultValue = "0") int page) {
+
+		Pageable pageRequest = PageRequest.of(page, 5);
+		Page<Producto> participants = participantService.findByCodigo(codigo, pageRequest);
+		return participants;
+
+	}
 }
