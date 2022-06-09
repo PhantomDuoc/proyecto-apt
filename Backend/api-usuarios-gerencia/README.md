@@ -140,3 +140,5 @@ docker network connect adasoft-network jaeger
 
 docker-compose up -d
 
+netstat -ano | findstr :5432   
+para encontrar proceso que tenga tomado el puerto 5432 postgres

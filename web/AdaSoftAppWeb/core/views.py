@@ -1,8 +1,12 @@
+from multiprocessing import context
 from urllib import response
 from django.shortcuts import render
+from django.template import RequestContext
 import requests
 from core.models import Usuarios
 
+urlUsers='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
+urlProductos='http://localhost:8091/v1/departamento/gerencia/producto/findAll'
 
 
 # Create your views here.
@@ -14,10 +18,14 @@ def index(request):
 
 
     
-def login(request):
-    return render(request,'core/login.html')
+def login(request):  #login
+    response = requests.get(urlUsers).json()  #obtenemos la respuesta de la api
+    context = response['content'] #obtenemos el contenido de la respuesta
+    return render(request, 'core/login.html', {'context': context})  #enviamos el contenido a la vista
 
-    
+
+
+
 def registro(request):
     return render(request,'core/registro.html')
 
@@ -48,7 +56,9 @@ def eventolog(request):
     return render(request,'core/eventolog.html')    
 
 def dashboard(request):
-    return render(request, 'core/dashboard.html')
+    response = requests.get(urlProductos).json()  #obtenemos la respuesta de la api
+    context = response['content'] #obtenemos el contenido de la respuesta
+    return render(request, 'core/dashboard.html', {'context': context})  #enviamos el contenido a la vista
 
 def estadistica(request):
     return render(request, 'core/estadistica.html')
