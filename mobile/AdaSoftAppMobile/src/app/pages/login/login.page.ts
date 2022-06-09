@@ -44,20 +44,27 @@ export class LoginPage implements OnInit {
   users : LoginResponse[] = [];
 
   ngOnInit() { 
-    this.http.get<any>('https://api.npms.io/v2/search?q=scope:angular').subscribe(data => {
+    /* this.http.get<any>('https://api.npms.io/v2/search?q=scope:angular').subscribe(data => {
         this.texto = data.total;
         console.log(this.texto);
-    })
+    }) */
     /* this.getApiTest(); */
-    this.getApiTest2();
+    /* this.getApiTest2(); */
     
     this.getUsers().subscribe( (response) =>  {
       this.users = response;
-      console.log("aqui esta el response");
       console.log(this.users);
+      console.log("hola")
     },  (error) => {
       console.log("Error ocurred: " + error)
     });
+
+    var result = this.users.map(person => ({id: person.content.id, username: person.content.username, password: person.content.password, email: person.content.email, type: person.content.type}));
+    console.log(result);
+    console.log("hola2")
+    result.forEach((value, key) =>{
+      console.log(key, value);
+    })
   }
 
   getApiTest(){
