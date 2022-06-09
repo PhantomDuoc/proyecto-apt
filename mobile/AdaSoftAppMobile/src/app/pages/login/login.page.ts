@@ -54,7 +54,8 @@ export class LoginPage implements OnInit {
     this.getUsers().subscribe( (response) =>  {
       this.users = response;
       console.log(this.users);
-      console.log("hola")
+      console.log("hola");
+      console.log(this.users['content']);
     },  (error) => {
       console.log("Error ocurred: " + error)
     });
@@ -67,7 +68,7 @@ export class LoginPage implements OnInit {
     })
   }
 
-  getApiTest(){
+  /* getApiTest(){
     const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
@@ -84,7 +85,7 @@ export class LoginPage implements OnInit {
     headers.set('Content-Type', 'application/json');
     let jsonObject = this.http.get<any>(url, {headers: headers});
     console.log(jsonObject);
-  }
+  } */
 
   getUsers(){
     const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
