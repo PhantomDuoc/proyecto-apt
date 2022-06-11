@@ -108,7 +108,7 @@ input[type="password"] {
 }
 
 .button:hover {
-    background: rgb(102, 5, 5);
+    background: rgb(0, 0, 0);
 }
 
 p {
