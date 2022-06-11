@@ -25,17 +25,16 @@ import cl.adasoft.departamento.gerencia.models.services.IPersonaService;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import io.swagger.v3.oas.annotations.Operation;
-
-@CrossOrigin(origins = "http://localhost:8100")   //para permitir el acceso a la api desde cualquier origen
-@RestController  //para que sea un controlador rest
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RestController
 public class PersonaController {
 	
 	@Autowired 
-	private IPersonaService participantService;  //para inyectar el servicio
-	
-	@GetMapping("/findAll")  //para indicarle a spring que es una peticion get
-	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")  //para indicarle a swagger que es una operacion get
-	public Page<Persona> findAll(@RequestParam(name="page", defaultValue="0") int page){  //para indicarle a spring que es una peticion get
+	private IPersonaService participantService;
+
+	@GetMapping("/findAll")
+	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")
+	public Page<Persona> findAll(@RequestParam(name="page", defaultValue="0") int page){
 		
 		Pageable pageRequest =  PageRequest.of(page, 5);  
 		Page<Persona> participants = participantService.findAll(pageRequest);  //para obtener todos los participantes
