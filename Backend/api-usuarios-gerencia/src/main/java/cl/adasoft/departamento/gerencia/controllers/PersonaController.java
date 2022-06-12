@@ -83,4 +83,14 @@ public class PersonaController {
 		return new ResponseEntity<>(participantService.save(persona),HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/findByUsername/{username}")
+	public Optional<Persona>  findByUsername(@PathVariable String username){
+		Optional<Persona> response = participantService.findByUsername(username);
+		
+		if(response == null) {
+			throw new NotFoundException("participant username: " + username);
+		}
+		
+		return response;
+    }
 }
