@@ -78,22 +78,9 @@ public class PersonaController {
 		return response;
     }
 
-	@GetMapping(/*"/findByName/{name}"*/)
-	public Page<Persona> findByName(@RequestParam(name="page", defaultValue="0") int page, @RequestParam(name="name", defaultValue="") String name){
-		Pageable pageRequest =  PageRequest.of(page, 5);  
-		Page<Persona> participants = participantService.findByName(pageRequest, name);
-		return participants;
-	}
-
 	@PutMapping("/update")
 	public ResponseEntity<Persona> update(@RequestBody Persona persona){
 		return new ResponseEntity<>(participantService.save(persona),HttpStatus.CREATED);
-	}
-
-	@Operation
-	@DeleteMapping("/delete/{id}")
-	public void deleteById(@PathVariable Long id){  
-		participantService.delete(id);
 	}
 	
 }

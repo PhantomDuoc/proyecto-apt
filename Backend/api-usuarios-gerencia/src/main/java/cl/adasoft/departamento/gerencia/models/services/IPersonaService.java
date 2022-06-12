@@ -17,20 +17,5 @@ public interface IPersonaService {
 	
 	public Persona findByRut(Long rut);
 	
-	public Optional<Persona> findById(Long rut);
-
-    public Page<Persona> findByName(Pageable pageRequest, String name);
-
-	public Page<Persona> findByLastName(Pageable pageRequest, String lastName);
-
-	public Page<Persona> findByRut(Pageable pageRequest, Long rut);
-
-	public Page<Persona> findByEmail(Pageable pageRequest, String email);
-
-	public Page<Persona> findByPhone(Pageable pageRequest, String phone);
-
-	public Page<Persona> findByAddress(Pageable pageRequest, String address);
-
-	
-
+	public Optional<Persona> findById(Long id);
 }

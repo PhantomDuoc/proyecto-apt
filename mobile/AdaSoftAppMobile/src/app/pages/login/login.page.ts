@@ -8,6 +8,16 @@ import {
 } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 
+interface LoginResponse {
+  content: {
+    id: number;
+    username: string;
+    password: string;
+    email: string;
+    type: string;
+  };
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -29,16 +39,36 @@ export class LoginPage implements OnInit {
 
   }
 
+  columns = ["ID", "Username", "Password", "Email", "Tipo"];
+  index = ["id", "username", "password", "email", "type"];
+  users : LoginResponse[] = [];
+
   ngOnInit() { 
-    this.http.get<any>('https://api.npms.io/v2/search?q=scope:angular').subscribe(data => {
+    /* this.http.get<any>('https://api.npms.io/v2/search?q=scope:angular').subscribe(data => {
         this.texto = data.total;
         console.log(this.texto);
-    })
-    this.getApiTest();
+    }) */
+    /* this.getApiTest(); */
+    /* this.getApiTest2(); */
     
+    this.getUsers().subscribe( (response) =>  {
+      this.users = response;
+      console.log(this.users);
+      console.log("hola");
+      console.log(this.users['content']);
+    },  (error) => {
+      console.log("Error ocurred: " + error)
+    });
+
+    var result = this.users.map(person => ({id: person.content.id, username: person.content.username, password: person.content.password, email: person.content.email, type: person.content.type}));
+    console.log(result);
+    console.log("hola2")
+    result.forEach((value, key) =>{
+      console.log(key, value);
+    })
   }
 
-  getApiTest(){
+  /* getApiTest(){
     const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
@@ -47,6 +77,21 @@ export class LoginPage implements OnInit {
       this.texto2 = data.username;
       console.log(this.texto2);
     })
+  }
+
+  getApiTest2(){
+    const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    let jsonObject = this.http.get<any>(url, {headers: headers});
+    console.log(jsonObject);
+  } */
+
+  getUsers(){
+    const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    return this.http.get<LoginResponse[]>(url, {headers: headers})
   }
 
   login() {
