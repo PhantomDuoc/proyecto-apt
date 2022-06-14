@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,27 +36,26 @@ public class PersonaController {
 	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")
 	public Page<Persona> findAll(@RequestParam(name="page", defaultValue="0") int page){
 		
-		Pageable pageRequest =  PageRequest.of(page, 5);
-		Page<Persona> participants = participantService.findAll(pageRequest);
-		return participants;
+		Pageable pageRequest =  PageRequest.of(page, 5);  
+		Page<Persona> participants = participantService.findAll(pageRequest);  //para obtener todos los participantes
+		return participants;  //para retornar los participantes
 		
 	}
 	
-	@PostMapping("/create")
-	public ResponseEntity<Persona>  save(@RequestBody Persona persona) {
+	@PostMapping("/create")  //para indicarle a spring que es una peticion post
+	public ResponseEntity<Persona>  save(@RequestBody Persona persona) {  
 		
-		return new ResponseEntity<>(participantService.save(persona),HttpStatus.CREATED);
+		return new ResponseEntity<>(participantService.save(persona),HttpStatus.CREATED);  //para retornar el objeto persona y el codigo de estado
 	}
 	
 	
-	@DeleteMapping("/delete/{id}")
-	public void  update(@PathVariable Long id) {
+	@DeleteMapping("/delete/{id}")  //para indicarle a spring que es una peticion delete
+	public void  update(@PathVariable Long id) {  
 		
-		participantService.delete(id);
+		participantService.delete(id);  //para eliminar el objeto persona
 	}	
 	
-/* 	Reemplazar por buscar por nombre de usuario
- */	@GetMapping("/findByRut/{rut}")
+	@GetMapping("/findByRut/{rut}")	 	
 	public ResponseEntity<Persona> findByRut(@PathVariable Long rut){
 		Persona response = participantService.findByRut(rut);
 		
@@ -77,5 +77,10 @@ public class PersonaController {
 		
 		return response;
     }
+
+	@PutMapping("/update")
+	public ResponseEntity<Persona> update(@RequestBody Persona persona){
+		return new ResponseEntity<>(participantService.save(persona),HttpStatus.CREATED);
+	}
 	
 }

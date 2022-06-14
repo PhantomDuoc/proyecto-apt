@@ -52,9 +52,9 @@ public class PersonaServiceImp implements IPersonaService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Persona> findById(Long rut) {
+	public Optional<Persona> findById(Long id) {
 		
-		return participantsDao.findById(rut);
+		return participantsDao.findById(id);
 	}	
 	
 }

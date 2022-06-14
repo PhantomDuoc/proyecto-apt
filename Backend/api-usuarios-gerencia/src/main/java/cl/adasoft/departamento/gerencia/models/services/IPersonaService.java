@@ -17,6 +17,5 @@ public interface IPersonaService {
 	
 	public Persona findByRut(Long rut);
 	
-	public Optional<Persona> findById(Long rut);
-
+	public Optional<Persona> findById(Long id);
 }
