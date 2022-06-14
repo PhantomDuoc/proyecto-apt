@@ -24,7 +24,11 @@
             <ion-row class="ion-text-center">
                 <ion-col size="12">
                     <h4 class="title">
-                        Sushis
+                        <tr>
+                            <td *ngFor="let user of users | keyvalue">
+                            {{user.key}}
+                            </td>
+                          </tr>
                     </h4>
                 </ion-col>
 

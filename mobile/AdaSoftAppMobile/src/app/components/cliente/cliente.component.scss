@@ -2,6 +2,11 @@ ion-content {
     --background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)), url("/assets/img/sushiback.jpg") no-repeat center center / cover;
 }
 
+.textbox{
+    margin-left: 0px;
+    margin-bottom: 100px;
+}
+
 .login-section {
     height: 78vh;
     width: 100%;

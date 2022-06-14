@@ -13,14 +13,16 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./cliente.component.scss'],
 })
 export class ClienteComponent implements OnInit {
-
+  user={
+    usuario:"",
+    password:""
+  }
   formularioLogin: FormGroup;
 
 
   constructor(private router: Router,public fb: FormBuilder ) { 
-    this.formularioLogin = this.fb.group({
-      'user': new FormControl("",Validators.required),
-      'password': new FormControl("",Validators.required)
+({
+
     })
 
   }
@@ -52,6 +54,7 @@ export class ClienteComponent implements OnInit {
     let navigationextras: NavigationExtras={
     }
     this.router.navigate(['/menu/home'], navigationextras)
+    console.log(this.user);
   }
   registro() {
     let navigationextras: NavigationExtras={

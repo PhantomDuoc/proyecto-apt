@@ -1,42 +1,94 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap, map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Access-Control-Allow-Origin' :'*',
-    'Content-Type': 'application/json'})
-};
+import { NavigationExtras, Router } from '@angular/router';
 
-const apiUrl = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll";
+interface LoginResponse {
+  content: {
+    id: number;
+    username: string;
+    password: string;
+    email: string;
+    type: string;
+  };
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class Proveedor1Service {
 
-  constructor(private http: HttpClient) { }
+  texto: any;
+  texto2: any;
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `content was: ${error.error}`);
-    }
-    return throwError('Something bad happened; please try again later.');
+
+  constructor(private router: Router, private http: HttpClient ) { 
+({
+
+    })
+
   }
 
-  private extractData(res: Response) {
-    let content = res;
-    return content || { };
+  columns = ["ID", "Username", "Password", "Email", "Tipo"];
+  index = ["id", "username", "password", "email", "type"];
+  users : LoginResponse[] = [];
+
+  ngOnInit() { 
+    /* this.http.get<any>('https://api.npms.io/v2/search?q=scope:angular').subscribe(data => {
+        this.texto = data.total;
+        console.log(this.texto);
+    }) */
+    /* this.getApiTest(); */
+    /* this.getApiTest2(); */
+    
+    this.getUsers().subscribe( (response) =>  {
+      this.users = response;
+      console.log(this.users);
+      console.log("hola");
+      console.log(this.users['content']);
+    },  (error) => {
+      console.log("Error ocurred: " + error)
+    });
+
+    var result = this.users.map(person => ({id: person.content.id, username: person.content.username, password: person.content.password, email: person.content.email, type: person.content.type}));
+    console.log(result);
+    console.log("hola2")
+    result.forEach((value, key) =>{
+      console.log(key, value);
+    })
   }
 
-  getDataUser(): Observable<any> {
-    return this.http.get(apiUrl, httpOptions).pipe(
-      map(this.extractData),
-      catchError(this.handleError));
+  /* getApiTest(){
+    const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    return this.http.get<any>(url, {headers: headers})
+    .subscribe(data => {
+      this.texto2 = data.username;
+      console.log(this.texto2);
+    })
+  }
+
+  getApiTest2(){
+    const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    let jsonObject = this.http.get<any>(url, {headers: headers});
+    console.log(jsonObject);
+  } */
+
+  getUsers(){
+    const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    return this.http.get<LoginResponse[]>(url, {headers: headers})
+  }
+
+
+  segmentChanged(event: any){
+    let direccion= event.detail.value
+    console.log(event.detail.value)
+    this.router.navigate(['login/'+direccion])
   }
 }
