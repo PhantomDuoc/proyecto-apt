@@ -5,26 +5,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function validarFormulario(evento) {
     evento.preventDefault();
-    //*   USUARIO    *//
-    var usuario1 = "pepito97"
-    var contrasena1 = "12345"
-    
-    //*   ADMIN    *//
-    var usuario2 = "colasushi"
-    var contrasena2 = "colasushi"
-
     var usuario = document.getElementById('user').value;
-    if (!(usuario === usuario1) || (usuario.length < 7)) {
-        alert('Usuario Incorrecto, Debes ingresar un usuario válido de almenos 6 caracteres');
-        return;
-
-    }
-
     var password = document.getElementById('pass').value;
-    if (!(password === contrasena1) || (password.length < 4)) {
-        alert('Contraseña Incorrecta, Debes ingresar contraseña valida de almenos 4-8 caracteres');
-        return;
-    }
-    this.submit();
-    alert('Inicio Sesion Con Exito');
+    let tipoUser;
+    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + usuario).then(function(data) {
+        console.log('aqui');
+        console.log(data.email);
+        console.log(data);
+        if (data.length === 0) {
+            alert('Usuario no existe');
+            return;
+        }
+        if (data.password !== password) {
+            alert('Contraseña Incorrecta');
+            return;
+        }
+        if (data.password === password) {
+            alert('Bienvenido ' + data.username);
+        }
+        if (data.type == 0) {
+            window.location.href = "http://localhost:8000/dashboard";
+        }
+        if (data.type != 0) {
+            window.location.href = "http://localhost:8000/indexlog";
+        }
+    });
+}
+
+async function fetchAsync(url) {
+    let response = await fetch(url);
+    let data = await response.json();
+    return data;
 }

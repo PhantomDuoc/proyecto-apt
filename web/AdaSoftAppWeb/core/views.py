@@ -6,7 +6,7 @@ import requests
 from core.models import Usuarios
 
 urlUsers='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
-urlProductos='http://localhost:8091/v1/departamento/gerencia/producto/findAll'
+urlProductos='http://localhost:8090/v1/departamento/gerencia/producto/findAll'
 
 
 # Create your views here.
