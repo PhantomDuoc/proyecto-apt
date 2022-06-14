@@ -9,7 +9,7 @@ import {
 import { NavigationExtras, Router } from '@angular/router';
 
 interface LoginResponse {
-  content: {
+  usuario: {
     id: number;
     username: string;
     password: string;
@@ -33,9 +33,10 @@ export class LoginPage implements OnInit {
 
   constructor(private router: Router,public fb: FormBuilder, private http: HttpClient ) { 
     this.formularioLogin = this.fb.group({
-      'user': new FormControl("",Validators.required),
+      'username': new FormControl("",Validators.required),
       'password': new FormControl("",Validators.required)
     })
+    this.segmentChanged({detail: {value: 'compUno'}})
 
   }
 
@@ -54,12 +55,13 @@ export class LoginPage implements OnInit {
     this.getUsers().subscribe( (response) =>  {
       this.users = response;
       console.log(this.users);
-      console.log("hola")
+      console.log("hola");
+      console.log(this.users['content']);
     },  (error) => {
       console.log("Error ocurred: " + error)
     });
 
-    var result = this.users.map(person => ({id: person.content.id, username: person.content.username, password: person.content.password, email: person.content.email, type: person.content.type}));
+    var result = this.users.map(person => ({id: person.usuario.id, username: person.usuario.username, password: person.usuario.password, email: person.usuario.email, type: person.usuario.type}));
     console.log(result);
     console.log("hola2")
     result.forEach((value, key) =>{
@@ -67,7 +69,7 @@ export class LoginPage implements OnInit {
     })
   }
 
-  getApiTest(){
+  /* getApiTest(){
     const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
@@ -84,7 +86,7 @@ export class LoginPage implements OnInit {
     headers.set('Content-Type', 'application/json');
     let jsonObject = this.http.get<any>(url, {headers: headers});
     console.log(jsonObject);
-  }
+  } */
 
   getUsers(){
     const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll?page=0";

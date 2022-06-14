@@ -18,8 +18,7 @@ import cl.adasoft.departamento.gerencia.models.entity.Persona;
 public class PersonaServiceImp implements IPersonaService {
 
 	@Autowired
-	private PersonaDao participantsDao;
-	
+	private PersonaDao participantsDao;	
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -56,5 +55,13 @@ public class PersonaServiceImp implements IPersonaService {
 		
 		return participantsDao.findById(id);
 	}	
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Persona> findByUsername(String username) {
+		
+		return participantsDao.findByUsername(username);
+	}
+	
 	
 }
