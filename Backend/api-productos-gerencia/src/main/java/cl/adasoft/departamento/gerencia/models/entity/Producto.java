@@ -27,7 +27,7 @@ public class Producto {
 
 	@NotBlank
 	@Column(name = "codigo")
-	private Long codigo;
+	private String codigo;
 
 	@NotBlank
 	@Column(name = "precio")

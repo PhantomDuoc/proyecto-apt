@@ -5,17 +5,25 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import cl.adasoft.departamento.gerencia.models.entity.Persona;
+import cl.adasoft.departamento.gerencia.models.entity.Pedido;
 
-public interface IPersonaService {
+public interface IPedidoService {
 	
-	public Page<Persona> findAll(Pageable pageable);
+	public Page<Pedido> findAll(Pageable pageable);
 	
-	public Persona save(Persona persona);
+	public Pedido save(Pedido Pedido);
 	
 	public void delete(Long id);	
 	
-	public Persona findByRut(Long rut);
+	public Pedido findByRut(Long rut);
 	
-	public Optional<Persona> findById(Long id);
+	public Optional<Pedido> findById(Long id);
+
+	public Optional<Pedido> findByCodigo(Long codigo);
+
+	public Optional<Pedido> findByEstado(Long estado);
+
+	public Optional<Pedido> findByIdUsuario(Long idUsuario);
+
+	public Optional<Pedido> findByIdRepartidor(String idRepartidor);
 }
