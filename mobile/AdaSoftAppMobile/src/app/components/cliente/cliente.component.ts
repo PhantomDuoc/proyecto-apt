@@ -6,6 +6,7 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
@@ -23,63 +24,72 @@ interface User {
   styleUrls: ['./cliente.component.scss'],
 })
 export class ClienteComponent implements OnInit {
-  formularioLogin: FormGroup;
+  formularioLogin: FormGroup; 
   constructor(
     private router: Router,
     public fb: FormBuilder,
     private http: HttpClient,
-    public alertController: AlertController,
+    public alertController: AlertController
   ) {
     this.formularioLogin = this.fb.group({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
-  }
+   }
 
   user: User;
-
   ngOnInit() {
-    this.getUser("admin").subscribe((response) => {
-      //console.log(response);
-      this.user=response;
-      console.log(this.user);
-    }, (error) => {
-      console.log(error);
+    this.formularioLogin.reset();
+    this.formularioLogin.setValue({
+      username: 'admin',
+      password: 'admin',
     });
+    console.log(this.formularioLogin.value);
+
+    /* this.getUser('admin').subscribe(
+      (response) => {
+        //console.log(response);
+        this.user = response;
+        console.log(this.user);
+        console.log(this.user.password);
+      },
+      (error) => {
+        console.log(error);
+      }
+    ); */
+  }
+
+  ionViewWillEnter(){
+/*     this.formularioLogin.reset(); */
   }
 
   getUser(username: string) {
-    const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/"
+    const url =
+      'http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/';
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
-    return this.http.get<User>(
-      `${url}${username}`, { headers }
-    );
+    headers.set('Access-Control-Allow-Origin', '*');
+    return this.http.get<User>(`${url}${username}`, { headers });
   }
 
   async login() {
-    const { username, password } = this.formularioLogin.value;
+    console.log(this.formularioLogin.value);
     let User: User;
-    await this.getUser(username).subscribe(data => {
-      User = data;
-      console.log(User);
-    }, error => {
-      console.log(error);
-    }
+    this.getUser(this.formularioLogin.controls.username.value).subscribe(
+      (response) => {
+        User = response;
+        console.log(User);
+        console.log(User.password);
+        if (User.password == this.formularioLogin.controls.password.value) {
+          this.router.navigate(['/menu/home']);
+        } else {
+          this.presentAlert();
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
     );
-    if (User.password === password) {
-      const navigationExtras: NavigationExtras = {
-        queryParams: {
-          username: User.username,
-          password: User.password,
-          email: User.email,
-          type: User.type,
-        },
-      };
-      this.router.navigate(['/home'], navigationExtras);
-    } else {
-      this.presentAlert();
-    }
   }
   registro() {
     let navigationextras: NavigationExtras = {};
