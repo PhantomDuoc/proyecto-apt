@@ -1,5 +1,6 @@
 package cl.adasoft.departamento.gerencia.models.entity;
 
+
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -11,6 +12,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 
 import lombok.Data;
 
@@ -43,6 +47,7 @@ public class Pedido {
 	@Column(name = "tiempo_entrega")
 	private String tiempo_entrega;
 
+	@NotBlank
 	@OneToOne
 	@JoinColumn(name = "id_usuario")
 	@RestResource(path = "idUsuario", rel = "usuario")
@@ -53,8 +58,6 @@ public class Pedido {
 	@RestResource(path = "idRepartidor", rel = "repartidor")
 	private Usuario repartidor;
 
-	@OneToMany(name= "productos", mappedBy = "pedido")
-	@RestResource(path = "productos", rel = "productos")
 	private List<Producto> productos;
 
 	

@@ -1,11 +1,21 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
-  FormBuilder
+  FormBuilder,
 } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+
+interface User {
+  id: number;
+  username: string;
+  password: string;
+  email: string;
+  type: string;
+}
 
 @Component({
   selector: 'app-cliente',
@@ -13,59 +23,78 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./cliente.component.scss'],
 })
 export class ClienteComponent implements OnInit {
-
   formularioLogin: FormGroup;
-
-
-  constructor(private router: Router,public fb: FormBuilder ) { 
+  constructor(
+    private router: Router,
+    public fb: FormBuilder,
+    private http: HttpClient,
+    public alertController: AlertController,
+  ) {
     this.formularioLogin = this.fb.group({
-      'user': new FormControl("",Validators.required),
-      'password': new FormControl("",Validators.required)
-    })
-
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    });
   }
 
-  ngOnInit() { }
-/*  async login(){
-    var f = this.formularioLogin.value;
+  user: User;
 
-    if(this.formularioLogin.valid){
-      let navigationextras: NavigationExtras={
-      }
-      this.router.navigate(['/menu/home'], navigationextras)
-      ;
-    
-    }else{
+  ngOnInit() {
+    this.getUser("admin").subscribe((response) => {
+      //console.log(response);
+      this.user=response;
+      console.log(this.user);
+    }, (error) => {
+      console.log(error);
+    });
+  }
 
-        const alert = await this.alertController.create({
-          header: 'Datos incompletos',
-          message: 'Tienes que llenar todos los datos',
-          buttons: ['Aceptar']
-        });
-      await alert.present();
+  getUser(username: string) {
+    const url = "http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/"
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    return this.http.get<User>(
+      `${url}${username}`, { headers }
+    );
+  }
 
+  async login() {
+    const { username, password } = this.formularioLogin.value;
+    let User: User;
+    await this.getUser(username).subscribe(data => {
+      User = data;
+      console.log(User);
+    }, error => {
+      console.log(error);
     }
-
- } 
- */
-  login() {
-    let navigationextras: NavigationExtras={
+    );
+    if (User.password === password) {
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          username: User.username,
+          password: User.password,
+          email: User.email,
+          type: User.type,
+        },
+      };
+      this.router.navigate(['/home'], navigationExtras);
+    } else {
+      this.presentAlert();
     }
-    this.router.navigate(['/menu/home'], navigationextras)
   }
   registro() {
-    let navigationextras: NavigationExtras={
-    }
-    this.router.navigate(['/registro'], navigationextras)
+    let navigationextras: NavigationExtras = {};
+    this.router.navigate(['/registro'], navigationextras);
   }
-  olvide(){
-    let navigationextras: NavigationExtras={
-    }
-    this.router.navigate(['/olvide'], navigationextras)
+  olvide() {
+    let navigationextras: NavigationExtras = {};
+    this.router.navigate(['/olvide'], navigationextras);
   }
-  segmentChanged(event: any){
-    let direccion= event.detail.value
-    console.log(event.detail.value)
-    this.router.navigate(['login/'+direccion])
+  segmentChanged(event: any) {
+    let direccion = event.detail.value;
+    console.log(event.detail.value);
+    this.router.navigate(['login/' + direccion]);
+  }
+  presentAlert() {
+    throw new Error('Method not implemented.');
   }
 }
