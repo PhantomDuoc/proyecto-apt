@@ -13,4 +13,7 @@ public interface PersonaDao extends PagingAndSortingRepository<Persona, Long> {
 
 	@Query("select p from Persona p where p.rut=?1")
 	public Persona findByRut(Long rut);
+
+	@Query("select p from Persona p where p.username=?1")
+    public Optional<Persona> findByUsername(String username);
 }
