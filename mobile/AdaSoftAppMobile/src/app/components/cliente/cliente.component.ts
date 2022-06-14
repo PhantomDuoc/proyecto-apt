@@ -24,7 +24,7 @@ interface User {
   styleUrls: ['./cliente.component.scss'],
 })
 export class ClienteComponent implements OnInit {
-  formularioLogin: FormGroup; 
+  formularioLogin: FormGroup;
   constructor(
     private router: Router,
     public fb: FormBuilder,
@@ -35,7 +35,7 @@ export class ClienteComponent implements OnInit {
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
-   }
+  }
 
   user: User;
   ngOnInit() {
@@ -59,8 +59,8 @@ export class ClienteComponent implements OnInit {
     ); */
   }
 
-  ionViewWillEnter(){
-/*     this.formularioLogin.reset(); */
+  ionViewWillEnter() {
+    /*     this.formularioLogin.reset(); */
   }
 
   getUser(username: string) {
@@ -73,7 +73,6 @@ export class ClienteComponent implements OnInit {
   }
 
   async login() {
-    console.log(this.formularioLogin.value);
     let User: User;
     this.getUser(this.formularioLogin.controls.username.value).subscribe(
       (response) => {
