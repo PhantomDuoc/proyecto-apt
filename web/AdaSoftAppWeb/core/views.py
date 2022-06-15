@@ -9,9 +9,13 @@ urlUsers='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
 urlProductos='http://localhost:8090/v1/departamento/gerencia/producto/findAll'
 
 
+
+
 # Create your views here.
 def index(request):
-    return render(request,'core/index.html')
+    response = requests.get(urlProductos).json() #Obteniendo datos productos
+    context = response['content'] #obtenemos el contenido de la respuesta
+    return render(request,'core/index.html', {'context': context}) #contenido hacia la vista
 
 
 
@@ -74,17 +78,17 @@ def logadm(request):
     return render(request, 'core/logadm.html')    
 
 def usuarios(request):
-    response = requests.get(urlUser).json()  #obtenemos la respuesta de la api
+    response = requests.get(urlUsers).json()  #obtenemos la respuesta de la api
     contextuser = response['content'] #obtenemos el contenido de la respuesta
     return render(request, 'core/usuarios.html', {'contextuser': contextuser})    
 
 def perfil(request):
-    response = requests.get(urlPerfil).json()  #obtenemos la respuesta de la api
-    contextperfil = response['content'] #obtenemos el contenido de la respuesta
-    return render(request, 'core/perfil.html', {'contextuser': contextperfil})        
+    # response = requests.get(urlPerfil).json()  #obtenemos la respuesta de la api
+    # contextperfil = response['content'] #obtenemos el contenido de la respuesta
+    return render(request, 'core/perfil.html')
 
-def repartidores(request):
-    return render(request, 'core/repartidores.html')    
+# def repartidores(request):
+#     return render(request, 'core/repartidores.html')    
     
-def administradores(request):
-    return render(request, 'core/administradores.html')        
+# def administradores(request):
+#     return render(request, 'core/administradores.html')        

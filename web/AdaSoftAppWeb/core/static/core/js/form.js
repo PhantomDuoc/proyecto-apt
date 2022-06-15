@@ -7,7 +7,7 @@ function validarFormulario(evento) {
     evento.preventDefault();
     var usuario = document.getElementById('user').value;
     var password = document.getElementById('pass').value;
-    let tipoUser;
+    
     fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + usuario).then(function(data) {
         console.log('aqui');
         console.log(data.email);
