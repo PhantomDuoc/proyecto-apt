@@ -33,7 +33,7 @@ public class ProductoController {
 	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")
 	public Page<Producto> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
 
-		Pageable pageRequest = PageRequest.of(page, 5);
+		Pageable pageRequest = PageRequest.of(page, 6);
 		Page<Producto> participants = participantService.findAll(pageRequest);
 		return participants;
 
