@@ -72,7 +72,9 @@ def estadistica(request):
 
 
 def inventario(request):
-    return render(request, 'core/inventario.html')
+    response = requests.get(urlProductos).json()  #obtenemos la respuesta de la api
+    context = response['content'] #obtenemos el contenido de la respuesta
+    return render(request, 'core/inventario.html', {'context': context})  #enviamos el contenido a la vista
 
 def ventas(request):
     return render(request, 'core/ventas.html')    

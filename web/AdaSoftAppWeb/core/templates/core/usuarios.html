@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{% static 'core/css/dashboard.css' %}">
 
 <head>
-  <title>Dashboard Administracion</title>
+  <title>Administracion Usuarios</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Updock&display=swap');
@@ -61,37 +61,26 @@
                   <th scope="col">Telefono</th>
                   <th scope="col">Rut</th>
                   <th scope="col">Opciones</th>
-                  <th scope="col"></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {% for i in contextuser%}
                 <tr>
                   <th scope="row">{{i.id}}</th>
-                  <td>{{i.username}}</td>
-                  <td>{{i.password}}</td>
-                  <td>{{i.email}}</td>
-                  <td>{{i.direccion}}</td>
-                  <td>{{i.telefono}}</td>
-                  <td>{{i.rut}}</td>
+                  <td><input type="text" id="pass" name="user"  value="{{i.username}}" class="usuarios"></td>
+                  <td><input type="text" id="pass" name="user"  value="{{i.password}}" class="usuarios"></td>
+                  <td><input type="text" id="pass" name="user"  value="{{i.email}}" class="usuarios"></td>
+                  <td><input type="text" id="pass" name="user"  value="{{i.direccion}}" class="usuarios"></td>
+                  <td><input type="text" id="pass" name="user"  value="{{i.telefono}}" class="usuarios"></td>
+                  <td><input type="text" id="pass" name="user"  value="{{i.rut}}" class="usuarios"></td>
+                  
                   <td>
-                    <a href="#">
-                      <div class="mod">
-                        <img
-                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACrElEQVRoge2Yv08UQRTHP4CHMTEqFobGXGVMtDD+EUYb9QQUtTTxH8BGpDFWINaWFoRcYaX+AULCEaM5sPQUMRaG2IjFYTxFWIuZJeve7M3s3OzOmtw3ecll7703n7e7b34s9PT/aRAYB6pAA9iS1pDXrkmfQmoUWAcCjX0ERjwxKjUAPEIPHrdZoN8Db5ts4EOb8cD7j0axhw+tkju11CDife62gE94auxxC9gku5oFoK7BXD76yw5zGesD7p5AI2d2AJqWsCprZgGY5xy9m0VSXQEbDsdymWtPugJWHI5Vd5hrT7oCnjkc67nDXMYqAWt038DreNyhjhgA6szLGhDVLPbw0x5429QPPCQ9/AwF2U6HqmDWE2sU4LVJUgmxMZsH3iFW2Kb8PQ+MSZ+eevKsEjAFvAe2EWvJA+CATyhTDQHLqCeIZToUcRpYBFoJwd1aC3gJnNLA1zV57qsCTwI/MgKP2xZwwhI+QJzT2/QiJ/jQnlrCB8AvVQFpT18/gXIkviyvmcZ/sYQPSDie2tzFuUj8XIq434jvTTbwAXBXVcCORQE7wHFppvHdwtdIWOk3LQrYBPZJM4nvFr4u45RasiigGomv+oQHmLQo4Hok/mYHvz/ADel3BHidcpxV4GgneIBjiPnZNOl27I4MyWsq+LGIj/M7H9VEisQLivhFhd9kXvAgTk+6dzm0CUX8nZjPV2A/osmT9jbO4EMNIM6xu5oBzkcGOIRYyG7FfB7L/6/kBR/VJcR3/bSNHbWLMteTvOFDlYDbwBv0TyRuLeAg0If4rJgJfF8K3zJwATgLnAGGEVPiYcQi9k3aW+AVYsX8LP1XDfKvAOeA7ymYctEU+jtvNM/7Uo3O8DUcvvNZSLVN30A0dgUxxRZa04gVfgm4h+iJNL3XU6H1F/tV+Ce+UGPAAAAAAElFTkSuQmCC" />
-                      </div>
-                      Modificar
-                    </a>
+                    <button>Eliminar</button>
                   </td>
 
                   <td>
-                    <a href="#">
-                      <div class="del">
-                        <img
-                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAAtElEQVRIie2VQQ6CQAxFX8R7uPM4xsPgCTmFSzW6niUGBTezMnawLTIQecks+1+bzgD8G4Wjdg9sgeNAvXzNHah/Fb6L4Z3y1LFWTWWQSaf6JFhZulLSjeCYOQH/foMUntrx2d87p1xiMWOS4ssAYjFjkhNnE4s3UoEpowAa7G+4AdZSeGriJ3CzdBy5Ag+LGHx7TtYu4nc8H5FkbbaJ+9gALfqn1MZaFwd0/+YAlF7pwvx5Abo6e/T2cOSLAAAAAElFTkSuQmCC" />
-                      </div>
-                      Eliminar
-                    </a>
+                  <button>Modificar</button>
                   </td>
                 </tr>
                 {% endfor%}

@@ -36,7 +36,7 @@
                 <h1 class="titulopanel"><ion-icon name="construct-outline"></ion-icon>Panel de Administración</h1> 
              </div>
              <div class="content-title">
-              <h1 class="seccionespanel">'Inventario'</h1> 
+              <h1 class="seccionespanel">'Administracion Bodega'</h1> 
              </div>
                 <div class="card">
                     <table class="table">
@@ -45,30 +45,22 @@
                             <th scope="col">#</th>
                             <th scope="col">Combo</th>
                             <th scope="col">Cantidad</th>
-                            <th scope="col">Reserva Bodega</th>
+                            <th scope="col">Opciones</th>
                             
                           </tr>
                         </thead>
                         <tbody>
+                          {% for i in context%}
                           <tr>
-                            <th scope="row">1</th>
-                            <td>California Niu</td>
-                            <td>99</td>
-                            <td>200</td>
-                            
+                            <th scope="row" class="bodega">{{i.codigo}}</th>
+                            <td class="bodega">{{i.nombre}}</td>
+                            <td><input type="text" id="pass" name="user"  value="{{i.stock}}" class="stock"></td>
+                            <td>
+                              <button>Modificar</button>
+                            </td>
                           </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>California Furai</td>
-                            <td>99</td>
-                            <td>200</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Hot Palmito</td>
-                            <td>99</td>
-                            <td>200</td>
-                          </tr>
+                          {% endfor%}
+                         
                           
                         </tbody>
                       </table>
