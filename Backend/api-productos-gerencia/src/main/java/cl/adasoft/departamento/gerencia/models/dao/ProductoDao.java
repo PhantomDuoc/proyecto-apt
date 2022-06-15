@@ -11,9 +11,6 @@ import cl.adasoft.departamento.gerencia.models.entity.Producto;
 
 public interface ProductoDao extends PagingAndSortingRepository<Producto, Long> {
 
-	@Query("select p from Producto p where p.codigo=?1")
-	public Producto findByRut(Long codigo);
-
 	@Query("select p from Producto p where p.id=?1")
 	public Optional<Producto> findById(Long id);
 
