@@ -6,16 +6,19 @@ import requests
 from core.models import Usuarios
 
 urlUsers='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
-urlProductos='http://localhost:8090/v1/departamento/gerencia/producto/findAll'
+urlProductos='http://localhost:8090/v1/departamento/gerencia/producto/findAll?size=6'
+
 
 
 
 
 # Create your views here.
 def index(request):
-    response = requests.get(urlProductos).json() #Obteniendo datos productos
-    context = response['content'] #obtenemos el contenido de la respuesta
-    return render(request,'core/index.html', {'context': context}) #contenido hacia la vista
+    response = requests.get(urlProductos).json() #Obteniendo datos productos 
+    contextprod = response['content'] #obtenemos el contenido de la respuesta
+    # imagen = contextprod[0].imagen
+    print(contextprod)
+    return render(request,'core/index.html', {'contextprod': contextprod}) #contenido hacia la vista
 
 
 
