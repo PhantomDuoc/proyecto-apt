@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{% static 'core/css/dashboard.css' %}">
 
 <head>
+{% load static %}
   <title>Administracion Usuarios</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" />
   <style>
@@ -16,8 +17,62 @@
   </style>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script type="text/javascript" src="{% static 'core/js/usuarios.js' %}"></script>
+  <script type="text/javascript">
+    function updateUser(Usuario) {
+    fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
+            method: "PUT",
+            headers: {
+                'Content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({
+                id: Usuario.id,
+                username: Usuario.username,
+                password: Usuario.password,
+                rut: Usuario.rut,
+                direccion: Usuario.direccion,
+                email: Usuario.email,
+            })
+        })
+        .then(res => {
+            if (res.ok) {
+                console.log("HTTP request successful")
+            } else {
+                console.log("HTTP request unsuccessful")
+            }
+            return res
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => console.log(error))
+        window.location.reload();
+}
 
-  {% load static %}
+function deleteUser(id) {
+    fetch('http://localhost:8091/v1/departamento/gerencia/usuario/delete/'+id, {
+            method: "DELETE",
+            headers: {
+                'Content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
+        })
+        .then(res => {
+            if (res.ok) {
+                console.log("HTTP request successful")
+            } else {
+                console.log("HTTP request unsuccessful")
+            }
+            return res
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => console.log(error))
+        window.location.reload();
+}
+  </script>
+
+  
 </head>
 <a href="https://icons8.com/icon/1CocjuhZpSKv/edit-account"></a>
 <a href="https://icons8.com/icon/67884/delete"></a>
@@ -67,21 +122,19 @@
               <tbody>
                 {% for i in contextuser%}
                 <tr>
-                  <th scope="row">{{i.id}}</th>
-                  <td><input type="text" id="pass" name="user"  value="{{i.username}}" class="usuarios"></td>
-                  <td><input type="text" id="pass" name="user"  value="{{i.password}}" class="usuarios"></td>
-                  <td><input type="text" id="pass" name="user"  value="{{i.email}}" class="usuarios"></td>
-                  <td><input type="text" id="pass" name="user"  value="{{i.direccion}}" class="usuarios"></td>
-                  <td><input type="text" id="pass" name="user"  value="{{i.telefono}}" class="usuarios"></td>
-                  <td><input type="text" id="pass" name="user"  value="{{i.rut}}" class="usuarios"></td>
+                  <th scope="row" id="userId" >{{i.id}}</th>
+                  <td><input type="text" id="username" name="username"  value="{{i.username}}" class="usuarios"></td>
+                  <td><input type="text" id="password" name="password"  value="{{i.password}}" class="usuarios"></td>
+                  <td><input type="text" id="email" name="email"  value="{{i.email}}" class="usuarios"></td>
+                  <td><input type="text" id="direccion" name="direccion"  value="{{i.direccion}}" class="usuarios"></td>
+                  <td><input type="text" id="telefono" name="telefono"  value="{{i.telefono}}" class="usuarios"></td>
+                  <td><input type="text" id="rut" name="rut"  value="{{i.rut}}" class="usuarios"></td>
                   
                   <td>
-                    <button>Eliminar</button>
+                    <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser({{i}})">Actualizar</button>
+                    <button type="button" class="btn btn-danger" id="btn-delete" onclick="deleteUser({{i.id}})">Eliminar</button>
                   </td>
-
-                  <td>
-                  <button>Modificar</button>
-                  </td>
+                  
                 </tr>
                 {% endfor%}
 
