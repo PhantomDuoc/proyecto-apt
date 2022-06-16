@@ -18,6 +18,7 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script type="text/javascript" src="{% static 'core/js/usuarios.js' %}"></script>
+  <!--
   <script type="text/javascript">
     function updateUser(){
         fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
@@ -32,6 +33,7 @@
             rut: 123456789,
             direccion: "direccion",
             email: "email",
+            type: 0,
         })
     })
     .then(res => {
@@ -47,7 +49,6 @@
     .catch(error => console.log(error))
         window.location.reload();
 }
-
 function deleteUser(id) {
     fetch('http://localhost:8091/v1/departamento/gerencia/usuario/delete/'+id, {
             method: "DELETE",
@@ -70,7 +71,7 @@ function deleteUser(id) {
         window.location.reload();
 }
   </script>
-
+-->
   
 </head>
 <a href="https://icons8.com/icon/1CocjuhZpSKv/edit-account"></a>
@@ -130,8 +131,10 @@ function deleteUser(id) {
                   <td><input type="text" id="rut" name="rut"  value="{{i.rut}}" class="usuarios"></td>
                   
                   <td>
-                    <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser()" data-answer="">Actualizar</button>
-                    {% comment %} <script>
+                    <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser(
+                      
+                    )">Actualizar</button>
+                    <!-- <script>
                           $(".btn-update").click((e) =>{
                             const idTabla = $(e.currentTarget).closest('tr').find('#id').text();
                             const username = $(e.currentTarget).closest('tr').find('#username').val();
@@ -170,7 +173,7 @@ function deleteUser(id) {
                       .then(data => console.log(data))
                       .catch(error => console.log(error))
                           window.location.reload();
-                    </script> {% endcomment %}
+                    </script> -->
                     <button type="button" class="btn btn-danger" id="btn-delete" onclick="deleteUser({{i.id}})">Eliminar</button>
                   </td>
                   
