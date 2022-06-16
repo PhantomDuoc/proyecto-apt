@@ -18,61 +18,7 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script type="text/javascript" src="{% static 'core/js/usuarios.js' %}"></script>
-  <!--
-  <script type="text/javascript">
-    function updateUser(){
-        fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
-        method: "PUT",
-        headers: {
-            'Content-type': 'application/json',
-            'Allow-Control-Allow-Origin': '*'
-        },
-        body: JSON.stringify({
-            username: "admin",
-            password: "admin",
-            rut: 123456789,
-            direccion: "direccion",
-            email: "email",
-            type: 0,
-        })
-    })
-    .then(res => {
-        if (res.ok) {
-            console.log("HTTP request successful")
-        } else {
-            console.log("HTTP request unsuccessful")
-        }
-        return res
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error))
-        window.location.reload();
-}
-function deleteUser(id) {
-    fetch('http://localhost:8091/v1/departamento/gerencia/usuario/delete/'+id, {
-            method: "DELETE",
-            headers: {
-                'Content-type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            }
-        })
-        .then(res => {
-            if (res.ok) {
-                console.log("HTTP request successful")
-            } else {
-                console.log("HTTP request unsuccessful")
-            }
-            return res
-        })
-        .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(error => console.log(error))
-        window.location.reload();
-}
-  </script>
--->
-  
+
 </head>
 <a href="https://icons8.com/icon/1CocjuhZpSKv/edit-account"></a>
 <a href="https://icons8.com/icon/67884/delete"></a>
@@ -114,6 +60,7 @@ function deleteUser(id) {
                   <th scope="col">Direccion</th>
                   <th scope="col">Telefono</th>
                   <th scope="col">Rut</th>
+                  <th scope="col">Rol</th>
                   <th scope="col">Opciones</th>
                   <th></th>
                 </tr>
@@ -127,53 +74,20 @@ function deleteUser(id) {
                   <td><input type="text" id="password" name="password"  value="{{i.password}}" class="usuarios"></td>
                   <td><input type="text" id="email" name="email"  value="{{i.email}}" class="usuarios"></td>
                   <td><input type="text" id="direccion" name="direccion"  value="{{i.direccion}}" class="usuarios"></td>
-                  <td><input type="text" id="telefono" name="telefono"  value="{{i.telefono}}" class="usuarios"></td>
-                  <td><input type="text" id="rut" name="rut"  value="{{i.rut}}" class="usuarios"></td>
-                  
+                  <td><input type="number" id="telefono" name="telefono"  value="{{i.telefono}}" class="usuarios"></td>
+                  <td><input type="number" id="rut" name="rut"  value="{{i.rut}}" class="usuarios"></td>
+                  <td><input type="number" id="type" name="type"  value="{{i.type}}" class="usuarios"></td>
                   <td>
                     <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser(
-                      
+                      {{i.id}},
+                      document.getElementById('username').value,
+                      document.getElementById('password').value,
+                      document.getElementById('email').value,
+                      document.getElementById('direccion').value,
+                      document.getElementById('telefono').value,
+                      document.getElementById('rut').value,
+                      document.getElementById('type').value
                     )">Actualizar</button>
-                    <!-- <script>
-                          $(".btn-update").click((e) =>{
-                            const idTabla = $(e.currentTarget).closest('tr').find('#id').text();
-                            const username = $(e.currentTarget).closest('tr').find('#username').val();
-                            const password = $(e.currentTarget).closest('tr').find('#password').val();
-                            const email = $(e.currentTarget).closest('tr').find('#email').val();
-                            const direccion = $(e.currentTarget).closest('tr').find('#direccion').val();
-                            const telefono = $(e.currentTarget).closest('tr').find('#telefono').val();
-                            const rut = $(e.currentTarget).closest('tr').find('#rut').val();
-
-                          })
-                          fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
-                          method: "PUT",
-                          headers: {
-                              'Content-type': 'application/json',
-                              'Allow-Control-Allow-Origin': '*'
-                          },
-                          body: JSON.stringify({
-                              id: id,
-                              username: username,
-                              password: password,
-                              email: email,
-                              direccion: direccion,
-                              telefono: telefono,
-                              rut:  rut,
-                          })
-                      })
-                      .then(res => {
-                          if (res.ok) {
-                              console.log("HTTP request successful")
-                          } else {
-                              console.log("HTTP request unsuccessful")
-                          }
-                          return res
-                      })
-                      .then(res => res.json())
-                      .then(data => console.log(data))
-                      .catch(error => console.log(error))
-                          window.location.reload();
-                    </script> -->
                     <button type="button" class="btn btn-danger" id="btn-delete" onclick="deleteUser({{i.id}})">Eliminar</button>
                   </td>
                   
@@ -196,30 +110,36 @@ function deleteUser(id) {
             <table>
               <thead class="thead-dark">
                 <tr>
-                  <th scope="col"></th>
                   <th scope="col">Username</th>
                   <th scope="col">Password</th>
                   <th scope="col">Email</th>
                   <th scope="col">Direccion</th>
                   <th scope="col">Telefono</th>
                   <th scope="col">Rut</th>
-                  <th scope="col"></th>
+                  <th scope="col">Rol</th>
                   <th></th>
                 </tr>
                 <tbody>
                   <tr>
-              
-                    <th scope="row" id="userId" >#</th>
-                    <td><input type="text" id="username" name="username" placerholder="Ingrese usuario"></td>
-                    <td><input type="text" id="password" name="password" placerholder="Ingrese password" ></td>
-                    <td><input type="text" id="email" name="email" placerholder="Ingrese email"></td>
-                    <td><input type="text" id="direccion" name="direccion"placerholder="Ingrese direccion"></td>
-                    <td><input type="text" id="telefono" name="telefono" placerholder="Ingrese telefono"></td>
-                    <td><input type="text" id="rut" name="rut" placerholder="Ingrese rut"></td>
-                    
-                    <td>
+                    <td><input type="text" id="usernameCreate" name="usernameCreate" placerholder="Ingrese usuario"></td>
+                    <td><input type="text" id="passwordCreate" name="passwordCreate" placerholder="Ingrese password" ></td>
+                    <td><input type="text" id="emailCreate" name="emailCreate" placerholder="Ingrese email"></td>
+                    <td><input type="text" id="direccionCreate" name="direccionCreate"placerholder="Ingrese direccion"></td>
+                    <td><input type="number" id="telefonoCreate" name="telefonoCreate" placerholder="Ingrese telefono"></td>
+                    <td><input type="number" id="rutCreate" name="rutCreate" placerholder="Ingrese rut"></td>
+                    <td><input type="number" id="typeCreate" name="typeCreate" placerholder="Ingrese Rol"></td>
+                      
+                      <td>
 
-                      <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser()">Crear</button>
+                      <button type="button" class="btn btn-primary" id="btn-update" onclick="crearUser(
+                      document.getElementById('usernameCreate').value,
+                      document.getElementById('passwordCreate').value,
+                      document.getElementById('emailCreate').value,
+                      document.getElementById('direccionCreate').value,
+                      document.getElementById('telefonoCreate').value,
+                      document.getElementById('rutCreate').value,
+                      document.getElementById('typeCreate').value
+                      )">Crear</button>
                       
                     </td>
                     
