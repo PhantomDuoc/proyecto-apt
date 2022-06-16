@@ -8,7 +8,7 @@ fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
             id: 2,
             username: "admin",
             password: "admin",
-            rut: "12345678-9",
+            rut: 123456789,
             direccion: "direccion",
             email: "email",
         })
