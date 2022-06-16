@@ -10,7 +10,6 @@ function validarFormulario(evento) {
 
     fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + usuario, { mode: 'no-cors' }).then(function(data) {
         console.log('aqui');
-        console.log(data.email);
         console.log(data);
         if (data.length === 0) {
             alert('Usuario no existe');
@@ -24,9 +23,11 @@ function validarFormulario(evento) {
             alert('Bienvenido ' + data.username);
         }
         if (data.type == 0) {
+            alert('Redireccionando a Panel de Administración')
             window.location.href = "http://localhost:8000/usuarios";
         }
         if (data.type != 0) {
+            alert('Sesión Iniciada Exitosamente')
             window.location.href = "http://localhost:8000/indexlog";
         }
     });

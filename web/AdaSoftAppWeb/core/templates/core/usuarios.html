@@ -19,20 +19,19 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script type="text/javascript" src="{% static 'core/js/usuarios.js' %}"></script>
   <script type="text/javascript">
-    function updateUser(Usuario) {
-    fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
+    function updateUser(){
+        fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
         method: "PUT",
         headers: {
             'Content-type': 'application/json',
             'Allow-Control-Allow-Origin': '*'
         },
         body: JSON.stringify({
-            id: ,
-            username: ,
-            password: ,
-            rut: ,
-            direccion: ,
-            email: ,
+            username: "admin",
+            password: "admin",
+            rut: 123456789,
+            direccion: "direccion",
+            email: "email",
         })
     })
     .then(res => {
@@ -46,7 +45,7 @@
     .then(res => res.json())
     .then(data => console.log(data))
     .catch(error => console.log(error))
-    window.location.reload();
+        window.location.reload();
 }
 
 function deleteUser(id) {
@@ -82,7 +81,6 @@ function deleteUser(id) {
     <div class="row">
       <div id="admin-sidebar" class="col-md-2 p-x-0 p-y-3">
         <ul class="sidenav admin-sidenav list-unstyled">
-          <h2 class="menusec">Admin. Local</h2>
           <li class="side"><a href="{% url 'usuarios' %}">Usuarios</a></li>
           <li class="side"><a href="{% url 'dashboard' %}">Pedidos</a></li>
           <li class="side"><a href="{% url 'inventario' %}">Bodega</a></li>
@@ -100,7 +98,7 @@ function deleteUser(id) {
           </h1>
         </div>
         <div class="content-title">
-          <h1 class="seccionespanel">'Usuarios Clientes'</h1>
+          <h1 class="titulopanel">'Usuarios Clientes'</h1>
         </div>
         <div class="box-img usuarios">
           <div class="card">
@@ -122,7 +120,8 @@ function deleteUser(id) {
               <tbody>
                 {% for i in contextuser%}
                 <tr>
-                  <th scope="row" id="userId" >{{i.id}}</th>
+                  
+                  <th scope="row" id="id" >{{i.id}}</th>
                   <td><input type="text" id="username" name="username"  value="{{i.username}}" class="usuarios"></td>
                   <td><input type="text" id="password" name="password"  value="{{i.password}}" class="usuarios"></td>
                   <td><input type="text" id="email" name="email"  value="{{i.email}}" class="usuarios"></td>
@@ -131,7 +130,47 @@ function deleteUser(id) {
                   <td><input type="text" id="rut" name="rut"  value="{{i.rut}}" class="usuarios"></td>
                   
                   <td>
-                    <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser({{i}})">Actualizar</button>
+                    <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser()" data-answer="">Actualizar</button>
+                    {% comment %} <script>
+                          $(".btn-update").click((e) =>{
+                            const idTabla = $(e.currentTarget).closest('tr').find('#id').text();
+                            const username = $(e.currentTarget).closest('tr').find('#username').val();
+                            const password = $(e.currentTarget).closest('tr').find('#password').val();
+                            const email = $(e.currentTarget).closest('tr').find('#email').val();
+                            const direccion = $(e.currentTarget).closest('tr').find('#direccion').val();
+                            const telefono = $(e.currentTarget).closest('tr').find('#telefono').val();
+                            const rut = $(e.currentTarget).closest('tr').find('#rut').val();
+
+                          })
+                          fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
+                          method: "PUT",
+                          headers: {
+                              'Content-type': 'application/json',
+                              'Allow-Control-Allow-Origin': '*'
+                          },
+                          body: JSON.stringify({
+                              id: id,
+                              username: username,
+                              password: password,
+                              email: email,
+                              direccion: direccion,
+                              telefono: telefono,
+                              rut:  rut,
+                          })
+                      })
+                      .then(res => {
+                          if (res.ok) {
+                              console.log("HTTP request successful")
+                          } else {
+                              console.log("HTTP request unsuccessful")
+                          }
+                          return res
+                      })
+                      .then(res => res.json())
+                      .then(data => console.log(data))
+                      .catch(error => console.log(error))
+                          window.location.reload();
+                    </script> {% endcomment %}
                     <button type="button" class="btn btn-danger" id="btn-delete" onclick="deleteUser({{i.id}})">Eliminar</button>
                   </td>
                   
@@ -141,9 +180,51 @@ function deleteUser(id) {
 
               </tbody>
             </table>
-
+           
           </div>
+        </div>
+        <button type="button" class="btn btn-primary btntabla" id="btn-update">Anterior</button>
+        <button type="button" class="btn btn-primary btntabla" id="btn-update">Siguiente</button>
+        
           <!--#fincard-->
+          <h1 class="titulopanel titulocrear">Crear Usuarios</h1>
+          <div class="card">
+           
+            <table>
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Password</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Direccion</th>
+                  <th scope="col">Telefono</th>
+                  <th scope="col">Rut</th>
+                  <th scope="col"></th>
+                  <th></th>
+                </tr>
+                <tbody>
+                  <tr>
+              
+                    <th scope="row" id="userId" >#</th>
+                    <td><input type="text" id="username" name="username" placerholder="Ingrese usuario"></td>
+                    <td><input type="text" id="password" name="password" placerholder="Ingrese password" ></td>
+                    <td><input type="text" id="email" name="email" placerholder="Ingrese email"></td>
+                    <td><input type="text" id="direccion" name="direccion"placerholder="Ingrese direccion"></td>
+                    <td><input type="text" id="telefono" name="telefono" placerholder="Ingrese telefono"></td>
+                    <td><input type="text" id="rut" name="rut" placerholder="Ingrese rut"></td>
+                    
+                    <td>
+
+                      <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser()">Crear</button>
+                      
+                    </td>
+                    
+                  </tr>
+                </tbody>
+              </thead>
+            </table>
+          </div>
 
         </div>
         <!---box usuarios-->
@@ -167,7 +248,7 @@ function deleteUser(id) {
         <div class="col-sm-6 col-md-3 item">
           <h5 class="menubar">Cerrar Sesión</h5>
           <ul class="" fortext>
-            <li><a style="color:#fff;" href="{% url 'logadm' %}">Logout</a></li>
+            <li><a style="color:#fff;" href="{% url 'login' %}">Logout</a></li>
 
 
           </ul>
