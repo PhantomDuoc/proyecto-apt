@@ -27,12 +27,12 @@
                 'Access-Control-Allow-Origin': '*'
             },
             body: JSON.stringify({
-                id: Usuario.id,
-                username: Usuario.username,
-                password: Usuario.password,
-                rut: Usuario.rut,
-                direccion: Usuario.direccion,
-                email: Usuario.email,
+                "id": Usuario.id.value,
+                "username": Usuario.username.value,
+                "direccion": Usuario.direccion.value,
+                "email": Usuario.email.value,
+                "password": Usuario.password.value,
+                "telefono": Usuario.telefono.value,
             })
         })
         .then(res => {
