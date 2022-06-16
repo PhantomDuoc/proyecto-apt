@@ -24,7 +24,7 @@ function validarFormulario(evento) {
             alert('Bienvenido ' + data.username);
         }
         if (data.type == 0) {
-            window.location.href = "http://localhost:8000/dashboard";
+            window.location.href = "http://localhost:8000/usuarios";
         }
         if (data.type != 0) {
             window.location.href = "http://localhost:8000/indexlog";
