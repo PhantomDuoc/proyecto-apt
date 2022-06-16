@@ -51,7 +51,12 @@ def evento(request):
     return render(request,'core/evento.html')
 
 def indexlog(request):
-    return render(request,'core/indexlog.html')
+    response = requests.get(urlProductos).json() #Obteniendo datos productos 
+    contextprod = response['content'] #obtenemos el contenido de la respuesta
+    # imagen = contextprod[0].imagen
+    print(contextprod)
+    return render(request,'core/indexlog.html', {'contextprod': contextprod}) #contenido hacia la vista
+
 
 def quieneslog(request):
     return render(request,'core/quieneslog.html')

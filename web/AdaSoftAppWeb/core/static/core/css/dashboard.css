@@ -272,4 +272,17 @@ img {
 	font-size: 15px;
 }
 
+.titulocrear{
+	margin-top:60px !important;
+}
+.inventariocrear{
+	margin-top:60px !important;
+	margin-left: 700px !important;
+}
+.btntabla{
+	background-color: black !important;
+	color: white !important;
+}
+
+
 
