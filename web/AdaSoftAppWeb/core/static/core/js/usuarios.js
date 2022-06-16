@@ -1,3 +1,26 @@
+var inputGroup = document.getElementById('input-group');
+var inputs = inputGroup.getElementsByTagName('input');
+
+for (i = 0; i < inputs.length; i++) {
+    var id = inputs[i].getAttribute('id');
+    inputs[i].value = getSavedValue(id);
+}
+
+function saveValue(e) {
+    var id = e.id; // get the sender's id to save it . 
+    var val = e.value; // get the value. 
+    console.log(id + ": " + val);
+    localStorage.setItem(id, val); // Every time user writing something, the localStorage's value will override . 
+}
+
+//get the saved value function - return the value of "v" from localStorage. 
+function getSavedValue(v) {
+    if (!localStorage.getItem(v)) {
+        return "None"; // You can change this to your defualt value. 
+    }
+    return localStorage.getItem(v);
+}
+
 function updateUser(id, username, password, email, direccion, telefono, rut, type) {
     fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
             method: "PUT",
@@ -14,7 +37,7 @@ function updateUser(id, username, password, email, direccion, telefono, rut, typ
                 telefono: telefono,
                 rut: rut,
                 type: type
-            })
+            }),
         })
         .then(res => {
             if (res.ok) {

@@ -67,26 +67,26 @@
               </thead>
               <tbody>
                 {% for i in contextuser%}
-                <tr>
+                <tr id="input-group">
                   
                   <th scope="row" id="id" >{{i.id}}</th>
-                  <td><input type="text" id="username" name="username"  value="{{i.username}}" class="usuarios"></td>
-                  <td><input type="text" id="password" name="password"  value="{{i.password}}" class="usuarios"></td>
-                  <td><input type="text" id="email" name="email"  value="{{i.email}}" class="usuarios"></td>
-                  <td><input type="text" id="direccion" name="direccion"  value="{{i.direccion}}" class="usuarios"></td>
-                  <td><input type="number" id="telefono" name="telefono"  value="{{i.telefono}}" class="usuarios"></td>
-                  <td><input type="number" id="rut" name="rut"  value="{{i.rut}}" class="usuarios"></td>
-                  <td><input type="number" id="type" name="type"  value="{{i.type}}" class="usuarios"></td>
+                  <td><input type="text" id="username" name="username"  value="{{i.username}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="password" name="password"  value="{{i.password}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="email" name="email"  value="{{i.email}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="direccion" name="direccion"  value="{{i.direccion}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="number" id="telefono" name="telefono"  value="{{i.telefono}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="number" id="rut" name="rut"  value="{{i.rut}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="number" id="type" name="type"  value="{{i.type}}" class="usuarios" onkeyup='saveValue(this);'></td>
                   <td>
                     <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser(
                       {{i.id}},
-                      document.getElementById('username').value,
-                      document.getElementById('password').value,
-                      document.getElementById('email').value,
-                      document.getElementById('direccion').value,
-                      document.getElementById('telefono').value,
-                      document.getElementById('rut').value,
-                      document.getElementById('type').value
+                      getSavedValue('username'),
+                      getSavedValue('password'),
+                      getSavedValue('email'),
+                      getSavedValue('direccion'),
+                      getSavedValue('telefono'),
+                      getSavedValue('rut'),
+                      getSavedValue('type')
                     )">Actualizar</button>
                     <button type="button" class="btn btn-danger" id="btn-delete" onclick="deleteUser({{i.id}})">Eliminar</button>
                   </td>
