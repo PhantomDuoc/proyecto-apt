@@ -532,3 +532,12 @@ body{
 .funciones{
     background: linear-gradient(to right, #000000, #626262bd);
 }
+.modales{
+ margin-left: 700px !important;
+
+}
+
+.contentmodal{
+    background-color: black;
+    color: white;;
+}
