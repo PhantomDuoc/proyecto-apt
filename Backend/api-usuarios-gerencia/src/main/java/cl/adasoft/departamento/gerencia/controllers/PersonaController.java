@@ -36,7 +36,7 @@ public class PersonaController {
 	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")
 	public Page<Persona> findAll(@RequestParam(name="page", defaultValue="0") int page){
 		
-		Pageable pageRequest =  PageRequest.of(page, 5);  
+		Pageable pageRequest =  PageRequest.of(page, 5, org.springframework.data.domain.Sort.by("id"));  
 		Page<Persona> participants = participantService.findAll(pageRequest);  //para obtener todos los participantes
 		return participants;  //para retornar los participantes
 		
