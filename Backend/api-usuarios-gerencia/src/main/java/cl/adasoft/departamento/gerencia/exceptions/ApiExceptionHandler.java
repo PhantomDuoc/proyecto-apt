@@ -65,12 +65,4 @@ public class ApiExceptionHandler {
 	public ErrorMessage fatalErrorUnexpected(HttpServletRequest request, Exception exception) {
 		return new ErrorMessage(exception, request.getRequestURI());
 	}
-
-	/**
-	 * Maneja el control de errores en caso de exception del tipo
-	 * 
-	 * @param request
-	 * @param exception
-	 * @return
-	 */
 }

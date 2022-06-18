@@ -54,12 +54,12 @@ public class PersonaController {
 	}	
 	
 /* 	Reemplazar por buscar por nombre de usuario
- */	@GetMapping("/findByRut/{rut}")
-	public ResponseEntity<Persona> findByRut(@PathVariable Long rut){
-		Persona response = participantService.findByRut(rut);
+ */	@GetMapping("/findByCodigo/{codigo}")
+	public ResponseEntity<Persona> findByRut(@PathVariable Long codigo){
+		Persona response = participantService.findByRut(codigo);
 		
 		if(response == null) {
-			throw new NotFoundException("participant rut: " + rut);
+			throw new NotFoundException("participant codigo: " + codigo);
 		}
 		
 		return new ResponseEntity<>(response, HttpStatus.OK);

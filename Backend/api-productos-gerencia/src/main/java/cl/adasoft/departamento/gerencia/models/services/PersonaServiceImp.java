@@ -44,17 +44,17 @@ public class PersonaServiceImp implements IPersonaService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Persona findByRut(Long rut) {
+	public Persona findByRut(Long codigo) {
 		
-		return participantsDao.findByRut(rut);
+		return participantsDao.findByRut(codigo);
 	}
 	
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Persona> findById(Long rut) {
+	public Optional<Persona> findById(Long id) {
 		
-		return participantsDao.findById(rut);
+		return participantsDao.findById(id);
 	}	
 	
 }
