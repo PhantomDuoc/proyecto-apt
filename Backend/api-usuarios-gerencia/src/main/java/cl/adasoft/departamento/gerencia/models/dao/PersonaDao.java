@@ -10,6 +10,11 @@ public interface PersonaDao extends PagingAndSortingRepository<Persona,Long> {
 	  @Query("select p from Persona p where p.rut=?1")
 	  public Persona findByRut(Long rut);
 
+<<<<<<< HEAD
 	  
 	  
+=======
+	@Query("select p from Persona p where p.rut=?1")
+	public Persona findByRut(Long rut);
+>>>>>>> parent of 15e3d2c (Merge remote-tracking branch 'origin/dev' into felipe)
 }

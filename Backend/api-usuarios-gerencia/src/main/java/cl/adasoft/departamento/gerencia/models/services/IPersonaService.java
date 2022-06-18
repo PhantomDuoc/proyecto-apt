@@ -17,6 +17,10 @@ public interface IPersonaService {
 	
 	public Persona findByRut(Long rut);
 	
+<<<<<<< HEAD
 	public Optional<Persona> findById(Long rut);
 
+=======
+	public Optional<Persona> findById(Long id);
+>>>>>>> parent of 15e3d2c (Merge remote-tracking branch 'origin/dev' into felipe)
 }
