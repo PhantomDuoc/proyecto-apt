@@ -51,5 +51,32 @@ public class Persona {
 	@NotBlank
 	@Column(name="telefono")
 	private Long telefono;
+
+	@NotBlank
+	@Column(name="nombre")
+	private String nombre;
+
+	@NotBlank
+	@Column(name="apellido")
+	private String apellido;
+
+	@NotBlank
+	@Column(name="estado")
+	private Long estado;
+
+	@NotBlank
+	@Column(name="fecha_nacimiento")
+	private String fecha_nacimiento;
+
+	@NotBlank
+	@Column(name="fecha_ingreso")
+	private String fecha_ingreso;
+
+	@NotBlank
+	@Column(name="fecha_salida")
+	private String fecha_salida;
 	
+	@NotBlank
+	@Column(name="patente")
+	private String patente;
 }
