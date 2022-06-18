@@ -17,7 +17,7 @@
   </style>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  <script type="text/javascript" src="{% static 'core/js/usuarios.js' %}"></script>
+  <script type="text/javascript" src="{% static 'core/js/productos.js' %}"></script>
 
 </head>
 <a href="https://icons8.com/icon/1CocjuhZpSKv/edit-account"></a>
@@ -30,7 +30,7 @@
         <ul class="sidenav admin-sidenav list-unstyled">
           <li class="side"><a href="{% url 'usuarios' %}">Usuarios</a></li>
           <li class="side"><a href="{% url 'dashboard' %}">Pedidos</a></li>
-          <li class="side"><a href="{% url 'inventario' %}">Bodega</a></li>
+          <li class="side"><a href="{% url 'inventario' %}">Inventario</a></li>
           <li class="side"><a href="{% url 'ventas' %}">Ventas</a></li>
           <li class="side"><a href="{% url 'estadistica' %}">Estadistica</a></li>
         </ul>
@@ -45,7 +45,7 @@
           </h1>
         </div>
         <div class="content-title">
-          <h1 class="titulopanel">'Usuarios Clientes'</h1>
+          <h1 class="titulopanel">Inventario</h1>
         </div>
         <div class="box-img usuarios">
           <div class="card">
@@ -54,39 +54,38 @@
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Username</th>
-                  <th scope="col">Password</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Direccion</th>
-                  <th scope="col">Telefono</th>
-                  <th scope="col">Rut</th>
-                  <th scope="col">Rol</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Código</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Imagen</th>
                   <th scope="col">Opciones</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                {% for i in contextuser%}
+                {% for i in context%}
                 <tr id="input-group">
-                  
                   <th scope="row" id="id" >{{i.id}}</th>
-                  <td><input type="text" id="username" name="username"  value="{{i.username}}" class="usuarios" onkeyup='saveValue(this);'></td>
-                  <td><input type="text" id="password" name="password"  value="{{i.password}}" class="usuarios" onkeyup='saveValue(this);'></td>
-                  <td><input type="text" id="email" name="email"  value="{{i.email}}" class="usuarios" onkeyup='saveValue(this);'></td>
-                  <td><input type="text" id="direccion" name="direccion"  value="{{i.direccion}}" class="usuarios" onkeyup='saveValue(this);'></td>
-                  <td><input type="number" id="telefono" name="telefono"  value="{{i.telefono}}" class="usuarios" onkeyup='saveValue(this);'></td>
-                  <td><input type="number" id="rut" name="rut"  value="{{i.rut}}" class="usuarios" onkeyup='saveValue(this);'></td>
-                  <td><input type="number" id="type" name="type"  value="{{i.type}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="nombre" name="nombre"  value="{{i.nombre}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="codigo" name="codigo"  value="{{i.codigo}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="number" id="precio" name="precio"  value="{{i.precio}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="number" id="stock" name="stock"  value="{{i.stock}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="descripcion" name="descripcion"  value="{{i.descripcion}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="categoria" name="categoria"  value="{{i.categoria}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="imagen" name="imagen"  value="{{i.imagen}}" class="usuarios" onkeyup='saveValue(this);'></td>
                   <td>
                     <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser(
                       {{i.id}},
-                      getSavedValue('username'),
-                      getSavedValue('password'),
-                      getSavedValue('email'),
-                      getSavedValue('direccion'),
-                      getSavedValue('telefono'),
-                      getSavedValue('rut'),
-                      getSavedValue('type')
+                      getSavedValue('nombre'),
+                      getSavedValue('codigo'),
+                      getSavedValue('precio'),
+                      getSavedValue('stock'),
+                      getSavedValue('descripcion'),
+                      getSavedValue('categoria'),
+                      getSavedValue('imagen')
                     )">Actualizar</button>
                     <button type="button" class="btn btn-danger" id="btn-delete" onclick="deleteUser({{i.id}})">Eliminar</button>
                   </td>
@@ -104,41 +103,41 @@
         <button type="button" class="btn btn-primary btntabla" id="btn-update">Siguiente</button>
         
           <!--#fincard-->
-          <h1 class="titulopanel titulocrear">Crear Usuarios</h1>
+          <h1 class="titulopanel titulocrear">Crear Producto</h1>
           <div class="card">
            
             <table>
               <thead class="thead-dark">
                 <tr>
-                  <th scope="col">Username</th>
-                  <th scope="col">Password</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Direccion</th>
-                  <th scope="col">Telefono</th>
-                  <th scope="col">Rut</th>
-                  <th scope="col">Rol</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Código</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Imagen</th>
                   <th></th>
                 </tr>
                 <tbody>
                   <tr>
-                    <td><input type="text" id="usernameCreate" name="usernameCreate" placerholder="Ingrese usuario"></td>
-                    <td><input type="text" id="passwordCreate" name="passwordCreate" placerholder="Ingrese password" ></td>
-                    <td><input type="text" id="emailCreate" name="emailCreate" placerholder="Ingrese email"></td>
-                    <td><input type="text" id="direccionCreate" name="direccionCreate"placerholder="Ingrese direccion"></td>
-                    <td><input type="number" id="telefonoCreate" name="telefonoCreate" placerholder="Ingrese telefono"></td>
-                    <td><input type="number" id="rutCreate" name="rutCreate" placerholder="Ingrese rut"></td>
-                    <td><input type="number" id="typeCreate" name="typeCreate" placerholder="Ingrese Rol"></td>
+                    <td><input type="text" id="nombreCreate" name="nombreCreate" placerholder="Ingrese nombre"></td>
+                    <td><input type="text" id="codigoCreate" name="codigoCreate" placerholder="Ingrese codigo" ></td>
+                    <td><input type="number" id="precioCreate" name="precioCreate" placerholder="Ingrese precio"></td>
+                    <td><input type="number" id="stockCreate" name="stockCreate"placerholder="Ingrese stock"></td>
+                    <td><input type="text" id="descripcionCreate" name="descripcionCreate" placerholder="Ingrese descripcion"></td>
+                    <td><input type="text" id="categoriaCreate" name="categoriaCreate" placerholder="Ingrese categoria"></td>
+                    <td><input type="text" id="imagenCreate" name="imagenCreate" placerholder="Ingrese imagen"></td>
                       
                       <td>
 
                       <button type="button" class="btn btn-primary" id="btn-update" onclick="crearUser(
-                      document.getElementById('usernameCreate').value,
-                      document.getElementById('passwordCreate').value,
-                      document.getElementById('emailCreate').value,
-                      document.getElementById('direccionCreate').value,
-                      document.getElementById('telefonoCreate').value,
-                      document.getElementById('rutCreate').value,
-                      document.getElementById('typeCreate').value
+                      document.getElementById('nombreCreate').value,
+                      document.getElementById('codigoCreate').value,
+                      document.getElementById('precioCreate').value,
+                      document.getElementById('stockCreate').value,
+                      document.getElementById('descripcionCreate').value,
+                      document.getElementById('categoriaCreate').value,
+                      document.getElementById('imagenCreate').value
                       )">Crear</button>
                       
                     </td>

@@ -8,9 +8,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import io.swagger.v3.oas.annotations.Operation;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ProductoController {
 
@@ -33,7 +36,7 @@ public class ProductoController {
 	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")
 	public Page<Producto> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
 
-		Pageable pageRequest = PageRequest.of(page, 6);
+		Pageable pageRequest = PageRequest.of(page, 6, org.springframework.data.domain.Sort.by("id"));
 		Page<Producto> participants = participantService.findAll(pageRequest);
 		return participants;
 
@@ -49,6 +52,11 @@ public class ProductoController {
 	public void update(@PathVariable Long id) {
 
 		participantService.delete(id);
+	}
+
+	@PutMapping("/update")
+	public ResponseEntity<Producto> update(@RequestBody Producto producto){
+		return new ResponseEntity<>(participantService.save(producto),HttpStatus.CREATED);
 	}
 
 	@GetMapping("/findById/{id}")
