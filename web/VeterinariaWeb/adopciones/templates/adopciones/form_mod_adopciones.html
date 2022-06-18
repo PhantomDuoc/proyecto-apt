@@ -1,0 +1,166 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=yes, maximum-scale=3.0, minimum-scale=1.0">
+    <title>Veterinaria Cola</title>
+    <link rel="stylesheet" href="{% static 'adopciones/css/style.css'%}">
+    <link rel="shortcut icon" href="{% static 'adopciones/icons/icon.png'%}">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container container--flex">
+            <h1 class="logo">Veterinaria Cola</h1>
+        </div>
+        <div class="main-header__contactInfo column ">
+            <p class="main-header__contactInfo__phone">
+                <span class="icon-phone">
+                    <img src="{% static 'adopciones/icons/icon-phone.png'%}" alt="" class="icon-phone">+569 1234 5678
+                </span>
+            </p>
+            <p class="main-header__contactInfo__address">
+                <span class="icon-location">
+                    <img src="{% static 'adopciones/icons/icon-location.png'%}" alt=""> Libertad #666 - Valparaíso, Chile
+                </span>
+            </p>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container container--flex">
+            <span class="icon-menu" id="btn-menu">
+                <img src="{% static 'adopciones/icons/icon-menu.png'%}" alt="">
+            </span>
+            <ul class="menu" id="menu">
+                <li class="menu__item">
+                    <a href="/" class="menu__link menu__link--select">Inicio</a>
+                </li>
+                <li class="menu__item">
+                    <a href="{% url 'adopciones'%}" class="menu__link">Adopciones</a>
+                </li>
+                <li class="menu__item">
+                    <a href="{% url 'conocenos'%}" class="menu__link">Conócenos</a>
+                </li>
+                <li class="menu__item">
+                    <a href="{% url 'contacto'%}" class="menu__link">Contacto</a>
+                </li>
+                <li class="menu__item">
+                    <a href="{% url 'login_screen'%}" class="menu__link">Login</a>
+                </li>
+                <li class="menu__item">
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'dashboard' %}" class="menu__link">Dashboard</a> {% endif %}
+                </li>
+            </ul>
+            <div class="social-icon">
+                <a href="" class="social-icon__link">
+                    <span class="icon">
+                        <img src="{% static 'adopciones/icons/icon-facebook.png'%}" alt="">
+                    </span>
+                </a>
+                <a href="" class="social-icon__link">
+                    <span class="icon">
+                        <img src="{% static 'adopciones/icons/icon-twitter.png'%}" alt="">
+                    </span>
+                </a>
+                <a href="" class="social-icon__link">
+                    <span class="icon">
+                        <img src="{% static 'adopciones/icons/icon-mail.png'%}" alt="">
+                    </span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="banner">
+        <img src="{% static 'adopciones/img/banner.jpg'%}" alt="" class="banner__img">
+        <div class="banner__content">Tus mascotas en las mejores manos</div>
+    </section>
+
+    <div class="container container--flex">
+        <form method="post" action="" id="formulario" style="max-width: 500px; margin: 0 auto;">
+            {% csrf_token %}
+
+            <div class="form_group">
+                {{ form.as_table }}
+
+            </div>
+            <input type="submit" class="btn btn-danger" id="enviar" value="Modificar">
+            <input type="reset" class="btn btn-primary" id="limnpiar" value="Limpiar">
+            <div id="error" class="alert alert-success" role="alert">
+                {{ mensaje }}
+            </div>
+            <a href="/" class="menu__link menu__link--select">Inicio</a>
+        </form>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container container--flex">
+            <div class="column column--33">
+                <h2 class="column__title">¿Por qué visitarnos?</h2>
+                <p class="column__txt">Porqué cuidaremos a tus mascotas como si fueran nuestras, contamos con una amplia variedad de profesionales para brindar la mejor atención</p>
+            </div>
+            <div class="column column--33">
+                <h2 class="column__title">Contáctanos</h2>
+                <p class="column__txt">Libertad #666 - Valparaíso, Chile</p>
+                <p class="column__txt">Teléfono: +569 1234 5678</p>
+                <p class="column__txt">consultas@veterinariacola.com</p>
+            </div>
+            <div class="column column--33">
+                <h2 class="column__title">Síguenos en nuestras redes sociales</h2>
+                <p class="column__txt">
+                    <a href="" class="icon-facebook"><img src="{% static 'adopciones/icons/icon-facebook.png'%}" alt="">Facebook</a>
+                </p>
+                <p class="column__txt">
+                    <a href="" class="icon-twitter"><img src="{% static 'adopciones/icons/icon-twitter.png'%}" alt="">Síguenos en Twitter</a>
+                </p>
+                <p class="column__txt">
+                    <a href="" class="icon-youtube"><img src="{% static 'adopciones/icons/icon-youtube.png'%}" alt="">Visita nuestro canal</a>
+                </p>
+            </div>
+            <p class="copy">&copy; 2021 Veterinaria Cola | Todos los derechos reservados</p>
+        </div>
+    </footer>
+    <script src="{% static 'adopciones/js/menu.js'%}"></script>
+    <script src="{% static 'adopciones/js/script.js'%}"></script>
+    <script>
+        $(document).ready(function() {
+            $.getJSON('http://127.0.0.1:8000/api/lista_adopciones', function(data) {
+                var estado = data;
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+
+                today = dd + '/' + mm + '/' + yyyy;
+
+                $('#fecha').html(today);
+                $.each(estado, function(i, item) {
+                    $('#estado').append("<tr><td>" + item.estado_id + "</td><td>" +
+                        item.estado + "</td></tr>");
+
+                });
+
+
+            }).fail(function() {
+                console.log('Error al consumir la API!');
+            });
+
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js "></script>
+</body>
+
+</html>
