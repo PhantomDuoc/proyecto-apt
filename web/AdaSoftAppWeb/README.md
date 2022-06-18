@@ -1,1 +1,0 @@
-docker build --tag=django:latest .
