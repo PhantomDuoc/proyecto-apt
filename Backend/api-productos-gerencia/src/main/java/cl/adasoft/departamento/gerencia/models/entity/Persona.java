@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data 
 @Entity
-@Table(name="users")
+@Table(name="products")
 public class Persona {
 
 	@Id
@@ -24,32 +24,15 @@ public class Persona {
 	
 	@NotBlank
 	@Size(min = 10, max = 100, message = "The name cannot exceed 100 characters")
-	@Column(name="username")
-	private String username;
+	@Column(name="nombre")
+	private String nombre;
 
 	@NotBlank
-	@Column(name="password")
-	private String password;
-	
-	@NotBlank
-	@Column(name="type")
-	private Long type;
+	@Column(name="codigo")
+	private Long codigo;
 
 	@NotBlank
-	@Column(name="rut")
-	private Long rut;
-
-	@NotBlank
-	@Column(name="direccion")
-	private String direccion;
-	
-	@NotBlank
-	@Column(name="email")
-	@Email
-	private String email;
-
-	@NotBlank
-	@Column(name="telefono")
-	private Long telefono;
+	@Column(name="precio")
+	private Long precio;
 	
 }
