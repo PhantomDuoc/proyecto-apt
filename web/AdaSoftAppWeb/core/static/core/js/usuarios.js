@@ -1,1 +1,0 @@
-let url = "http://localhost:8091/v1/departamento/gerencia/usuario/findAll"
