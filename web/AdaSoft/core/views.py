@@ -9,3 +9,6 @@ def login(request):
 
 def dashboard(request):
     return render(request, 'core/dashboard.html')
+
+def usuarios(request):
+    return render(request, 'core/usuarios.html')
