@@ -1,5 +1,26 @@
-var inputGroup = document.getElementById('input-group');
-var inputs = inputGroup.getElementsByTagName('input');
+function editarUsuario(id) {
+    fetch('http://localhost:8091/v1/departamento/gerencia/usuario/findById/' + id, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
+        })
+        .then(res => {
+            if (res.ok) {
+                console.log("HTTP request successful")
+            } else {
+                console.log("HTTP request unsuccessful")
+            }
+            return res
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => console.log(error))
+    localStorage.setItem("id", id);
+}
 
 for (i = 0; i < inputs.length; i++) {
     var id = inputs[i].getAttribute('id');

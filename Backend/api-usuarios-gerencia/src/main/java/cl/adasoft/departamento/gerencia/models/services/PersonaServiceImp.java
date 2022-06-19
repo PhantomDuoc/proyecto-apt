@@ -63,5 +63,11 @@ public class PersonaServiceImp implements IPersonaService {
 		return participantsDao.findByUsername(username);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Persona> findByType(Long type, Pageable pageRequest) {
+		
+		return participantsDao.findByType(type, pageRequest);
+	}
 	
 }

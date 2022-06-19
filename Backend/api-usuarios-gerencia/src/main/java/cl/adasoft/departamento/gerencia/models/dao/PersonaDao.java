@@ -16,4 +16,7 @@ public interface PersonaDao extends PagingAndSortingRepository<Persona, Long> {
 
 	@Query("select p from Persona p where p.username=?1")
     public Optional<Persona> findByUsername(String username);
+
+	@Query("select p from Persona p where p.type=?1")
+	public Page<Persona> findByType(Long type, org.springframework.data.domain.Pageable pageRequest);
 }
