@@ -55,6 +55,9 @@
       href="{% static 'core/css/material-dashboard.css' %}"
       rel="stylesheet"
     />
+    <!-- ADASOFT -->
+    <script src="{% static 'core/js/adasoft/dashboard.js'%}"></script>
+    <script src="{% static 'core/js/adasoft/util.js'%}"></script>
   </head>
 
   <body class="g-sidenav-show bg-gray-200">
@@ -192,8 +195,9 @@
         <div class="mx-3">
           <a
             class="btn bg-gradient-primary mt-4 w-100"
-            href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree"
+            href=""
             type="button"
+            onclick="Logout()"
             >Cerrar Sesión</a
           >
         </div>
@@ -221,8 +225,8 @@
               <li
                 class="breadcrumb-item text-sm text-dark active"
                 aria-current="page"
+                id="usuarioLogeado"
               >
-                ADMIN
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Panel Usuarios</h6>

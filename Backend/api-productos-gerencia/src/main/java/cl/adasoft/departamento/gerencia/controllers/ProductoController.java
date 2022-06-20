@@ -114,7 +114,7 @@ public class ProductoController {
 	public Page<Producto> findByCategoria(@PathVariable String categoria,
 			@RequestParam(name = "page", defaultValue = "0") int page) {
 
-		Pageable pageRequest = PageRequest.of(page, 5);
+		Pageable pageRequest = PageRequest.of(page, 50, org.springframework.data.domain.Sort.by("id"));
 		Page<Producto> participants = participantService.findByCategoria(categoria, pageRequest);
 		return participants;
 

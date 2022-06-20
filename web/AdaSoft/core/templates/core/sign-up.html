@@ -37,6 +37,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="{% static 'core/css/material-dashboard.css '%}" rel="stylesheet" />
+  <!-- ADASOFT -->
+  <script src="{% static 'core/js/adasoft/sign-up.js'%}"></script>
 </head>
 
 <body class="">
@@ -115,27 +117,27 @@
                   <form role="form">
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Nombre de Usuario</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" id="username">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Correo</label>
-                      <input type="email" class="form-control">
+                      <input type="email" class="form-control" id="email">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Contraseña</label>
-                      <input type="password" class="form-control">
+                      <input type="password" class="form-control" id="password">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Teléfono</label>
-                      <input type="number" class="form-control">
+                      <input type="number" class="form-control" id="telefono">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Dirección</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" id="direccion">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Rut</label>
-                      <input type="number" class="form-control">
+                      <input type="number" class="form-control" id="rut">
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -144,7 +146,7 @@
                       </label>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Registrarse</button>
+                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="registrar()">Registrarse</button>
                     </div>
                   </form>
                 </div>
