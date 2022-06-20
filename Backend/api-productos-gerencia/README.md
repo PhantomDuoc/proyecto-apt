@@ -113,6 +113,8 @@ docker run -p 8090:8090 -p 50000:50000 --restart always jenkins/jenkins:lts-jdk1
 
 docker run --name=api-usuarios-gerencia -p 8090:8090 api-usuarios-gerencia:latest
 
+mvn clean install -s configuration/settings.xml
+
 docker build --tag=api-productos-gerencia:latest .
 
 docker-compose up -d
