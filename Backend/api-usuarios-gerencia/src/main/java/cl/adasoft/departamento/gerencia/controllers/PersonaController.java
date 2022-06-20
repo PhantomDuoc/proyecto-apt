@@ -34,9 +34,9 @@ public class PersonaController {
 	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")
 	public Page<Persona> findAll(@RequestParam(name="page", defaultValue="0") int page){
 		
-		Pageable pageRequest =  PageRequest.of(page, 5);
-		Page<Persona> participants = participantService.findAll(pageRequest);
-		return participants;
+		Pageable pageRequest =  PageRequest.of(page, 5, org.springframework.data.domain.Sort.by("id"));  
+		Page<Persona> participants = participantService.findAll(pageRequest);  //para obtener todos los participantes
+		return participants;  //para retornar los participantes
 		
 	}
 	
@@ -77,4 +77,23 @@ public class PersonaController {
 		return response;
     }
 	
+	@GetMapping("/findByUsername/{username}")
+	public Optional<Persona>  findByUsername(@PathVariable String username){
+		Optional<Persona> response = participantService.findByUsername(username);
+		
+		if(response == null) {
+			throw new NotFoundException("participant username: " + username);
+		}
+		
+		return response;
+    }
+
+	@GetMapping("/findByType/{type}")
+	public Page<Persona> findByType(@PathVariable Long type, @RequestParam(name="page", defaultValue="0") int page){
+		
+		Pageable pageRequest =  PageRequest.of(page, 5, org.springframework.data.domain.Sort.by("id"));  
+		Page<Persona> participants = participantService.findByType(type, pageRequest);  //para obtener todos los participantes
+		return participants;  //para retornar los participantes
+		
+	}
 }

@@ -19,4 +19,7 @@ public interface IPersonaService {
 	
 	public Optional<Persona> findById(Long rut);
 
+    public Optional<Persona> findByUsername(String username);
+
+    public Page<Persona> findByType(Long type, Pageable pageRequest);
 }

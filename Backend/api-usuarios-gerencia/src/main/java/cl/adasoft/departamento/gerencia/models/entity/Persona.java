@@ -39,11 +39,9 @@ public class Persona {
 	@Column(name="rut")
 	private Long rut;
 
-	@NotBlank
 	@Column(name="direccion")
 	private String direccion;
 	
-	@NotBlank
 	@Column(name="email")
 	@Email
 	private String email;
@@ -51,5 +49,25 @@ public class Persona {
 	@NotBlank
 	@Column(name="telefono")
 	private Long telefono;
+
+	@Column(name="nombre")
+	private String nombre;
+
+	@Column(name="apellido")
+	private String apellido;
+
+	@Column(name="estado")
+	private Long estado;
+
+	@Column(name="fecha_nacimiento")
+	private String fecha_nacimiento;
+
+	@Column(name="fecha_ingreso")
+	private String fecha_ingreso;
+
+	@Column(name="fecha_salida")
+	private String fecha_salida;
 	
+	@Column(name="patente")
+	private String patente;
 }

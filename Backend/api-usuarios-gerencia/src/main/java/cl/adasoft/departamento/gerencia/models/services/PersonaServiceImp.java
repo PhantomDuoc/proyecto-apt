@@ -56,5 +56,19 @@ public class PersonaServiceImp implements IPersonaService {
 		
 		return participantsDao.findById(rut);
 	}	
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Persona> findByUsername(String username) {
+		
+		return participantsDao.findByUsername(username);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Persona> findByType(Long type, Pageable pageRequest) {
+		
+		return participantsDao.findByType(type, pageRequest);
+	}
 	
 }

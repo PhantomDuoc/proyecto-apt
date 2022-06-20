@@ -1,0 +1,196 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'core/css/dashboard.css' %}">
+
+<head>
+{% load static %}
+  <title>Administracion Usuarios</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Updock&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Updock&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@389&display=swap');
+  </style>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script type="text/javascript" src="{% static 'core/js/productos.js' %}"></script>
+
+</head>
+<a href="https://icons8.com/icon/1CocjuhZpSKv/edit-account"></a>
+<a href="https://icons8.com/icon/67884/delete"></a>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="admin-sidebar" class="col-md-2 p-x-0 p-y-3">
+        <ul class="sidenav admin-sidenav list-unstyled">
+          <li class="side"><a href="{% url 'usuarios' %}">Usuarios</a></li>
+          <li class="side"><a href="{% url 'dashboard' %}">Pedidos</a></li>
+          <li class="side"><a href="{% url 'inventario' %}">Inventario</a></li>
+          <li class="side"><a href="{% url 'ventas' %}">Ventas</a></li>
+          <li class="side"><a href="{% url 'estadistica' %}">Estadistica</a></li>
+        </ul>
+
+
+
+      </div> <!-- /#admin-sidebar -->
+      <div id="admin-main-control" class="col-md-10 p-x-3 p-y-1">
+        <div class="content-title m-x-auto">
+          <h1 class="titulopanel">
+            <ion-icon name="construct-outline"></ion-icon>Panel de Administración
+          </h1>
+        </div>
+        <div class="content-title">
+          <h1 class="titulopanel">Inventario</h1>
+        </div>
+        <div class="box-img usuarios">
+          <div class="card">
+
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Código</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Imagen</th>
+                  <th scope="col">Opciones</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in context%}
+                <tr id="input-group">
+                  <th scope="row" id="id" >{{i.id}}</th>
+                  <td><input type="text" id="nombre" name="nombre"  value="{{i.nombre}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="codigo" name="codigo"  value="{{i.codigo}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="number" id="precio" name="precio"  value="{{i.precio}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="number" id="stock" name="stock"  value="{{i.stock}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="descripcion" name="descripcion"  value="{{i.descripcion}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="categoria" name="categoria"  value="{{i.categoria}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td><input type="text" id="imagen" name="imagen"  value="{{i.imagen}}" class="usuarios" onkeyup='saveValue(this);'></td>
+                  <td>
+                    <button type="button" class="btn btn-primary" id="btn-update" onclick="updateUser(
+                      {{i.id}},
+                      getSavedValue('nombre'),
+                      getSavedValue('codigo'),
+                      getSavedValue('precio'),
+                      getSavedValue('stock'),
+                      getSavedValue('descripcion'),
+                      getSavedValue('categoria'),
+                      getSavedValue('imagen')
+                    )">Actualizar</button>
+                    <button type="button" class="btn btn-danger" id="btn-delete" onclick="deleteUser({{i.id}})">Eliminar</button>
+                  </td>
+                  
+                </tr>
+                {% endfor%}
+
+
+              </tbody>
+            </table>
+           
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary btntabla" id="btn-update">Anterior</button>
+        <button type="button" class="btn btn-primary btntabla" id="btn-update">Siguiente</button>
+        
+          <!--#fincard-->
+          <h1 class="titulopanel titulocrear">Crear Producto</h1>
+          <div class="card">
+           
+            <table>
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Código</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Imagen</th>
+                  <th></th>
+                </tr>
+                <tbody>
+                  <tr>
+                    <td><input type="text" id="nombreCreate" name="nombreCreate" placerholder="Ingrese nombre"></td>
+                    <td><input type="text" id="codigoCreate" name="codigoCreate" placerholder="Ingrese codigo" ></td>
+                    <td><input type="number" id="precioCreate" name="precioCreate" placerholder="Ingrese precio"></td>
+                    <td><input type="number" id="stockCreate" name="stockCreate"placerholder="Ingrese stock"></td>
+                    <td><input type="text" id="descripcionCreate" name="descripcionCreate" placerholder="Ingrese descripcion"></td>
+                    <td><input type="text" id="categoriaCreate" name="categoriaCreate" placerholder="Ingrese categoria"></td>
+                    <td><input type="text" id="imagenCreate" name="imagenCreate" placerholder="Ingrese imagen"></td>
+                      
+                      <td>
+
+                      <button type="button" class="btn btn-primary" id="btn-update" onclick="crearUser(
+                      document.getElementById('nombreCreate').value,
+                      document.getElementById('codigoCreate').value,
+                      document.getElementById('precioCreate').value,
+                      document.getElementById('stockCreate').value,
+                      document.getElementById('descripcionCreate').value,
+                      document.getElementById('categoriaCreate').value,
+                      document.getElementById('imagenCreate').value
+                      )">Crear</button>
+                      
+                    </td>
+                    
+                  </tr>
+                </tbody>
+              </thead>
+            </table>
+          </div>
+
+        </div>
+        <!---box usuarios-->
+      </div>
+
+
+
+
+
+
+
+    </div> <!-- /#admin-main-control -->
+  </div> <!-- /.row -->
+  </div> <!-- /.container-fluid -->
+</body>
+
+<footer class="fotterevent">
+  <div class="footer-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-md-3 item">
+          <h5 class="menubar">Cerrar Sesión</h5>
+          <ul class="" fortext>
+            <li><a style="color:#fff;" href="{% url 'login' %}">Logout</a></li>
+
+
+          </ul>
+        </div>
+        <div class="col-sm-6 col-md-3 item">
+          <h5 class="menubar"></h5>
+          <ul>
+            <p class="card-text"><small class="text-muted"></small></p>
+
+          </ul>
+        </div>
+        <div class="col-md-6 item text">
+
+          <p class="card-text"><small class="text-muted">© SushiCola. Todos los derechos reservados.</small></p>
+        </div>
+        <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i
+              class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-whatsapp"></i></a></div>
+      </div>
+      <p class="copyright"><small class="text-muted">SushiCola © 2022.</small></p>
+    </div>
+
+
+</footer>
