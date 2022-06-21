@@ -121,8 +121,8 @@
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start" onKeyPress="return checkSubmit(event)">
-                  <div class="input-group input-group-outline my-3">
+                <form role="form">
+                  <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Nombre de Usuario</label>
                     <input type="text" id="username" class="form-control">
                   </div>
@@ -187,7 +187,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.min.js?v=3.0.4"></script>
+  <script src="{% static 'core/js/material-dashboard.min.js'%}"></script>
 </body>
 
 </html>
