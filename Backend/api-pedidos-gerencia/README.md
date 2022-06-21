@@ -1,144 +1,123 @@
-# Spring Boot - Proyecto Base Arquitectura - Microservicio 
+<p align="center">
+  <a href="" rel="noopener">
+ <img src="https://i.imgur.com/AZ2iWek.png" alt="Project logo"></a>
+</p>
+<h3 align="center">Project Title</h3>
 
-Este componente corresponde a un proyecto base que permite crear una estructura basado en microservicios, este componente tiene como objetivo generar la base de implementación para que pueda ser ajustada respectivamente
+<div align="center">
 
-Este proyecto pertenece a la especificación de liberación de documentación *"[CEN] - Documento Lineamientos Técnicos APIs de Servicios  - v1.0"*
- 
-## Pre Requisitos
+[![Hackathon](https://img.shields.io/badge/hackathon-name-orange.svg)](http://hackathon.url.com)
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
-* Contar con OpenJDK 11 instalado entorno local
+</div>
 
-## Ejecución del proyecto base sobre mvn archetype
-Para iniciar se deberá crear el proyecto base mediante el arquetipo, para esto se deberá utilizar la siguiente instrucción
+---
+
+<p align="center"> Few lines describing your project.
+    <br> 
+</p>
+
+## 📝 Table of Contents
+
+- [Problem Statement](#problem_statement)
+- [Idea / Solution](#idea)
+- [Dependencies / Limitations](#limitations)
+- [Future Scope](#future_scope)
+- [Setting up a local environment](#getting_started)
+- [Usage](#usage)
+- [Technology Stack](#tech_stack)
+- [Contributing](../CONTRIBUTING.md)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgments)
+
+## 🧐 Problem Statement <a name = "problem_statement"></a>
+
+It is useful to design and follow a specific format when writing a problem statement. While there are several options
+for doing this, the following is a simple and straightforward template often used in Business Analysis to maintain
+focus on defining the problem.
+
+- IDEAL: This section is used to describe the desired or “to be” state of the process or product. At large, this section
+  should illustrate what the expected environment would look like once the solution is implemented.
+- REALITY: This section is used to describe the current or “as is” state of the process or product.
+- CONSEQUENCES: This section is used to describe the impacts on the business if the problem is not fixed or improved upon.
+  This includes costs associated with loss of money, time, productivity, competitive advantage, and so forth.
+
+Following this format will result in a workable document that can be used to understand the problem and elicit
+requirements that will lead to a winning solution.
+
+## 💡 Idea / Solution <a name = "idea"></a>
+
+This section is used to describe potential solutions.
+
+Once the ideal, reality, and consequences sections have been
+completed, and understood, it becomes easier to provide a solution for solving the problem.
+
+## ⛓️ Dependencies / Limitations <a name = "limitations"></a>
+
+- What are the dependencies of your project?
+- Describe each limitation in detailed but concise terms
+- Explain why each limitation exists
+- Provide the reasons why each limitation could not be overcome using the method(s) chosen to acquire.
+- Assess the impact of each limitation in relation to the overall findings and conclusions of your project, and if
+  appropriate, describe how these limitations could point to the need for further research.
+
+## 🚀 Future Scope <a name = "future_scope"></a>
+
+Write about what you could not develop during the course of the Hackathon; and about what your project can achieve
+in the future.
+
+## 🏁 Getting Started <a name = "getting_started"></a>
+
+These instructions will get you a copy of the project up and running on your local machine for development
+and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+What things you need to install the software and how to install them.
 
 ```
-mvn archetype:generate -DarchetypeGroupId=cl.coordinador.arquetipos \
--DarchetypeArtifactId=archetype-rest-microservice-crud \
--DarchetypeVersion=1.0.0 \
--DgroupId=cl.coordinador.personas \
--DartifactId=api-personas-rrhh-personas
-
+Give examples
 ```
 
-## Compilación y ejecución
-La primera parte corresponderá a la compilación la cual deberá ser realizada mediante el comando:
+### Installing
 
+A step by step series of examples that tell you how to get a development env running.
 
-```
-mvn clean install -s configuration/settings.xml
-```
-Posteriormente, para ejecutar el servicio deberá realizarlo mediante el comando:
+Say what the step will be
 
 ```
-mvn spring-boot:run -s configuration/settings.xml
+Give the example
 ```
 
+And repeat
 
-## Pruebas
-
-Las pruebas podrán ser realizadas mediante postman, se adjunta proyecto para que pueda ser importado y testeado respectivamente, adicionalmente se establecen los comandos curl respectivamente
-
-
-###### Crear Registro
 ```
-curl --location -k --request POST 'http://localhost:8091/v1/departamento/gerencia/usuario/create' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "username":"testName",
-    "password":"testPass",
-    "rut": 11111,
-    "type": 1,
-    "direccion": "Dirección de prueba xd"
-}'
+until finished
 ```
 
-###### Buscar todos los registros
-```
-curl --location -k --request GET 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/findAll'
-```
+## 🎈 Usage <a name="usage"></a>
 
-###### Buscar registro por ID
-```
-curl --location -k --request GET 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/findById/1'
-```
+Add notes about how to use the system.
 
-###### Buscar registro por Rut o por atributo custom
-```
-curl --location -k --request GET 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/findByRut/11111'
-```
+## ⛏️ Built With <a name = "tech_stack"></a>
 
-###### Eliminar registro por ID
-```
-curl --location -k --request DELETE 'http://localhost:8080/v1/gerencia/departamento/funcionalidad/delete/8'
-```
+- [MongoDB](https://www.mongodb.com/) - Database
+- [Express](https://expressjs.com/) - Server Framework
+- [VueJs](https://vuejs.org/) - Web Framework
+- [NodeJs](https://nodejs.org/en/) - Server Environment
 
-### Creación pipeline
+## ✍️ Authors <a name = "authors"></a>
 
-Ejecutar:
+- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
 
-curl -v -X GET http://jenkins-cen.coordinador.cl:8080/crumbIssuer/api/json --user hcerda:hcerda
+See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors)
+who participated in this project.
 
-luego
+## 🎉 Acknowledgments <a name = "acknowledgments"></a>
 
-curl -X GET http://jenkins-cen.coordinador.cl:8080/job/RedHat/job/test-deploy/config.xml -u hcerda:hcerda -o config.xml
-
-luego, ejecutar:
-
-curl -s -XPOST 'http://jenkins-cen.coordinador.cl:8080/job/RedHat/createItem?name=api-personas-rrhh-personas' --data-binary @config.xml -H "Content-Type:text/xml" --user hcerda:118d424eddde0f7e1cd089ca4c2c4265a6
-
-luego, debemos configurar la integración con Gitlab para el webhook:
-
-### Creación Integración Gitlab y Jenkins
-https://docs.google.com/document/d/1RpjxSSqdhrJgr-Hv13SrbDBhnECtxDXi9bPfqYC47Ys/edit#heading=h.1n6zdhow586a
-punto 4.8
-
-### Primer Push a la rama
-Para configurar exitosamente los recursos a crear dentro de Openshift,
-primero debemos modificar los 3 archivos yaml presentes. rellenando al
-final del archivo, con los parametros APP_NAME = Artifact ID que se le
-dará al proyecto. APP_GROUP = Grupo de aplicaciones deseado. NAMESPACE= Namespace a desplegar. etc.
-
-Luego de crear la pipeline con los comandos entregados anteriormente y modificar los archivos yaml
-podemos proceder a subir nuestro archivo a Openshift, mediante un Push
-a la rama, ya que tenemos la Integración de Gitlab con Jekins.
-
-
-
-
-
-
-Comandos útiles docker
-
-docker run --name postgres -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD=postgrespw -e POSTGRES_USER=postgres -e POSTGRES_DB=gerencia -d postgres:latest
-
-docker run -p 8080:8080 -p 50000:50000 --restart always jenkins/jenkins:lts-jdk11
-
-docker run --name=api-usuarios-gerencia -p 8090:8090 api-usuarios-gerencia:latest
-
-mvn clean install -s configuration/settings.xml
-
-docker build --tag=api-usuarios-gerencia:latest .
-
-docker run -d --name jaeger \
-  -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
-  -p 5775:5775/udp \
-  -p 6831:6831/udp \
-  -p 6832:6832/udp \
-  -p 5778:5778 \
-  -p 16686:16686 \
-  -p 14250:14250 \
-  -p 14268:14268 \
-  -p 14269:14269 \
-  -p 9411:9411 \
-  jaegertracing/all-in-one:1.9 \
-
-docker network create adasoft-network
-
-docker network connect adasoft-network postgres
-
-docker network connect adasoft-network jaeger
-
-docker-compose up -d
-
-netstat -ano | findstr :5432   
-para encontrar proceso que tenga tomado el puerto 5432 postgres
+- Hat tip to anyone whose code was used
+- Inspiration
+- References

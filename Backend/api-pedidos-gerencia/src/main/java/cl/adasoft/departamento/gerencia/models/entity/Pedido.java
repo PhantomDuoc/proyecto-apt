@@ -2,6 +2,7 @@ package cl.adasoft.departamento.gerencia.models.entity;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,12 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import javax.persistence.OneToMany;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 
 import lombok.Data;
 
@@ -26,10 +22,6 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@NotBlank
-	@Column(name = "codigo")
-	private Long codigo;
 
 	@NotBlank
 	@Column(name = "estado")
@@ -48,35 +40,32 @@ public class Pedido {
 	private String tiempo_entrega;
 
 	@NotBlank
-	@OneToOne
-	@JoinColumn(name = "id_usuario")
-	@RestResource(path = "idUsuario", rel = "usuario")
-	private Usuario usuario;
+	@Column(name = "lista_productos")
+	private List<Producto> lista_productos = new ArrayList<Producto>();
 
-	@OneToOne
-	@JoinColumn(name = "id_repartidor")
-	@RestResource(path = "idRepartidor", rel = "repartidor")
-	private Usuario repartidor;
+	@NotBlank
+	@Column(name = "total")
+	private Long total;
 
-	private List<Producto> productos;
+	@NotBlank
+	@Column(name = "cliente")
+	private String cliente;
 
-	
+	@NotBlank
+	@Column(name = "direccion")
+	private String direccion;
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+	@NotBlank
+	@Column(name = "telefono")
+	private String telefono;
 
-	public Usuario getRepartidor(){
-		return repartidor;
-	}
+	@NotBlank
+	@Column(name = "email")
+	private String email;
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+	@NotBlank
+	@Column(name = "comentario")
+	private String comentario;
 
 	public Long getId() {
 		return id;
@@ -84,14 +73,6 @@ public class Pedido {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
 	}
 
 	public Long getEstado() {
@@ -130,22 +111,20 @@ public class Pedido {
 		super();
 	}
 
-	public Pedido(Long id, Long codigo, Long estado, String tiempo_ingreso, String tiempo_estimado,
-			String tiempo_entrega, Usuario usuario) {
+	public Pedido(Long id, Long estado, String tiempo_ingreso, String tiempo_estimado,
+			String tiempo_entrega) {
 		super();
 		this.id = id;
-		this.codigo = codigo;
 		this.estado = estado;
 		this.tiempo_ingreso = tiempo_ingreso;
 		this.tiempo_estimado = tiempo_estimado;
 		this.tiempo_entrega = tiempo_entrega;
-		this.usuario = usuario;
 	}
 
 	@Override
 	public String toString() {
-		return "Pedido [id=" + id + ", codigo=" + codigo + ", estado=" + estado + ", tiempo_ingreso=" + tiempo_ingreso
-				+ ", tiempo_estimado=" + tiempo_estimado + ", tiempo_entrega=" + tiempo_entrega + ", usuario=" + usuario
+		return "Pedido [id=" + id + ", estado=" + estado + ", tiempo_ingreso=" + tiempo_ingreso
+				+ ", tiempo_estimado=" + tiempo_estimado + ", tiempo_entrega=" + tiempo_entrega
 				+ "]";
 	}
 }
