@@ -91,7 +91,7 @@ public class PersonaController {
 	@GetMapping("/findByType/{type}")
 	public Page<Persona> findByType(@PathVariable Long type, @RequestParam(name="page", defaultValue="0") int page){
 		
-		Pageable pageRequest =  PageRequest.of(page, 5, org.springframework.data.domain.Sort.by("id"));  
+		Pageable pageRequest =  PageRequest.of(page, 50, org.springframework.data.domain.Sort.by("id"));  
 		Page<Persona> participants = participantService.findByType(type, pageRequest);  //para obtener todos los participantes
 		return participants;  //para retornar los participantes
 		

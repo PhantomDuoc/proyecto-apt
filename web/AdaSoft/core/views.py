@@ -44,3 +44,9 @@ def sign_in(request):
 
 def sign_up(request):
     return render(request, 'core/sign-up.html')
+
+def user_profile(request):
+    return render(request, 'core/user-profile.html')
+
+def admin_profile(request):
+    return render(request, 'core/admin-profile.html')

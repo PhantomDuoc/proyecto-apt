@@ -57,6 +57,9 @@
       href="{% static 'core/css/material-dashboard.css' %} "
       rel="stylesheet"
     />
+    <!-- ADASOFT -->
+    <script src="{% static 'core/js/adasoft/dashboard.js'%}"></script>
+    <script src="{% static 'core/js/adasoft/util.js'%}"></script>
   </head>
 
   <body class="g-sidenav-show bg-gray-200">
@@ -159,7 +162,7 @@
             </h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="../pages/profile.html">
+            <a class="nav-link text-white" href="{% url 'admin_profile'%}">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -222,7 +225,7 @@
       </div>
       <div class="sidenav-footer position-absolute w-100 bottom-0">
         <div class="mx-3">
-          <a class="btn bg-gradient-primary mt-4 w-100" href="" type="button"
+          <a class="btn bg-gradient-primary mt-4 w-100" href="" type="button" onclick="Logout()"
             >Cerrar Sesión</a
           >
         </div>
@@ -250,8 +253,8 @@
               <li
                 class="breadcrumb-item text-sm text-dark active"
                 aria-current="page"
+                id="usuarioLogeado"
               >
-                ADMIN
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Panel General</h6>
