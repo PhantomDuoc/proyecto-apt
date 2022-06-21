@@ -1,3 +1,9 @@
+document.addEventListener("DOMContentLoaded", function() {
+    if (localStorage.getItem('sessionId') == null) {
+        window.location.href = "http://localhost:8000/sign-in";
+    }
+});
+
 function editarUsuario(id) {
     fetch('http://localhost:8091/v1/departamento/gerencia/usuario/findById/' + id, {
             method: "GET",
@@ -16,10 +22,19 @@ function editarUsuario(id) {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+
+            console.log("usuario a editar: ", data);
+            localStorage.setItem("updateId", data.id);
+            localStorage.setItem("updateUsername", data.username);
+            localStorage.setItem("updatePassword", data.password);
+            localStorage.setItem("updateEmail", data.email);
+            localStorage.setItem("updateDireccion", data.direccion);
+            localStorage.setItem("updateTelefono", data.telefono);
+            localStorage.setItem("updateRut", data.rut);
+            localStorage.setItem("updateType", data.type);
+            /* AGREGAR MODAL Y CARGAR DATOS DE LOCALSTORAGE */
         })
         .catch(error => console.log(error))
-    localStorage.setItem("id", id);
 }
 
 for (i = 0; i < inputs.length; i++) {
