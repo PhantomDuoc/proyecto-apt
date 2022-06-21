@@ -151,7 +151,7 @@
           <div class="card-body">
             <form role="form">
               <div class="input-group input-group-outline mb-3">
-                <label class="form-label">Nombre de Producto/label>
+                <label class="form-label">Nombre de Producto</label>
                 <input type="text" class="form-control" id="crearName">
               </div>
               <div class="input-group input-group-outline mb-3">
@@ -163,6 +163,10 @@
                 <input type="number" class="form-control" id="crearPrecio">
               </div>
               <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Stock</label>
+                <input type="number" class="form-control" id="crearStock">
+              </div>
+              <div class="input-group input-group-outline mb-3">
                 <label class="form-label">Descripción</label>
                 <input type="text" class="form-control" id="crearDescripcion">
               </div>
@@ -172,7 +176,7 @@
               </div>
               <div class="input-group input-group-outline mb-3">
                 <label class="form-label">Nombre imagen en core</label>
-                <input type="number" class="form-control" id="crearImagen">
+                <input type="text" class="form-control" id="crearImagen">
               </div>
               <div class="form-check form-check-info text-start ps-0">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -181,10 +185,11 @@
                 </label>
               </div>
               <div class="text-center">
-                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="crearUser(
+                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="crearProduct(
                   document.getElementById('crearName').value,
                   document.getElementById('crearCodigo').value,
                   document.getElementById('crearPrecio').value,
+                  document.getElementById('crearStock').value,
                   document.getElementById('crearDescripcion').value,
                   document.getElementById('crearCategoria').value,
                   document.getElementById('crearImagen').value,
@@ -222,7 +227,7 @@
                 </label>
               </div>
               <div class="text-center">
-                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="deleteUser(document.getElementById('eliminarId').value)">Eliminar</button>
+                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="deleteProduct(document.getElementById('eliminarId').value)">Eliminar</button>
               </div>
             </form>
           </div>
@@ -339,7 +344,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" onClick="eliminarProducto()">
+            <a class="nav-link text-white" onClick="eliminarProduct()">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -388,7 +393,7 @@
               >
               </li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Panel Usuarios</h6>
+            <h6 class="font-weight-bolder mb-0">Panel Productos</h6>
           </nav>
           <div
             class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"

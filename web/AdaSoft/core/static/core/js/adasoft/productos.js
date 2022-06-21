@@ -63,7 +63,7 @@ function editarProducto(id) {
         }).catch(error => console.log(error));
 }
 
-function crearUsuario() {
+function crearProducto() {
     var modal = document.getElementById("myModalCrear");
     /* AGREGAR MODAL Y CARGAR DATOS DE LOCALSTORAGE */
     var span = document.getElementsByClassName("close")[1];
@@ -84,7 +84,7 @@ function crearUsuario() {
 
 }
 
-function eliminarUsuario() {
+function eliminarProduct() {
     var modal = document.getElementById("myModalEliminar");
     /* AGREGAR MODAL Y CARGAR DATOS DE LOCALSTORAGE */
     var span = document.getElementsByClassName("close")[2];
@@ -156,8 +156,8 @@ function updateProduct(id, nombre, codigo, precio, stock, descripcion, categoria
     window.location.reload();
 }
 
-function crearUser(nombre, codigo, precio, stock, descripcion, categoria, imagen) {
-    fetch('http://localhost:8090/v1/departamento/gerencia/usuario/update', {
+function crearProduct(nombre, codigo, precio, stock, descripcion, categoria, imagen) {
+    fetch('http://localhost:8090/v1/departamento/gerencia/producto/update', {
             'method': 'PUT',
             'headers': {
                 'Content-type': 'application/json',
