@@ -1,5 +1,8 @@
 package cl.adasoft.departamento.gerencia.models.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,5 +44,13 @@ public class Producto {
 	@NotBlank
 	@Column(name="categoria", nullable = false)
 	private String categoria;
+<<<<<<< HEAD
 	
+=======
+
+	@NotBlank
+	@Column(name = "imagen")
+	private String imagen;
+
+>>>>>>> hai
 }
