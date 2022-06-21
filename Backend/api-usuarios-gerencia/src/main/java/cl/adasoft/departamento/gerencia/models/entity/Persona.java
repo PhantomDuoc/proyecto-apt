@@ -24,30 +24,30 @@ public class Persona {
 	
 	@NotBlank
 	@Size(min = 10, max = 100, message = "The name cannot exceed 100 characters")
-	@Column(name="username")
+	@Column(name="username", unique = true, nullable = false)
 	private String username;
 
 	@NotBlank
-	@Column(name="password")
+	@Column(name="password", nullable = false)
 	private String password;
 	
 	@NotBlank
-	@Column(name="type")
+	@Column(name="type", nullable = false)
 	private Long type;
 
 	@NotBlank
-	@Column(name="rut")
+	@Column(name="rut", unique = true, nullable = false)
 	private Long rut;
 
 	@Column(name="direccion")
 	private String direccion;
 	
-	@Column(name="email")
+	@Column(name="email", unique = true)
 	@Email
 	private String email;
 
 	@NotBlank
-	@Column(name="telefono")
+	@Column(name="telefono", unique = true)
 	private Long telefono;
 
 	@Column(name="nombre")
@@ -68,6 +68,6 @@ public class Persona {
 	@Column(name="fecha_salida")
 	private String fecha_salida;
 	
-	@Column(name="patente")
+	@Column(name="patente", unique = true)
 	private String patente;
 }
