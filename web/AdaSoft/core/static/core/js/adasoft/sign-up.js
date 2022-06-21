@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {});
+document.addEventListener("DOMContentLoaded", function () {});
 
 function registrar() {
     var username = document.getElementById('username').value;
@@ -8,25 +8,25 @@ function registrar() {
     var telefono = document.getElementById('telefono').value;
     var rut = document.getElementById('rut').value;
     var type = 1;
-    if (checkUser(username, email, telefono, rut)) {
+    /* if (checkUser(username, email, telefono, rut)) { */
         crearUser(username, password, email, direccion, telefono, rut, type);
-    }
+    /* } */
 
 }
 
 function checkUser(username, email, telefono, rut) {
-    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + username, { mode: 'no-cors' }).then(function(data) {
+    /* fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + username, ).then(function (data) {
         if (data.length != 0) {
             alert('Ya existe un usuario con ese nombre de usuario');
             return;
         }
     });
-    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByRut/" + rut, { mode: 'no-cors' }).then(function(data) {
+    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByRut/" + rut, ).then(function (data) {
         if (data.length != 0) {
             alert('Ya existe un usuario con ese rut');
             return;
         }
-    });
+    }); */
 }
 
 function crearUser(username, password, email, direccion, telefono, rut, type) {
@@ -34,7 +34,9 @@ function crearUser(username, password, email, direccion, telefono, rut, type) {
             method: "PUT",
             headers: {
                 'Content-type': 'application/json',
-                'Allow-Control-Allow-Origin': '*'
+                'Allow-Control-Allow-Origin': '*',
+                'Allow-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                'Allow-Control-Allow-Headers': 'Content-Type'
             },
             body: JSON.stringify({
                 username: username,
@@ -65,7 +67,7 @@ function validarFormulario(evento) {
     var usuario = document.getElementById('username').value;
     var password = document.getElementById('password').value;
 
-    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + usuario, { mode: 'no-cors' }).then(function(data) {
+    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + usuario, ).then(function (data) {
         console.log(data);
         if (data.length === 0) {
             alert('Usuario no existe');
@@ -82,7 +84,7 @@ function validarFormulario(evento) {
                 }
                 if (data.type != 0) {
                     alert('Sesión Iniciada Exitosamente')
-                        /* window.location.href = ""; */
+                    /* window.location.href = ""; */
                 }
             }
         }

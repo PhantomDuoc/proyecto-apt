@@ -6,28 +6,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
+async function fetchAsync(url) {
+    let response = await fetch(url);
+    let data = await response.json();
+    return data;
+}
 
 
 function editarUsuario(id) {
-    fetch('http://localhost:8091/v1/departamento/gerencia/usuario/findById/' + id, {
-            method: "GET",
-            headers: {
+    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findById/" + id, {
+            'method': 'GET',
+            'headers': {
                 'Content-type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type',
             }
         })
-        .then(res => {
-            if (res.ok) {
-                console.log("HTTP request successful")
-            } else {
-                console.log("HTTP request unsuccessful")
-            }
-            return res
-        })
-        .then(res => res.json())
-        .then(data => {
-
+        .then(function (data) {
+            console.log(data);
             console.log("usuario a editar: ", data);
             // Get the modal
             var modal = document.getElementById("myModal");
@@ -74,8 +71,7 @@ function editarUsuario(id) {
                 modal.style.display = "none";
             }
 
-        })
-        .catch(error => console.log(error))
+        }).catch(error => console.log(error));
 }
 
 function crearUsuario() {
@@ -143,46 +139,44 @@ function getSavedValue(v) {
 }
 
 function updateUser(id, username, email, password, telefono, direccion, rut, patente, estado, type) {
-    fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
-            method: "PUT",
-            headers: {
-                'Content-type': 'application/json',
-                'Allow-Control-Allow-Origin': '*'
-            },
-            body: JSON.stringify({
-                id: id,
-                username: username,
-                password: password,
-                email: email,
-                direccion: direccion,
-                telefono: telefono,
-                rut: rut,
-                patente: patente,
-                estado: estado,
-                type: type
-            }),
-        })
-        .then(res => {
-            if (res.ok) {
-                console.log("HTTP request successful")
-            } else {
-                console.log("HTTP request unsuccessful")
-            }
-            return res
-        })
-        .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(error => console.log(error))
+    var result = confirm("¿Está seguro de que desea actualizar este usuario?");
+    if (result) {
+        fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
+                method: "PUT",
+                headers: {
+                    'Content-type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Allow-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                },
+                body: JSON.stringify({
+                    id: id,
+                    username: username,
+                    password: password,
+                    email: email,
+                    direccion: direccion,
+                    telefono: telefono,
+                    rut: rut,
+                    patente: patente,
+                    estado: estado,
+                    type: type
+                }),
+            })
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
+    }
+
 
     window.location.reload();
 }
 
 function crearUser(username, email, password, telefono, direccion, rut, patente, estado, type) {
     fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
-            method: "PUT",
-            headers: {
+            'method': 'PUT',
+            'headers': {
                 'Content-type': 'application/json',
-                'Allow-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+
             },
             body: JSON.stringify({
                 username: username,
