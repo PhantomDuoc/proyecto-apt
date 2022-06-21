@@ -33,6 +33,15 @@ function getUserById() {
         .then(data => {
             console.log(data);
             document.getElementById("usuarioLogeado").innerHTML = data.username;
+            if( document.getElementById("nombreApellido") != null){
+                document.getElementById("nombreApellido").innerHTML = data.nombre + " " + data.apellido;
+                document.getElementById("fullName").innerHTML = data.nombre + " " + data.apellido;
+                document.getElementById("numero").innerHTML = data.telefono;
+                document.getElementById("email").innerHTML = data.email;
+                document.getElementById("direccion").innerHTML = data.direccion;
+                document.getElementById("rut").innerHTML = data.rut;
+
+            }
         })
         .catch(error => console.log(error));
 }
