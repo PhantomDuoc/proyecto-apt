@@ -12,5 +12,11 @@ import cl.adasoft.pedidos.gerencia.models.entity.Pedido;
 public interface PedidoDao extends PagingAndSortingRepository<Pedido, Long> {
 
 	@Query("select p from Pedido p where p.codigo=?1")
-	public Pedido findByCodigo(Long codigo);
+	public Optional<Pedido> findByCodigo(String codigo);
+
+	@Query("select p from Pedido p where p.estado=?1")
+	public Optional<Pedido> findByEstado(Long estado);
+
+	@Query("select p from Pedido p")
+	public Page<Pedido> getAll(org.springframework.data.domain.Pageable pageRequest);
 }

@@ -8,22 +8,19 @@ import org.springframework.data.domain.Pageable;
 import cl.adasoft.pedidos.gerencia.models.entity.Pedido;
 
 public interface IPedidoService {
-	
-	public Page<Pedido> findAll(Pageable pageable);
-	
-	public Pedido save(Pedido Pedido);
-	
-	public void delete(Long id);	
-	
-	public Pedido findByRut(Long rut);
-	
-	public Optional<Pedido> findById(Long id);
 
-	public Optional<Pedido> findByCodigo(Long codigo);
+	public Page<Pedido> findAll(Pageable pageable);
+
+	public Pedido save(Pedido Pedido);
+
+	public void delete(Long id);
+
+	public Optional<Pedido> findByCodigo(String codigo);
+
+	public Optional<Pedido> findById(Long id);
 
 	public Optional<Pedido> findByEstado(Long estado);
 
-	public Optional<Pedido> findByIdUsuario(Long idUsuario);
+	public Page<Pedido> getAll(Pageable pageRequest);
 
-	public Optional<Pedido> findByIdRepartidor(String idRepartidor);
 }

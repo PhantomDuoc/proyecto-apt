@@ -1,5 +1,7 @@
 package cl.adasoft.pedidos.gerencia.models.entity;
 
+import cl.adasoft.productos.gerencia.models.entity.Producto;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,10 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NotBlank
+	@Column(name = "codigo")
+	private String codigo;
 
 	@NotBlank
 	@Column(name = "estado")
@@ -51,6 +57,9 @@ public class Pedido {
 	@Column(name = "cliente")
 	private String cliente;
 
+	@Column(name = "direccion")
+	private String repartidor;
+
 	@NotBlank
 	@Column(name = "direccion")
 	private String direccion;
@@ -66,6 +75,10 @@ public class Pedido {
 	@NotBlank
 	@Column(name = "comentario")
 	private String comentario;
+
+	public List<Producto> getListaProductos() {
+		return lista_productos;
+	}
 
 	public Long getId() {
 		return id;

@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,12 @@ public class PedidoServiceImp implements IPedidoService {
 
 	@Autowired
 	private PedidoDao participantsDao;
+
+	@Override
+	@Transactional
+	public Page<Pedido> getAll(Pageable pageable) {
+		return participantsDao.getAll(pageable);
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -40,23 +47,9 @@ public class PedidoServiceImp implements IPedidoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Pedido findByRut(Long rut) {
-
-		return participantsDao.findByRut(rut);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
 	public Optional<Pedido> findById(Long id) {
 
 		return participantsDao.findById(id);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<Pedido> findByCodigo(Long codigo) {
-
-		return participantsDao.findByCodigo(codigo);
 	}
 
 	@Override
@@ -67,17 +60,8 @@ public class PedidoServiceImp implements IPedidoService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	public Optional<Pedido> findByIdUsuario(Long idUsuario) {
-
-		return participantsDao.findByIdUsuario(idUsuario);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<Pedido> findByIdRepartidor(String idRepartidor) {
-
-		return participantsDao.findByIdRepartidor(idRepartidor);
+	public Optional<Pedido> findByCodigo(String codigo) {
+		return participantsDao.findByCodigo(codigo);
 	}
 
 }
