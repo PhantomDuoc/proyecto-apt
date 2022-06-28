@@ -57,6 +57,9 @@
       href="{% static 'core/css/material-dashboard.css' %} "
       rel="stylesheet"
     />
+    <!-- ADASOFT -->
+    <script src="{% static 'core/js/adasoft/dashboard.js'%}"></script>
+    <script src="{% static 'core/js/adasoft/util.js'%}"></script>
   </head>
 
   <body class="g-sidenav-show bg-gray-200">
@@ -159,33 +162,13 @@
             </h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="../pages/profile.html">
+            <a class="nav-link text-white" href="{% url 'admin_profile'%}">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
                 <i class="material-icons opacity-10">person</i>
               </div>
               <span class="nav-link-text ms-1">Perfil</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'sign_in'%}">
-              <div
-                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i class="material-icons opacity-10">login</i>
-              </div>
-              <span class="nav-link-text ms-1">Iniciar Sesión</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'sign_up'%}">
-              <div
-                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i class="material-icons opacity-10">assignment</i>
-              </div>
-              <span class="nav-link-text ms-1">Registrarse</span>
             </a>
           </li>
           <li class="nav-item">
@@ -222,7 +205,7 @@
       </div>
       <div class="sidenav-footer position-absolute w-100 bottom-0">
         <div class="mx-3">
-          <a class="btn bg-gradient-primary mt-4 w-100" href="" type="button"
+          <a class="btn bg-gradient-primary mt-4 w-100" href="" type="button" onclick="Logout()"
             >Cerrar Sesión</a
           >
         </div>
@@ -250,8 +233,8 @@
               <li
                 class="breadcrumb-item text-sm text-dark active"
                 aria-current="page"
+                id="usuarioLogeado"
               >
-                ADMIN
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Panel General</h6>
@@ -320,7 +303,7 @@
                       <div class="d-flex py-1">
                         <div class="my-auto">
                           <img
-                            src="../assets/img/team-2.jpg"
+                            src="{% static 'core/img/team-2.jpg'%}"
                             class="avatar avatar-sm me-3"
                           />
                         </div>

@@ -18,7 +18,6 @@
     
     <meta charset="utf-8" />
     {% load static %}
-    <script type="text/javascript" src="{% static 'core/js/usuarios.js' %}"></script>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -29,7 +28,7 @@
       href="{% static 'core/img/apple-icon.png'%}"
     />
     <link rel="icon" type="image/png" href="{% static 'core/img/favicon.png' %}" />
-    <title>Productos | AdaSoft</title>
+    <title>Usuarios | AdaSoft</title>
     <!--     Fonts and icons     -->
     <link
       rel="stylesheet"
@@ -55,9 +54,187 @@
       href="{% static 'core/css/material-dashboard.css' %}"
       rel="stylesheet"
     />
+    <!-- ADASOFT -->
+    <script src="{% static 'core/js/adasoft/productos.js'%}"></script>
+    <script src="{% static 'core/js/adasoft/util.js'%}"></script>
+    <link
+      id="pagestyle"
+      href="{% static 'core/css/usuarios.css' %}"
+      rel="stylesheet"
+    />
   </head>
 
   <body class="g-sidenav-show bg-gray-200">
+    <!-- The Modal -->
+    <div id="myModal" class="modal" style="z-index:4">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="">
+          <div class="card card-plain">
+            <span class="close">&times;</span>
+            <div class="card-header">
+              <h4 class="font-weight-bolder">Modificar producto</h4>
+              <p class="mb-0">Modifica los datos necesarios</p>
+            </div>
+            <div class="card-body">
+              <form role="form">
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">ID</label>
+                  <input type="number" class="form-control" id="updateId">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="updateName">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Porción</label>
+                  <input type="text" class="form-control" id="updateCodigo">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Precio</label>
+                  <input type="number" class="form-control" id="updatePrecio">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Stock</label>
+                  <input type="number" class="form-control" id="updateStock">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Descripción</label>
+                  <input type="text" class="form-control" id="updateDescripcion">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Categoría</label>
+                  <input type="text" class="form-control" id="updateCategoria">
+                </div>
+                <div class="input-group input-group-outline mb-3 repartidor">
+                  <label class="form-label">Imágen en core</label>
+                  <input type="text" class="form-control" id="updateImagen">
+                </div>
+                <div class="form-check form-check-info text-start ps-0">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                  <label class="form-check-label" for="flexCheckDefault">
+                    <a href="javascript:;" class="text-dark font-weight-bolder">¿Estás Seguro?</a>
+                  </label>
+                </div>
+                <div class="text-center">
+                  <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="
+                  updateProduct(
+                    document.getElementById('updateId').value,
+                    document.getElementById('updateName').value,
+                    document.getElementById('updateCodigo').value,
+                    document.getElementById('updatePrecio').value,
+                    document.getElementById('updateStock').value,
+                    document.getElementById('updateDescripcion').value,
+                    document.getElementById('updateCategoria').value,
+                    document.getElementById('updateImagen').value,
+                  )">Modificar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!-- The Modal -->
+  <div id="myModalCrear" class="modal" style="z-index:4">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="">
+        <div class="card card-plain">
+          <span class="close">&times;</span>
+          <div class="card-header">
+            <h4 class="font-weight-bolder">Crear producto</h4>
+            <p class="mb-0">Ingresa los datos necesarios</p>
+          </div>
+          <div class="card-body">
+            <form role="form">
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Nombre de Producto</label>
+                <input type="text" class="form-control" id="crearName">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Porciones</label>
+                <input type="number" class="form-control" id="crearCodigo">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Precio</label>
+                <input type="number" class="form-control" id="crearPrecio">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Stock</label>
+                <input type="number" class="form-control" id="crearStock">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="crearDescripcion">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Categoria</label>
+                <input type="text" class="form-control" id="crearCategoria">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Nombre imagen en core</label>
+                <input type="text" class="form-control" id="crearImagen">
+              </div>
+              <div class="form-check form-check-info text-start ps-0">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                <label class="form-check-label" for="flexCheckDefault">
+                  <a href="javascript:;" class="text-dark font-weight-bolder">¿Estás Seguro?</a>
+                </label>
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="crearProduct(
+                  document.getElementById('crearName').value,
+                  document.getElementById('crearCodigo').value,
+                  document.getElementById('crearPrecio').value,
+                  document.getElementById('crearStock').value,
+                  document.getElementById('crearDescripcion').value,
+                  document.getElementById('crearCategoria').value,
+                  document.getElementById('crearImagen').value,
+                )">Crear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  <!-- The Modal -->
+  <div id="myModalEliminar" class="modal" style="z-index:4">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="">
+        <div class="card card-plain">
+          <span class="close">&times;</span>
+          <div class="card-header">
+            <h4 class="font-weight-bolder">Eliminar Usuario</h4>
+            <p class="mb-0">Ingresa el id</p>
+          </div>
+          <div class="card-body">
+            <form role="form">
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">ID</label>
+                <input type="number" class="form-control" id="eliminarId">
+              </div>
+              
+              <div class="form-check form-check-info text-start ps-0">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                <label class="form-check-label" for="flexCheckDefault">
+                  <a href="javascript:;" class="text-dark font-weight-bolder">¿Estás Seguro?</a>
+                </label>
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="deleteProduct(document.getElementById('eliminarId').value)">Eliminar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
     <aside
       class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
       id="sidenav-main"
@@ -100,7 +277,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white " href="{% url 'usuarios'%}">
+            <a class="nav-link text-white " href="{%url 'usuarios'%}">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -120,7 +297,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white active bg-gradient-primary" href="">
+            <a class="nav-link text-white active bg-gradient-primary" href="{% url 'productos'%}">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -130,7 +307,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="">
+            <a class="nav-link text-white" href="../pages/notifications.html">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -157,33 +334,23 @@
             </h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="../pages/profile.html">
+            <a class="nav-link text-white" onclick="crearProducto()">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
                 <i class="material-icons opacity-10">person</i>
               </div>
-              <span class="nav-link-text ms-1">Crear Usuario</span>
+              <span class="nav-link-text ms-1">Crear Producto</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="../pages/sign-in.html">
+            <a class="nav-link text-white" onClick="eliminarProduct()">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
                 <i class="material-icons opacity-10">login</i>
               </div>
-              <span class="nav-link-text ms-1">Eliminar Usuario</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="../pages/sign-up.html">
-              <div
-                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i class="material-icons opacity-10">assignment</i>
-              </div>
-              <span class="nav-link-text ms-1">Modificar Usuario</span>
+              <span class="nav-link-text ms-1">Eliminar Producto</span>
             </a>
           </li>
         </ul>
@@ -192,8 +359,9 @@
         <div class="mx-3">
           <a
             class="btn bg-gradient-primary mt-4 w-100"
-            href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree"
+            href=""
             type="button"
+            onclick="Logout()"
             >Cerrar Sesión</a
           >
         </div>
@@ -221,8 +389,8 @@
               <li
                 class="breadcrumb-item text-sm text-dark active"
                 aria-current="page"
+                id="usuarioLogeado"
               >
-                ADMIN
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Panel Productos</h6>
@@ -291,7 +459,7 @@
                       <div class="d-flex py-1">
                         <div class="my-auto">
                           <img
-                            src="../assets/img/team-2.jpg"
+                            src="{% static 'core/img/team-2.jpg'%}"
                             class="avatar avatar-sm me-3"
                           />
                         </div>
@@ -422,10 +590,9 @@
                       <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nombre</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Precio</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Porción</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Stock</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Opciones</th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -445,31 +612,39 @@
                           </td> 
                           <td>
                             <div class="d-flex flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">${{i.precio}}</h6>
+                              <h6 class="mb-0 text-sm">{{i.codigo}}</h6>
                             </div>
                             </td>
                             <td>
                               <div class="d-flex flex-column justify-content-center">
                                 <h6 class="mb-0 text-sm">{{i.stock}}</h6>
                               </div>
-                              </td>    
+                              </td>  
                                 <td class="align-middle">
                                   <a
                                     href="javascript:;"
                                     class="text-secondary font-weight-bold text-xs"
                                     data-toggle="tooltip"
                                     data-original-title="Edit user"
-                                    onclick=(editarUsuario({{i.id}}))
+                                    onclick=(editarProducto({{i.id}}))
                                   >
-                                    Edit
+                                    Edit  
+                                  </a>|
+                                  <a
+                                    href="javascript:;"
+                                    class="text-secondary font-weight-bold text-xs"
+                                    data-toggle="tooltip"
+                                    data-original-title="Edit user"
+                                    onclick=(deleteUser({{i.id}}))
+                                  >
+                                      Eliminar
                                   </a>
-                                </td>
-                        
+                                </td>                        
                       </tr>
                       {% endfor%}
                     </tbody>
                   </table>
-                </div>
+                  
               </div>
             </div>
           </div>
@@ -495,10 +670,9 @@
                       <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nombre</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Precio</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Porción</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Stock</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Opciones</th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -518,26 +692,34 @@
                           </td> 
                           <td>
                             <div class="d-flex flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">${{i.precio}}</h6>
+                              <h6 class="mb-0 text-sm">{{i.codigo}}</h6>
                             </div>
                             </td>
                             <td>
                               <div class="d-flex flex-column justify-content-center">
                                 <h6 class="mb-0 text-sm">{{i.stock}}</h6>
                               </div>
-                              </td>    
+                              </td>  
                                 <td class="align-middle">
                                   <a
                                     href="javascript:;"
                                     class="text-secondary font-weight-bold text-xs"
                                     data-toggle="tooltip"
                                     data-original-title="Edit user"
-                                    onclick=(editarUsuario({{i.id}}))
+                                    onclick=(editarProducto({{i.id}}))
                                   >
-                                    Edit
+                                    Edit  
+                                  </a>|
+                                  <a
+                                    href="javascript:;"
+                                    class="text-secondary font-weight-bold text-xs"
+                                    data-toggle="tooltip"
+                                    data-original-title="Edit user"
+                                    onclick=(deleteProduct({{i.id}}))
+                                  >
+                                      Eliminar
                                   </a>
-                                </td>
-                        
+                                </td>                        
                       </tr>
                       {% endfor%}
                     </tbody>
@@ -547,6 +729,7 @@
             </div>
           </div>
         </div>
+        
         <footer class="footer py-4">
           <div class="container-fluid">
             <div class="row align-items-center justify-content-lg-between">

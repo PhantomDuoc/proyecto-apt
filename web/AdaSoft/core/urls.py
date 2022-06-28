@@ -26,4 +26,6 @@ urlpatterns = [
     path('productos/', productos, name="productos"),
     path('sign-in/', sign_in, name="sign_in"),
     path('sign-up/', sign_up, name="sign_up"),
+    path('user-profile/', user_profile, name="user_profile"),
+    path('admin-profile/', admin_profile, name="admin_profile"),
 ]

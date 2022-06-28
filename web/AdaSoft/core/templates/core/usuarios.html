@@ -55,9 +55,206 @@
       href="{% static 'core/css/material-dashboard.css' %}"
       rel="stylesheet"
     />
+    <!-- ADASOFT -->
+    <script src="{% static 'core/js/adasoft/usuarios.js'%}"></script>
+    <script src="{% static 'core/js/adasoft/util.js'%}"></script>
+    <link
+      id="pagestyle"
+      href="{% static 'core/css/usuarios.css' %}"
+      rel="stylesheet"
+    />
   </head>
 
   <body class="g-sidenav-show bg-gray-200">
+    <!-- The Modal -->
+    <div id="myModal" class="modal" style="z-index:4">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="">
+          <div class="card card-plain">
+            <span class="close">&times;</span>
+            <div class="card-header">
+              <h4 class="font-weight-bolder">Modificar usuario</h4>
+              <p class="mb-0">Modifica los datos necesarios</p>
+            </div>
+            <div class="card-body">
+              <form role="form">
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">ID</label>
+                  <input type="number" class="form-control" id="updateId">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Nombre de Usuario</label>
+                  <input type="text" class="form-control" id="updateUsername">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Correo</label>
+                  <input type="email" class="form-control" id="updateEmail">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Contraseña</label>
+                  <input type="text" class="form-control" id="updatePassword">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Teléfono</label>
+                  <input type="number" class="form-control" id="updateTelefono">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Dirección</label>
+                  <input type="text" class="form-control" id="updateDireccion">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Rut</label>
+                  <input type="number" class="form-control" id="updateRut">
+                </div>
+                <div class="input-group input-group-outline mb-3 repartidor">
+                  <label class="form-label">Patente</label>
+                  <input type="text" class="form-control" id="updatePatente">
+                </div>
+                <div class="input-group input-group-outline mb-3 repartidor">
+                  <label class="form-label">Estado</label>
+                  <input type="text" class="form-control" id="updateEstado">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Type</label>
+                  <input type="number" class="form-control" id="updateType">
+                </div>
+                <div class="form-check form-check-info text-start ps-0">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                  <label class="form-check-label" for="flexCheckDefault">
+                    <a href="javascript:;" class="text-dark font-weight-bolder">¿Estás Seguro?</a>
+                  </label>
+                </div>
+                <div class="text-center">
+                  <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="updateUser(
+                    document.getElementById('updateId').value,
+                    document.getElementById('updateUsername').value,
+                    document.getElementById('updateEmail').value,
+                    document.getElementById('updatePassword').value,
+                    document.getElementById('updateTelefono').value,
+                    document.getElementById('updateDireccion').value,
+                    document.getElementById('updateRut').value,
+                    document.getElementById('updatePatente').value,
+                    document.getElementById('updateEstado').value,
+                    document.getElementById('updateType').value,
+                  )">Modificar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!-- The Modal -->
+  <div id="myModalCrear" class="modal" style="z-index:4">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="">
+        <div class="card card-plain">
+          <span class="close">&times;</span>
+          <div class="card-header">
+            <h4 class="font-weight-bolder">Crear usuario</h4>
+            <p class="mb-0">Ingresa los datos necesarios</p>
+          </div>
+          <div class="card-body">
+            <form role="form">
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Nombre de Usuario</label>
+                <input type="text" class="form-control" id="crearUsername">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Correo</label>
+                <input type="email" class="form-control" id="crearEmail">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Contraseña</label>
+                <input type="text" class="form-control" id="crearPassword">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Teléfono</label>
+                <input type="number" class="form-control" id="crearTelefono">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="crearDireccion">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Rut</label>
+                <input type="number" class="form-control" id="crearRut">
+              </div>
+              <div class="input-group input-group-outline mb-3 repartidor">
+                <label class="form-label">Patente</label>
+                <input type="text" class="form-control" id="crearPatente">
+              </div>
+              <div class="input-group input-group-outline mb-3 repartidor">
+                <label class="form-label">Estado</label>
+                <input type="text" class="form-control" id="crearEstado">
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Type</label>
+                <input type="number" class="form-control" id="crearType">
+              </div>
+              <div class="form-check form-check-info text-start ps-0">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                <label class="form-check-label" for="flexCheckDefault">
+                  <a href="javascript:;" class="text-dark font-weight-bolder">¿Estás Seguro?</a>
+                </label>
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="crearUser(
+                  document.getElementById('crearUsername').value,
+                  document.getElementById('crearEmail').value,
+                  document.getElementById('crearPassword').value,
+                  document.getElementById('crearTelefono').value,
+                  document.getElementById('crearDireccion').value,
+                  document.getElementById('crearRut').value,
+                  document.getElementById('crearPatente').value,
+                  document.getElementById('crearEstado').value,
+                  document.getElementById('crearType').value,
+                )">Crear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  <!-- The Modal -->
+  <div id="myModalEliminar" class="modal" style="z-index:4">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="">
+        <div class="card card-plain">
+          <span class="close">&times;</span>
+          <div class="card-header">
+            <h4 class="font-weight-bolder">Eliminar Usuario</h4>
+            <p class="mb-0">Ingresa el id</p>
+          </div>
+          <div class="card-body">
+            <form role="form">
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">ID</label>
+                <input type="number" class="form-control" id="eliminarId">
+              </div>
+              
+              <div class="form-check form-check-info text-start ps-0">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                <label class="form-check-label" for="flexCheckDefault">
+                  <a href="javascript:;" class="text-dark font-weight-bolder">¿Estás Seguro?</a>
+                </label>
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="deleteUser(document.getElementById('eliminarId').value)">Eliminar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
     <aside
       class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
       id="sidenav-main"
@@ -157,7 +354,7 @@
             </h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="../pages/profile.html">
+            <a class="nav-link text-white" onclick="crearUsuario()">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -167,7 +364,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="../pages/sign-in.html">
+            <a class="nav-link text-white" onClick="eliminarUsuario()">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -176,24 +373,15 @@
               <span class="nav-link-text ms-1">Eliminar Usuario</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="../pages/sign-up.html">
-              <div
-                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i class="material-icons opacity-10">assignment</i>
-              </div>
-              <span class="nav-link-text ms-1">Modificar Usuario</span>
-            </a>
-          </li>
         </ul>
       </div>
       <div class="sidenav-footer position-absolute w-100 bottom-0">
         <div class="mx-3">
           <a
             class="btn bg-gradient-primary mt-4 w-100"
-            href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree"
+            href=""
             type="button"
+            onclick="Logout()"
             >Cerrar Sesión</a
           >
         </div>
@@ -221,8 +409,8 @@
               <li
                 class="breadcrumb-item text-sm text-dark active"
                 aria-current="page"
+                id="usuarioLogeado"
               >
-                ADMIN
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Panel Usuarios</h6>
@@ -291,7 +479,7 @@
                       <div class="d-flex py-1">
                         <div class="my-auto">
                           <img
-                            src="../assets/img/team-2.jpg"
+                            src="{% static 'core/img/team-2.jpg'%}"
                             class="avatar avatar-sm me-3"
                           />
                         </div>
@@ -426,7 +614,6 @@
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Direccion</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Rut</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Opciones</th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -473,15 +660,23 @@
                                     data-original-title="Edit user"
                                     onclick=(editarUsuario({{i.id}}))
                                   >
-                                    Edit
+                                    Edit  
+                                  </a>|
+                                  <a
+                                    href="javascript:;"
+                                    class="text-secondary font-weight-bold text-xs"
+                                    data-toggle="tooltip"
+                                    data-original-title="Edit user"
+                                    onclick=(deleteUser({{i.id}}))
+                                  >
+                                      Eliminar
                                   </a>
-                                </td>
-                        
+                                </td>                        
                       </tr>
                       {% endfor%}
                     </tbody>
                   </table>
-                </div>
+                  
               </div>
             </div>
           </div>
@@ -564,6 +759,7 @@
                                 </td>   
                                 <td class="align-middle">
                                   <a
+                                    id="myBtn"
                                     href="javascript:;"
                                     class="text-secondary font-weight-bold text-xs"
                                     data-toggle="tooltip"
@@ -571,6 +767,15 @@
                                     onclick=(editarUsuario({{i.id}}))
                                   >
                                     Edit
+                                  </a>|
+                                  <a
+                                    href="javascript:;"
+                                    class="text-secondary font-weight-bold text-xs"
+                                    data-toggle="tooltip"
+                                    data-original-title="Edit user"
+                                    onclick=(deleteUser({{i.id}}))
+                                  >
+                                      Eliminar
                                   </a>
                                 </td>
                         
@@ -656,6 +861,15 @@
                                     onclick=(editarUsuario({{i.id}}))
                                   >
                                     Edit
+                                  </a>|
+                                  <a
+                                    href="javascript:;"
+                                    class="text-secondary font-weight-bold text-xs"
+                                    data-toggle="tooltip"
+                                    data-original-title="Edit user"
+                                    onclick=(deleteUser({{i.id}}))
+                                  >
+                                      Eliminar
                                   </a>
                                 </td>
                         
