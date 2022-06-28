@@ -7,8 +7,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div id="container">
-    <strong class="capitalize">formularioo</strong>
-  </div>
+<ion-content [fullscreen]="true" class="auth-form">
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block">Iniciar Sesión</ion-button>
+        <a [routerLink]="['/forgot-password']" class="small-text">Olvidaste tu contraseña?</a>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>

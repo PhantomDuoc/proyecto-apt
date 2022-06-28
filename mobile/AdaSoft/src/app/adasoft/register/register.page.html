@@ -8,7 +8,27 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div id="container">
-    <strong class="capitalize">formulario</strong>
-  </div>
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block">Sign Up</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>
