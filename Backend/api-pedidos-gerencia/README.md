@@ -121,3 +121,10 @@ who participated in this project.
 - Hat tip to anyone whose code was used
 - Inspiration
 - References
+
+
+mvn clean install -s configuration/settings.xml
+
+docker build --tag=api-productos-gerencia:latest .
+
+docker-compose up -d
