@@ -50,26 +50,6 @@ public class ProductoController {
 
 	}
 
-	@GetMapping("/findByCodigo/{codigo}")
-	public Page<Producto> findByCodigo(@PathVariable String codigo,
-			@RequestParam(name = "page", defaultValue = "0") int page) {
-
-		Pageable pageRequest = PageRequest.of(page, 5);
-		Page<Producto> participants = participantService.findByCodigo(codigo, pageRequest);
-		return participants;
-
-	}
-
-	@GetMapping("/findByDescripcion/{descripcion}")
-	public Page<Producto> findByDescripcion(@PathVariable String descripcion,
-			@RequestParam(name = "page", defaultValue = "0") int page) {
-
-		Pageable pageRequest = PageRequest.of(page, 5);
-		Page<Producto> participants = participantService.findByDescripcion(descripcion, pageRequest);
-		return participants;
-
-	}
-
 	@GetMapping("/findById/{id}")
 	public Optional<Producto> findById(@PathVariable Long id) {
 		Optional<Producto> response = participantService.findById(id);
@@ -92,7 +72,7 @@ public class ProductoController {
 	}
 
 	@GetMapping("/findByPrecio/{precio}")
-	public Page<Producto> findByPrecio(@PathVariable Double precio,
+	public Page<Producto> findByPrecio(@PathVariable Long precio,
 			@RequestParam(name = "page", defaultValue = "0") int page) {
 
 		Pageable pageRequest = PageRequest.of(page, 5);
@@ -102,7 +82,7 @@ public class ProductoController {
 	}
 
 	@GetMapping("/findByStock/{stock}")
-	public Page<Producto> findByStock(@PathVariable Integer stock,
+	public Page<Producto> findByStock(@PathVariable Long stock,
 			@RequestParam(name = "page", defaultValue = "0") int page) {
 
 		Pageable pageRequest = PageRequest.of(page, 5);

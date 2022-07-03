@@ -33,6 +33,13 @@ public class PersonaServiceImp implements IPersonaService {
 		
 		return participantsDao.save(participant);
 	}
+
+	@Override
+	@Transactional
+	public Optional<Persona> findByUsernameAndPassword(String username, String password) {
+		
+		return participantsDao.findByUsernameAndPassword(username, password);
+	}
 	
 	@Override
 	@Transactional

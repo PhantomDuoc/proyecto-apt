@@ -41,6 +41,15 @@ public class PersonaController {
 		return participants;  //para retornar los participantes
 		
 	}
+
+	@GetMapping("/findByUsernameAndPassword")
+	@Operation(summary = "Get user by username and password", description = "Returns the user filtered by username and password")
+	public Optional<Persona> findByUsernameAndPassword(@RequestParam(name="username", defaultValue="") String username, @RequestParam(name="password", defaultValue="") String password){
+		
+		Optional<Persona> participant = participantService.findByUsernameAndPassword(username, password);  //para obtener un participante por username y password
+		return participant;  //para retornar el participante
+		
+	}
 	
 	@PostMapping("/create")  //para indicarle a spring que es una peticion post
 	public ResponseEntity<Persona>  save(@RequestBody Persona persona) {  

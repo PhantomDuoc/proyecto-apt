@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.adasoft.pedidos.gerencia.exceptions.NotFoundException;
 import cl.adasoft.pedidos.gerencia.models.entity.Pedido;
 import cl.adasoft.pedidos.gerencia.models.services.IPedidoService;
-import cl.adasoft.productos.gerencia.models.entity.Producto;
+/* import cl.adasoft.productos.gerencia.models.entity.Producto; */
 import org.springframework.web.bind.annotation.PathVariable;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,19 +30,19 @@ import io.swagger.v3.oas.annotations.Operation;
 @RestController
 public class PedidoController {
 
-	public Producto producto;
+/* 	public Producto producto; */
 
 	@Autowired
 	private IPedidoService participantService;
 
-	@Operation(summary = "Obtener todos los pedidos", description = "Obtener todos los pedidos")
+/* 	@Operation(summary = "Obtener todos los pedidos", description = "Obtener todos los pedidos")
 	@GetMapping("/findPedidos")
 	public ResponseEntity<Page<Pedido>> getAll(@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "size", defaultValue = "50") int size) {
 		Pageable pageable = PageRequest.of(page, size, org.springframework.data.domain.Sort.by("id"));
 		Page<Pedido> pedidos = participantService.findAll(pageable);
 		return new ResponseEntity<>(pedidos, HttpStatus.OK);
-	}
+	} */
 
 	@GetMapping("/findAll")
 	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")
@@ -95,14 +96,39 @@ public class PedidoController {
 	}
 
 	@GetMapping("/findByEstado/{estado}")
-	public Optional<Pedido> findByEstado(@PathVariable Long estado) {
-		Optional<Pedido> response = participantService.findByEstado(estado);
-
-		if (response == null) {
-			throw new NotFoundException("participant estado: " + estado);
-		}
+	public Page<Pedido> findByEstado(@RequestParam(name = "page", defaultValue = "0") int page, @PathVariable Long estado) {
+		Pageable pageRequest = PageRequest.of(page, 5);
+		Page<Pedido> response = participantService.findByEstado(estado, pageRequest);
 
 		return response;
+	}
+
+	@GetMapping("/findByRepartidor/{repartidor}")
+	public Page<Pedido> findByRepartidor(@RequestParam(name = "page", defaultValue = "0") int page,
+			@PathVariable Long repartidor) {
+		Pageable pageRequest = PageRequest.of(page, 5);
+		Page<Pedido> response = participantService.findByRepartidor(repartidor, pageRequest);
+
+		return response;
+	}
+
+	@GetMapping("/findByCliente/{cliente}")
+	public Page<Pedido> findByCliente(@RequestParam(name = "page", defaultValue = "0") int page,
+			@PathVariable Long cliente) {
+		Pageable pageRequest = PageRequest.of(page, 5);
+		Page<Pedido> response = participantService.findByCliente(cliente, pageRequest);
+
+		return response;
+	}
+
+	@PatchMapping("/updateEstado/{id}")
+	public ResponseEntity<Pedido> patch(@RequestBody Pedido pedido) {
+		return new ResponseEntity<>(participantService.save(pedido), HttpStatus.CREATED);
+	}
+
+	@PatchMapping("/updateSoft")
+	public ResponseEntity<Pedido> updateSoft(@RequestBody Pedido pedido) {
+		return new ResponseEntity<>(participantService.save(pedido), HttpStatus.CREATED);
 	}
 
 }
