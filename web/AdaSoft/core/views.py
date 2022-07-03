@@ -27,9 +27,9 @@ def usuarios(request):
     return render(request, 'core/usuarios.html', {'contextAdmins': contextAdmins, 'contextClients': contextClients, 'contextDelivers': contextDelivers})
 
 def pedidos(request):
-    responseAdmins = requests.get(AdminUsers).json()  #obtenemos la respuesta de la api
-    contextAdmins = responseAdmins['content'] #obtenemos el contenido de la respuesta
-    return render(request, 'core/pedidos.html')
+    responseDesarrollo = requests.get("http://localhost:8092/v1/departamento/gerencia/pedidos/findByEstado/0").json()  #obtenemos la respuesta de la api
+    contextDesarrollo = responseDesarrollo['content'] #obtenemos el contenido de la respuesta
+    return render(request, 'core/pedidos.html', {'contextDesarrollo': contextDesarrollo})
 
 ProductosGyozas="http://localhost:8090/v1/departamento/gerencia/producto/findByCategoria/gyoza"
 def productos(request):
@@ -50,3 +50,8 @@ def user_profile(request):
 
 def admin_profile(request):
     return render(request, 'core/admin-profile.html')
+
+def landing_page(request):
+    responseprod = requests.get("http://localhost:8090/v1/departamento/gerencia/producto/findAll").json()  #obtenemos la respuesta de la api
+    contextprod = responseprod['content'] #obtenemos el contenido de la respuesta
+    return render(request, 'core/landing-page.html', {'contextprod': contextprod})

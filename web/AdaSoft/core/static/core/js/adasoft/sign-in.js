@@ -15,7 +15,8 @@ function validarFormulario(evento) {
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
         }
-    }).then(function (data) {
+    })
+    .then(function (data) {
         console.log(data);
         if (data.length === 0) {
             alert('Usuario no existe');
