@@ -22,4 +22,6 @@ public interface IPersonaService {
     public Optional<Persona> findByUsername(String username);
 
     public Page<Persona> findByType(Long type, Pageable pageRequest);
+
+	public Optional<Persona> findByUsernameAndPassword(String username, String password);
 }

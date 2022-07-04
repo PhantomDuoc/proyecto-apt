@@ -32,7 +32,7 @@
 	
 	<dependencies>
 		<dependency>
-			<groupId>cl.adasoft.usuarios</groupId>
+			<groupId>cl.adasoft.productos</groupId>
 			<artifactId>api-productos-gerencia</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>

@@ -50,26 +50,6 @@ public class ProductoController {
 
 	}
 
-	@GetMapping("/findByCodigo/{codigo}")
-	public Page<Producto> findByCodigo(@PathVariable String codigo,
-			@RequestParam(name = "page", defaultValue = "0") int page) {
-
-		Pageable pageRequest = PageRequest.of(page, 5);
-		Page<Producto> participants = participantService.findByCodigo(codigo, pageRequest);
-		return participants;
-
-	}
-
-	@GetMapping("/findByDescripcion/{descripcion}")
-	public Page<Producto> findByDescripcion(@PathVariable String descripcion,
-			@RequestParam(name = "page", defaultValue = "0") int page) {
-
-		Pageable pageRequest = PageRequest.of(page, 5);
-		Page<Producto> participants = participantService.findByDescripcion(descripcion, pageRequest);
-		return participants;
-
-	}
-
 	@GetMapping("/findById/{id}")
 	public Optional<Producto> findById(@PathVariable Long id) {
 		Optional<Producto> response = participantService.findById(id);

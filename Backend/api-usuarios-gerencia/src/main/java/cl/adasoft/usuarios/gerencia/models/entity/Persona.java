@@ -28,7 +28,8 @@ public class Persona {
 	private String username;
 
 	@NotBlank
-	@Column(name="password", nullable = false)
+	@Size(min = 8, max = 16, message = "The password must be between 8 and 16 characters")
+	@Column(name="password")
 	private String password;
 	
 	@NotBlank

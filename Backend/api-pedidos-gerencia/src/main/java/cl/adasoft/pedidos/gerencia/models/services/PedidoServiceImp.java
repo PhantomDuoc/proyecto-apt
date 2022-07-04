@@ -18,11 +18,11 @@ public class PedidoServiceImp implements IPedidoService {
 	@Autowired
 	private PedidoDao participantsDao;
 
-	@Override
+/* 	@Override
 	@Transactional
 	public Page<Pedido> getAll(Pageable pageable) {
 		return participantsDao.getAll(pageable);
-	}
+	} */
 
 	@Override
 	@Transactional(readOnly = true)
@@ -54,14 +54,24 @@ public class PedidoServiceImp implements IPedidoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Pedido> findByEstado(Long estado) {
+	public Page<Pedido> findByEstado(Long estado, Pageable pageRequest) {
 
-		return participantsDao.findByEstado(estado);
+		return participantsDao.findByEstado(estado, pageRequest);
 	}
 
 	@Override
 	public Optional<Pedido> findByCodigo(String codigo) {
 		return participantsDao.findByCodigo(codigo);
+	}
+	
+	@Override
+	public Page<Pedido> findByRepartidor(Long repartidor, Pageable pageRequest) {
+		return participantsDao.findByRepartidor(repartidor, pageRequest);
+	}
+
+	@Override
+	public Page<Pedido> findByCliente(Long cliente, Pageable pageRequest) {
+		return participantsDao.findByCliente(cliente, pageRequest);
 	}
 
 }

@@ -15,8 +15,14 @@ public interface PedidoDao extends PagingAndSortingRepository<Pedido, Long> {
 	public Optional<Pedido> findByCodigo(String codigo);
 
 	@Query("select p from Pedido p where p.estado=?1")
-	public Optional<Pedido> findByEstado(Long estado);
-
+	public Page<Pedido> findByEstado(Long estado, org.springframework.data.domain.Pageable pageable);
+/* 
 	@Query("select p from Pedido p")
-	public Page<Pedido> getAll(org.springframework.data.domain.Pageable pageRequest);
+	public Page<Pedido> getAll(org.springframework.data.domain.Pageable pageRequest); */
+
+	@Query("select p from Pedido p where p.repartidor=?1")
+	public Page<Pedido> findByRepartidor(Long repartidor, org.springframework.data.domain.Pageable pageRequest);
+
+	@Query("select p from Pedido p where p.cliente=?1")
+	public Page<Pedido> findByCliente(Long cliente, org.springframework.data.domain.Pageable pageRequest);
 }
