@@ -21,4 +21,10 @@ public interface ProductoDao extends PagingAndSortingRepository<Producto, Long> 
 
 	@Query("select p from Producto p where p.stock>=?1")
 	public Page<Producto> findByStock(Long cantidad, org.springframework.data.domain.Pageable pageRequest);
+
+	@Query("select p from Producto p where p.precio>=?1")
+	public Page<Producto> findByPrecio(Long precio, org.springframework.data.domain.Pageable pageRequest);
+
+	@Query("select p from Producto p where p.codigo=?1")
+	public Page<Producto> findByCodigo(Long codigo, org.springframework.data.domain.Pageable pageRequest);
 }

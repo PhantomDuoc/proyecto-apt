@@ -17,10 +17,6 @@ public interface IProductoService {
 
 	public Page<Producto> findByCategoria(String categoria, Pageable pageRequest);
 
-	public Page<Producto> findByCodigo(String codigo, Pageable pageRequest);
-
-	public Page<Producto> findByDescripcion(String descripcion, Pageable pageRequest);
-
 	public Optional<Producto> findById(Long id);
 
 	public Page<Producto> findByNombre(String nombre, Pageable pageable);
