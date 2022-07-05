@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { GoogleMapsModule } from '@angular/google-maps'
+import {HTTP} from '@awesome-cordova-plugins/http/ngx'
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
     FormsModule,
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    HTTP
   ],
   declarations: [Tab2Page]
 })

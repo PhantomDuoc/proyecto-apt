@@ -15,17 +15,17 @@ export class AunthenticationService {
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     null
   );
-  token = '';
+  id = '';
 
   constructor(private http: HttpClient) {
     this.loadToken();
   }
 
   async loadToken() {
-    const token = await Storage.get({ key: TOKEN_KEY });
-    if (token && token.value) {
-      console.log('set token: ', token.value);
-      this.token = token.value;
+    const id = await Storage.get({ key: TOKEN_KEY });
+    if (id && id.value) {
+      console.log('set id: ', id.value);
+      this.id = id.value;
       this.isAuthenticated.next(true);
     } else {
       console.log('no token');
@@ -33,11 +33,11 @@ export class AunthenticationService {
     }
   }
 
-  login(credentials: { email; password }): Observable<any> {
-    return this.http.post(`https://reqres.in/api/login`, credentials).pipe(
-      map((data: any) => data.token),
-      switchMap((token) => {
-        return from(Storage.set({ key: TOKEN_KEY, value: token }));
+  login(credentials: { username; password }): Observable<any> {
+    return this.http.get("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + credentials.username).pipe(
+      map((data: any) => data.id),
+      switchMap((id) => {
+        return from(Storage.set({ key: TOKEN_KEY, value: id }));
       }),
       tap((_) => {
         this.isAuthenticated.next(true);
