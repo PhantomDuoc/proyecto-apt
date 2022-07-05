@@ -15,6 +15,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class Tab1Page {
   orders: any = [];
+  user: any ={};
+  tipoUser: string;
 
   constructor(
     private authService: AunthenticationService,
@@ -22,7 +24,8 @@ export class Tab1Page {
   ) {}
 
   ngOnInit() {
-    this.getPedidos();
+    this.getUser();
+/*     this.getPedidos(); */
     /*     let id = this.getToken();
     console.log(id) */
   }
@@ -32,12 +35,55 @@ export class Tab1Page {
     return id.value;
   }
 
-  async getPedidos() {
+  async getUser() {
     const id = await this.authService.getToken();
-    console.log(id.value);
     return this.http
       .get(
-        'http://localhost:8092/v1/departamento/gerencia/pedidos/findByRepartidor/' +
+        'http://localhost:8091/v1/departamento/gerencia/usuario/findById/' +
+          id.value
+      )
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.user = data;
+        console.log("tipo usuario " + this.user.type);
+        if(this.user.type == 0){
+          console.log("usuario tipo administrador");
+          this.tipoUser = "Administrador";
+          this.getPedidos(this.tipoUser);
+        }
+        if(this.user.type == 1){
+          console.log("usuario tipo cliente");
+          this.tipoUser = "Cliente";
+          this.getPedidos(this.tipoUser);
+        }
+        if(this.user.type == 2){
+          console.log("usuario tipo repartidor");
+          this.tipoUser = "Repartidor";
+          this.getPedidos(this.tipoUser);
+        }
+      });
+  }
+
+  async deleteOrder(id){
+    console.log(id);
+    return this.http.delete('http://localhost:8092/v1/departamento/gerencia/pedidos/delete/'+id).subscribe
+    ((data) => {
+      console.log(data);
+    }
+    );
+  }
+
+  async getPedidos(tipoUsuario) {
+    const id = await this.authService.getToken();
+    console.log(tipoUsuario)
+    return this.http
+      .get(
+        'http://localhost:8092/v1/departamento/gerencia/pedidos/findBy'+tipoUsuario+'/' +
           id.value
       )
       .pipe(

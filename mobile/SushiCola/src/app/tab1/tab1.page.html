@@ -18,12 +18,13 @@
       <ion-avatar slot="start">
         <ion-icon size="large" name="bag-check-outline"></ion-icon>
       </ion-avatar>
-      <ion-avatar slot="end">
-        <ion-icon size="small" name="create-outline"></ion-icon>
+      <ion-avatar slot="end" (click)="deleteOrder(order.id)">
+        <ion-icon size="small" name="trash-outline"></ion-icon>
       </ion-avatar>
       <ion-label>
         <h2>{{order.codigo}}</h2>
         <h3>{{order.total}}</h3>
+        <h3>{{order.direccion}}</h3>
         <p>{{order.tiempo_estimado}}</p>
       </ion-label>
     </ion-item>
