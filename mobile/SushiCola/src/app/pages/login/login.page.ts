@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { Storage } from '@capacitor/storage';
 import { BehaviorSubject } from 'rxjs';
 
-const TOKEN_KEY = 'my-token';
+
 
 @Component({
   selector: 'app-login',
@@ -17,11 +17,6 @@ const TOKEN_KEY = 'my-token';
 })
 export class LoginPage implements OnInit {
   credentials: FormGroup;
-
-  isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    null
-  );
-  token = '';
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +49,7 @@ export class LoginPage implements OnInit {
     /* this.getUsers(); */
   }
 
-  async loadToken() {
+/*   async loadToken() {
     const token = await Storage.get({ key: TOKEN_KEY });
     if (token && token.value) {
       console.log('set token: ', token.value);
@@ -64,7 +59,7 @@ export class LoginPage implements OnInit {
       console.log('no token');
       this.isAuthenticated.next(false);
     }
-  }
+  } */
 
   /* getUsers() {
     this.http

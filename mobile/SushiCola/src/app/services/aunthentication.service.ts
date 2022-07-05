@@ -33,6 +33,11 @@ export class AunthenticationService {
     }
   }
 
+  async getToken(){
+    const id = await Storage.get({ key: TOKEN_KEY });
+    return id;
+  }
+
   login(credentials: { username; password }): Observable<any> {
     return this.http.get("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + credentials.username).pipe(
       map((data: any) => data.id),
