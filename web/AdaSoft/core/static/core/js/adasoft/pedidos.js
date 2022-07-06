@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-});
+document.addEventListener("DOMContentLoaded", function () {});
 
 async function fetchAsync(url) {
     let response = await fetch(url);
@@ -8,8 +7,8 @@ async function fetchAsync(url) {
 }
 
 
-function editarUsuario(id) {
-    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findById/" + id, {
+function editarPedido(id) {
+    fetchAsync("http://localhost:8092/v1/departamento/gerencia/pedidos/findById/" + id, {
             'method': 'GET',
             'headers': {
                 'Content-type': 'application/json',
@@ -20,7 +19,7 @@ function editarUsuario(id) {
         })
         .then(function (data) {
             console.log(data);
-            console.log("usuario a editar: ", data);
+            console.log("pedido a editar: ", data);
             // Get the modal
             var modal = document.getElementById("myModal");
             /* AGREGAR MODAL Y CARGAR DATOS DE LOCALSTORAGE */
@@ -28,33 +27,22 @@ function editarUsuario(id) {
 
 
             modal.style.display = "block";
-            document.getElementsByClassName("repartidor")[0].style.display = "none";
-            document.getElementsByClassName("repartidor")[1].style.display = "none";
-            // Get the <span> element that closes the modal
-            if (data.type == "2") {
-                document.getElementsByClassName("repartidor")[0].style.display = "flex";
-                document.getElementsByClassName("repartidor")[1].style.display = "flex";
-            }
             document.getElementById("updateId").value = data.id;
-            document.getElementById("updateUsername").value = data.username;
-            document.getElementById("updatePassword").value = data.password;
             document.getElementById("updateEmail").value = data.email;
             document.getElementById("updateDireccion").value = data.direccion;
             document.getElementById("updateTelefono").value = data.telefono;
-            document.getElementById("updateRut").value = data.rut;
-            document.getElementById("updateType").value = data.type;
-            document.getElementById("updatePatente").value = data.patente;
+            document.getElementById("updateIdCliente").value = data.cliente;
+            document.getElementById("updateIdRepartidor").value = data.repartidor;
+            document.getElementById("updateTotal").value = data.total;
             document.getElementById("updateEstado").value = data.estado;
-            document.getElementById("updatePatente").focus();
             document.getElementById("updateEstado").focus();
-            document.getElementById("updateUsername").focus();
-            document.getElementById("updatePassword").focus();
             document.getElementById("updateEmail").focus();
             document.getElementById("updateDireccion").focus();
             document.getElementById("updateTelefono").focus();
-            document.getElementById("updateRut").focus();
-            document.getElementById("updateType").focus();
             document.getElementById("updateId").focus();
+            document.getElementById("updateTotal").focus();
+            document.getElementById("updateIdCliente").focus();
+            document.getElementById("updateIdRepartidor").focus();
             // When the user clicks on <span> (x), close the modal
 
             document.onkeyup = function (e) {
@@ -90,7 +78,7 @@ function crearUsuario() {
 
 }
 
-function eliminarUsuario() {
+function eliminarPedido() {
     var modal = document.getElementById("myModalEliminar");
     /* AGREGAR MODAL Y CARGAR DATOS DE LOCALSTORAGE */
     var span = document.getElementsByClassName("close")[2];
@@ -133,10 +121,10 @@ function getSavedValue(v) {
     return localStorage.getItem(v);
 }
 
-function updateUser(id, username, email, password, telefono, direccion, rut, patente, estado, type) {
-    var result = confirm("¿Está seguro de que desea actualizar este usuario?");
+function updatePedido(id, email, telefono, direccion, idcliente, idrepartidor, total, estado) {
+    var result = confirm("¿Está seguro de que desea actualizar este pedido?");
     if (result) {
-        fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
+        fetch('http://localhost:8092/v1/departamento/gerencia/pedidos/update', {
                 method: "PUT",
                 headers: {
                     'Content-type': 'application/json',
@@ -145,15 +133,13 @@ function updateUser(id, username, email, password, telefono, direccion, rut, pat
                 },
                 body: JSON.stringify({
                     id: id,
-                    username: username,
-                    password: password,
                     email: email,
                     direccion: direccion,
                     telefono: telefono,
-                    rut: rut,
-                    patente: patente,
+                    cliente: idcliente,
+                    repartidor: idrepartidor,
+                    total: total,
                     estado: estado,
-                    type: type
                 }),
             })
             .then(data => console.log(data))
@@ -164,47 +150,11 @@ function updateUser(id, username, email, password, telefono, direccion, rut, pat
     window.location.reload();
 }
 
-function crearUser(username, email, password, telefono, direccion, rut, patente, estado, type) {
-    fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
-            'method': 'PUT',
-            'headers': {
-                'Content-type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
 
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-                email: email,
-                direccion: direccion,
-                telefono: telefono,
-                rut: rut,
-                patente: patente,
-                estado: estado,
-                type: type
-            })
-        })
-        .then(res => {
-            if (res.ok) {
-                console.log("HTTP request successful")
-            } else {
-                console.log("HTTP request unsuccessful")
-            }
-            return res
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => console.log(error))
-    window.location.reload();
-}
-
-function deleteUser(id) {
-    var result = confirm("¿Estás seguro de eliminar este usuario?");
+function deletePedido(id) {
+    var result = confirm("¿Estás seguro de eliminar este pedido?");
     if (result) {
-        fetch('http://localhost:8091/v1/departamento/gerencia/usuario/delete/' + id, {
+        fetch('http://localhost:8092/v1/departamento/gerencia/pedidos/delete/' + id, {
                 method: "DELETE",
                 headers: {
                     'Content-type': 'application/json',

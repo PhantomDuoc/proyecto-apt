@@ -54,18 +54,16 @@ export class Tab1Page {
         if(this.user.type == 0){
           console.log("usuario tipo administrador");
           this.tipoUser = "Administrador";
-          this.getPedidos(this.tipoUser);
         }
         if(this.user.type == 1){
           console.log("usuario tipo cliente");
           this.tipoUser = "Cliente";
-          this.getPedidos(this.tipoUser);
         }
         if(this.user.type == 2){
           console.log("usuario tipo repartidor");
           this.tipoUser = "Repartidor";
-          this.getPedidos(this.tipoUser);
         }
+        this.getPedidos(this.tipoUser);
       });
   }
 

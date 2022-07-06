@@ -56,7 +56,7 @@
       rel="stylesheet"
     />
     <!-- ADASOFT -->
-    <script src="{% static 'core/js/adasoft/usuarios.js'%}"></script>
+    <script src="{% static 'core/js/adasoft/pedidos.js'%}"></script>
     <script src="{% static 'core/js/adasoft/util.js'%}"></script>
     <link
       id="pagestyle"
@@ -75,7 +75,7 @@
           <div class="card card-plain">
             <span class="close">&times;</span>
             <div class="card-header">
-              <h4 class="font-weight-bolder">Modificar usuario</h4>
+              <h4 class="font-weight-bolder">Modificar Pedido</h4>
               <p class="mb-0">Modifica los datos necesarios</p>
             </div>
             <div class="card-body">
@@ -85,16 +85,8 @@
                   <input type="number" class="form-control" id="updateId">
                 </div>
                 <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Nombre de Usuario</label>
-                  <input type="text" class="form-control" id="updateUsername">
-                </div>
-                <div class="input-group input-group-outline mb-3">
                   <label class="form-label">Correo</label>
                   <input type="email" class="form-control" id="updateEmail">
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Contraseña</label>
-                  <input type="text" class="form-control" id="updatePassword">
                 </div>
                 <div class="input-group input-group-outline mb-3">
                   <label class="form-label">Teléfono</label>
@@ -105,20 +97,20 @@
                   <input type="text" class="form-control" id="updateDireccion">
                 </div>
                 <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Rut</label>
-                  <input type="number" class="form-control" id="updateRut">
+                  <label class="form-label">ID Cliente</label>
+                  <input type="number" class="form-control" id="updateIdCliente">
                 </div>
-                <div class="input-group input-group-outline mb-3 repartidor">
-                  <label class="form-label">Patente</label>
-                  <input type="text" class="form-control" id="updatePatente">
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">ID Repartidor</label>
+                  <input type="number" class="form-control" id="updateIdRepartidor">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Total</label>
+                  <input type="number" class="form-control" id="updateTotal">
                 </div>
                 <div class="input-group input-group-outline mb-3 repartidor">
                   <label class="form-label">Estado</label>
                   <input type="text" class="form-control" id="updateEstado">
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Type</label>
-                  <input type="number" class="form-control" id="updateType">
                 </div>
                 <div class="form-check form-check-info text-start ps-0">
                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -127,17 +119,15 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="updateUser(
+                  <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="updatePedido(
                     document.getElementById('updateId').value,
-                    document.getElementById('updateUsername').value,
                     document.getElementById('updateEmail').value,
-                    document.getElementById('updatePassword').value,
                     document.getElementById('updateTelefono').value,
                     document.getElementById('updateDireccion').value,
-                    document.getElementById('updateRut').value,
-                    document.getElementById('updatePatente').value,
+                    document.getElementById('updateIdCliente').value,
+                    document.getElementById('updateIdRepartidor').value,
+                    document.getElementById('updateTotal').value,
                     document.getElementById('updateEstado').value,
-                    document.getElementById('updateType').value,
                   )">Modificar</button>
                 </div>
               </form>
@@ -230,7 +220,7 @@
         <div class="card card-plain">
           <span class="close">&times;</span>
           <div class="card-header">
-            <h4 class="font-weight-bolder">Eliminar Usuario</h4>
+            <h4 class="font-weight-bolder">Eliminar Pedido</h4>
             <p class="mb-0">Ingresa el id</p>
           </div>
           <div class="card-body">
@@ -247,7 +237,7 @@
                 </label>
               </div>
               <div class="text-center">
-                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="deleteUser(document.getElementById('eliminarId').value)">Modificar</button>
+                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="deletePedido(document.getElementById('eliminarId').value)">Eliminar</button>
               </div>
             </form>
           </div>
@@ -326,26 +316,6 @@
               <span class="nav-link-text ms-1">Inventario</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="../pages/notifications.html">
-              <div
-                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i class="material-icons opacity-10">notifications</i>
-              </div>
-              <span class="nav-link-text ms-1">Notifications</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="../pages/virtual-reality.html">
-              <div
-                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i class="material-icons opacity-10">view_in_ar</i>
-              </div>
-              <span class="nav-link-text ms-1">Virtual Reality</span>
-            </a>
-          </li>
           <li class="nav-item mt-3">
             <h6
               class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8"
@@ -354,23 +324,13 @@
             </h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" onclick="crearUsuario()">
-              <div
-                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i class="material-icons opacity-10">person</i>
-              </div>
-              <span class="nav-link-text ms-1">Crear Usuario</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" onClick="eliminarUsuario()">
+            <a class="nav-link text-white" onClick="eliminarPedido()">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
                 <i class="material-icons opacity-10">login</i>
               </div>
-              <span class="nav-link-text ms-1">Eliminar Usuario</span>
+              <span class="nav-link-text ms-1">Eliminar Pedido</span>
             </a>
           </li>
         </ul>
@@ -609,10 +569,10 @@
                     <thead class="thead-dark">
                       <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">User</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Contacto</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Direccion</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Rut</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Total</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Repartidor</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Cliente</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Estado</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Opciones</th>
                       </tr>
                     </thead>
@@ -628,28 +588,22 @@
                         </td>
                         <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{i.username}}</h6>
-                            <p class="text-xs text-secondary mb-0">
-                              {{i.password}}
-                            </p>
+                            <h6 class="mb-0 text-sm">{{i.total}}</h6>
                           </div>
                           </td> 
                           <td>
                             <div class="d-flex flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">{{i.email}}</h6>
-                              <p class="text-xs text-secondary mb-0">
-                                {{i.telefono}}
-                              </p>
+                              <h6 class="mb-0 text-sm">{{i.repartidor}}</h6>
                             </div>
                             </td>
                             <td>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">{{i.direccion}}</h6>
+                                <h6 class="mb-0 text-sm">{{i.cliente}}</h6>
                               </div>
                               </td> 
                               <td>
                                 <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm">{{i.rut}}</h6>
+                                  <h6 class="mb-0 text-sm">{{i.estado}}</h6>
                                 </div>
                                 </td>   
                                 <td class="align-middle">
@@ -658,7 +612,7 @@
                                     class="text-secondary font-weight-bold text-xs"
                                     data-toggle="tooltip"
                                     data-original-title="Edit user"
-                                    onclick=(editarUsuario({{i.id}}))
+                                    onclick=(editarPedido({{i.id}}))
                                   >
                                     Edit  
                                   </a>|
@@ -667,7 +621,7 @@
                                     class="text-secondary font-weight-bold text-xs"
                                     data-toggle="tooltip"
                                     data-original-title="Edit user"
-                                    onclick=(deleteUser({{i.id}}))
+                                    onclick=(deletePedido({{i.id}}))
                                   >
                                       Eliminar
                                   </a>

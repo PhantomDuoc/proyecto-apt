@@ -3,9 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("cargando usuario");
     console.log(localStorage.getItem('sessionId'));
     user = getUserById();
-    if (localStorage.getItem('sessionId') == null) {
+    /* if (localStorage.getItem('sessionId') == null) {
         window.location.href = "http://localhost:8000/sign-in";
-    }
+    } */
     const sitiosRestringidos = [];
     sitiosRestringidos.push("http://localhost:8000/dashboard/");
     sitiosRestringidos.push("http://localhost:8000/usuarios/");
@@ -15,10 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(sitiosRestringidos);
     console.log(window.location.href);
     for (let i = 0; i < sitiosRestringidos.length; i++) {
-        if (window.location.href == sitiosRestringidos[i]) {
-            if (localStorage.getItem('sessionType') != 0) {
-                window.location.href = "http://localhost:8000/sign-in/";
-            }
+        if (window.location.href == sitiosRestringidos[i] && !isLogged()) {
+            window.location.href = "http://localhost:8000/sign-in/";
         }
     }
     /* if(){} */
@@ -29,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function Logout() {
     console.log("logout");
-    window.location.href = "http://localhost:8000/sign-in";
+    window.location.href = "http://localhost:8000/landing-page";
     localStorage.removeItem('sessionId');
 }
 
@@ -46,6 +44,10 @@ function getUserById() {
         }).then(function (data) {
             console.log(data);
             document.getElementById("usuarioLogeado").innerHTML = data.username;
+            var usuarioFormulario = document.getElementById("usuarioFormulario");
+            usuarioFormulario.value=data.username;
+            var correoFormulario = document.getElementById("correoFormulario");
+            correoFormulario.value=data.email;
             if (document.getElementById("nombreApellido") != null) {
                 document.getElementById("nombreApellido").innerHTML = data.nombre + " " + data.apellido;
                 document.getElementById("fullName").innerHTML = data.nombre + " " + data.apellido;
@@ -63,4 +65,8 @@ async function fetchAsync(url) {
     let response = await fetch(url);
     let data = await response.json();
     return data;
+}
+
+function isLogged() {
+    return localStorage.getItem('sessionId') != null;
 }
