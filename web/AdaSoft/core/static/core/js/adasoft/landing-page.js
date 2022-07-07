@@ -5,7 +5,40 @@ document.addEventListener("DOMContentLoaded", function () {
     carrito = []
     total = 0;
     i = 0;
+    user = getUserById();
 });
+
+function getUserById() {
+    var id = localStorage.getItem('sessionId');
+    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findById/" + id, {
+            'method': 'GET',
+            'headers': {
+                'Content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type',
+            }
+        }).then(function (data) {
+            this.user=data;
+            document.getElementById("usuarioLogeado").innerHTML = data.username;
+            var usuarioFormulario = document.getElementById("usuarioFormulario");
+            if(usuarioFormulario){
+                usuarioFormulario.value=data.username;
+                var correoFormulario = document.getElementById("correoFormulario");
+                correoFormulario.value=data.email;
+            }
+            if (document.getElementById("nombreApellido") != null) {
+                document.getElementById("nombreApellido").innerHTML = data.nombre + " " + data.apellido;
+                document.getElementById("fullName").innerHTML = data.nombre + " " + data.apellido;
+                document.getElementById("numero").innerHTML = data.telefono;
+                document.getElementById("email").innerHTML = data.email;
+                document.getElementById("direccion").innerHTML = data.direccion;
+                document.getElementById("rut").innerHTML = data.rut;
+            }
+            return data
+        })
+        .catch(error => console.log(error));
+}
 
 function addToCart(id, price) {
     total += price;
@@ -67,14 +100,44 @@ function updateCart(id) {
 
 }
 
+
+
+function createPedido() {
+    var pedido = {
+        "cliente": this.user.id,
+        "listaProductos": carrito,
+        "total": total,
+        "estado": 0,
+        "email": this.user.email,
+        "telefono": this.user.telefono,
+        "tiempo_ingreso": new Date().getTime(),
+        "tiempo_estimado": new Date().getTime()+40,
+        "codigo":1,
+    }
+    console.log(pedido);
+    console.log(JSON.stringify(pedido));
+    fetch("http://localhost:8092/v1/departamento/gerencia/pedidos/create", {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Allow-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            },
+            body: JSON.stringify(pedido)
+        })
+        .then(function (data) {
+            console.log(data);
+        }).catch(error => console.log(error));
+}
+
 function buy(){
     confirm('¿Estás seguro de que quieres comprar?');
     var modal = document.getElementById("myModal");
     modal.style.display = "none";
 
-    var modalNew = document.getElementById("myModalNew");
-    var span = document.getElementsByClassName("close")[1];
-    modalNew.style.display = "block";
+    createPedido();
+
+    alert('Pedido ingresado correctamente');
 
     
     document.onkeyup = function (e) {
@@ -114,6 +177,7 @@ function checkLogin() {
         document.getElementById("register").style.display = "none";
         document.getElementById("logout").style.display = "block";
         document.getElementById("pideAquiButton").style.display = "";
+        document.getElementById("usuarioLogeado").style.display = "block";
     }
     if (sessionId == null) {
         document.getElementById("login").style.display = "block";

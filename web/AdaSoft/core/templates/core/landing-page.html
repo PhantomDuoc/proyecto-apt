@@ -127,7 +127,7 @@ The above copyright notice and this permission notice shall be included in all c
         <div id="myModal" class="modal" style="z-index:4">
 
           <!-- Modal content -->
-          <div class="modal-content">
+          <div class="modal-contenido">
             <div class="">
               <div class="card card-plain">
 {% comment %}                 <span class="close">&times;</span>
@@ -200,7 +200,7 @@ The above copyright notice and this permission notice shall be included in all c
         <div id="myModalNew" class="modal" style="z-index:4">
 
           <!-- Modal content -->
-          <div class="modal-content">
+          <div class="modal-contenido">
             <div class="">
               <div class="card card-plain">
                 {% comment %} <span class="close">&times;</span> {% endcomment %}
@@ -413,7 +413,7 @@ The above copyright notice and this permission notice shall be included in all c
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <h2 class="text-center">Agenda tu pedido</h2>
-              <form class="contact-form" action="https://api.web3forms.com/submit">
+              <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contact">
                 <input type="hidden" name="access_key" value="fab551af-a686-49c6-a0f7-f202261ad56e"/>
                 <input type="hidden" name="subject" value="New Submission from Web3Forms" />
                   <input type="hidden" name="redirect" value="https://web3forms.com/success" />
@@ -462,11 +462,13 @@ The above copyright notice and this permission notice shall be included in all c
                 
                 <div class="row">
                   <div class="col-md-4 ml-auto mr-auto">
-                    <button class="btn btn-danger btn-lg btn-fill" type="submit">
+                    <button class="btn btn-danger btn-lg btn-fill" type="submit" onclick="">
                       Enviar 
                     </button>
                   </div>
                 </div>
+                <div id="result"></div>
+
               </form>
             </div>
           </div>

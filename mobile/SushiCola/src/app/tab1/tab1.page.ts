@@ -1,5 +1,5 @@
 import { AunthenticationService } from '../services/aunthentication.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Storage } from '@capacitor/storage';
 import { BehaviorSubject } from 'rxjs';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-tab1',
@@ -16,7 +18,10 @@ import { BehaviorSubject } from 'rxjs';
 export class Tab1Page {
   orders: any = [];
   user: any ={};
+  modalData: any ={};
   tipoUser: string;
+  input:any;
+  @ViewChild(IonModal) modal: IonModal;
 
   constructor(
     private authService: AunthenticationService,
@@ -25,6 +30,7 @@ export class Tab1Page {
 
   ngOnInit() {
     this.getUser();
+    this.input = document.getElementById('estadoModal') as HTMLInputElement | null;
 /*     this.getPedidos(); */
     /*     let id = this.getToken();
     console.log(id) */
@@ -93,5 +99,100 @@ export class Tab1Page {
         console.log(data);
         this.orders = data;
       });
+  }
+
+  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  name: string;
+  
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(this.name, 'confirm');
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      this.message = `Hello, ${ev.detail.data}!`;
+    }
+  }
+
+  loadModal(id){
+    console.log("aqui id:"+id)
+    this.getDetallePedido(id);
+/*     var input = document.getElementById('loadModal'+id) as HTMLInputElement | null;
+    console.log(input); */
+    
+  }
+
+  async getDetallePedido(id){
+    
+    console.log(id);
+    return this.http.get('http://localhost:8092/v1/departamento/gerencia/pedidos/findById/'+id)
+    .pipe(
+      map((res: any) => {
+        return res;
+      })
+    ).subscribe
+    ((data) => {
+      console.log(data);
+      this.modalData = data;
+      if(this.modalData.estado == 0){
+        this.modalData.estado = "EN DESARROLLO";
+      }
+      if(this.modalData.estado == 1){
+        this.modalData.estado = "EN CAMINO";
+      }
+      if(this.modalData.estado == 2){
+        this.modalData.estado = "ENTREGADO";
+      }
+      var input = document.getElementById('estadoModal') as HTMLInputElement | null;
+      input.value = this.modalData.estado;
+    }
+    );
+  }
+
+  async updateEstado(){
+    return this.http.put('http://localhost:8092/v1/departamento/gerencia/pedidos/update',{
+      id: this.modalData.id,
+      estado: this.modalData.estado,
+      codigo: this.modalData.codigo,
+      tiempo_ingreso: this.modalData.tiempo_ingreso,
+      tiempo_entrega: this.modalData.tiempo_entrega,
+      tiempo_estimado: this.modalData.tiempo_estimado,
+      total: this.modalData.total,
+      cliente: this.modalData.cliente,
+      repartidor: this.modalData.repartidor,
+      direccion: this.modalData.direccion,
+      telefono: this.modalData.telefono,
+      listaProductos: this.modalData.listaProductos,
+      email: this.modalData.email,
+      comentario: this.modalData.comentario,
+    }).subscribe
+    ((data) => {
+      console.log(data);
+      this.getPedidos(this.tipoUser);
+    }
+    );
+  }
+
+  modificarEstado(){
+    this.modalData.estado++;
+    this.updateEstado();
+    console.log(this.modalData.estado);
+    var input = document.getElementById('estadoModal') as HTMLInputElement | null;
+      if(this.modalData.estado == 0){
+        this.modalData.estado = "EN DESARROLLO";
+      }
+      if(this.modalData.estado == 1){
+        this.modalData.estado = "EN CAMINO";
+      }
+      if(this.modalData.estado == 2){
+        this.modalData.estado = "ENTREGADO";
+      }
+      input.value = this.modalData.estado;
   }
 }

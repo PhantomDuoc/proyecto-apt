@@ -45,9 +45,11 @@ function getUserById() {
             console.log(data);
             document.getElementById("usuarioLogeado").innerHTML = data.username;
             var usuarioFormulario = document.getElementById("usuarioFormulario");
-            usuarioFormulario.value=data.username;
-            var correoFormulario = document.getElementById("correoFormulario");
-            correoFormulario.value=data.email;
+            if(usuarioFormulario){
+                usuarioFormulario.value=data.username;
+                var correoFormulario = document.getElementById("correoFormulario");
+                correoFormulario.value=data.email;
+            }
             if (document.getElementById("nombreApellido") != null) {
                 document.getElementById("nombreApellido").innerHTML = data.nombre + " " + data.apellido;
                 document.getElementById("fullName").innerHTML = data.nombre + " " + data.apellido;

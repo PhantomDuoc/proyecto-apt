@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {});
+document.addEventListener("DOMContentLoaded", function () {
+    pedido;
+});
 
 async function fetchAsync(url) {
     let response = await fetch(url);
@@ -20,6 +22,7 @@ function editarPedido(id) {
         .then(function (data) {
             console.log(data);
             console.log("pedido a editar: ", data);
+            this.pedido=data;
             // Get the modal
             var modal = document.getElementById("myModal");
             /* AGREGAR MODAL Y CARGAR DATOS DE LOCALSTORAGE */
@@ -123,6 +126,8 @@ function getSavedValue(v) {
 
 function updatePedido(id, email, telefono, direccion, idcliente, idrepartidor, total, estado) {
     var result = confirm("¿Está seguro de que desea actualizar este pedido?");
+    var pedidoSend = this.pedido;
+    console.log("pedido a enviar: "+pedidoSend)
     if (result) {
         fetch('http://localhost:8092/v1/departamento/gerencia/pedidos/update', {
                 method: "PUT",
@@ -131,16 +136,7 @@ function updatePedido(id, email, telefono, direccion, idcliente, idrepartidor, t
                     'Access-Control-Allow-Origin': '*',
                     'Allow-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
                 },
-                body: JSON.stringify({
-                    id: id,
-                    email: email,
-                    direccion: direccion,
-                    telefono: telefono,
-                    cliente: idcliente,
-                    repartidor: idrepartidor,
-                    total: total,
-                    estado: estado,
-                }),
+                body: JSON.stringify(pedidoSend),
             })
             .then(data => console.log(data))
             .catch(error => console.log(error))
