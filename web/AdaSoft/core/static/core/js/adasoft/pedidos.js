@@ -124,9 +124,13 @@ function getSavedValue(v) {
     return localStorage.getItem(v);
 }
 
-function updatePedido(id, email, telefono, direccion, idcliente, idrepartidor, total, estado) {
+function updatePedido(id, idcliente, idrepartidor, estado) {
     var result = confirm("¿Está seguro de que desea actualizar este pedido?");
     var pedidoSend = this.pedido;
+    pedidoSend.id = id;
+    pedidoSend.cliente = idcliente;
+    pedidoSend.repartidor = idrepartidor;
+    pedidoSend.estado = estado;
     console.log("pedido a enviar: "+pedidoSend)
     if (result) {
         fetch('http://localhost:8092/v1/departamento/gerencia/pedidos/update', {
