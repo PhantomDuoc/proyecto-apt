@@ -413,8 +413,11 @@ The above copyright notice and this permission notice shall be included in all c
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <h2 class="text-center">Agenda tu pedido</h2>
-              <form class="contact-form">
-                <div class="row">
+              <form class="contact-form" action="https://api.web3forms.com/submit">
+                <input type="hidden" name="access_key" value="fab551af-a686-49c6-a0f7-f202261ad56e"/>
+                <input type="hidden" name="subject" value="New Submission from Web3Forms" />
+                  <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+                  <div class="row">
                   <div class="col-md-6">
                     <label>Usuario</label>
                     <div class="input-group">
@@ -456,10 +459,11 @@ The above copyright notice and this permission notice shall be included in all c
                   rows="4"
                   placeholder="Me gustaría agendar un pedido de x handrolls para el día x..."
                 ></textarea>
+                
                 <div class="row">
                   <div class="col-md-4 ml-auto mr-auto">
-                    <button class="btn btn-danger btn-lg btn-fill">
-                      Enviar
+                    <button class="btn btn-danger btn-lg btn-fill" type="submit">
+                      Enviar 
                     </button>
                   </div>
                 </div>
