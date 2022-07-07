@@ -113,6 +113,7 @@ function createPedido() {
         "tiempo_ingreso": new Date().getTime(),
         "tiempo_estimado": new Date().getTime()+40,
         "codigo":1,
+        "direccion":this.user.direccion,
     }
     console.log(pedido);
     console.log(JSON.stringify(pedido));

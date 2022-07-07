@@ -78,8 +78,10 @@ export class Tab1Page {
     return this.http.delete('http://localhost:8092/v1/departamento/gerencia/pedidos/delete/'+id).subscribe
     ((data) => {
       console.log(data);
+      window.location.reload();
     }
     );
+    
   }
 
   async getPedidos(tipoUsuario) {
@@ -97,6 +99,7 @@ export class Tab1Page {
       )
       .subscribe((data) => {
         console.log(data);
+
         this.orders = data;
       });
   }
@@ -155,10 +158,10 @@ export class Tab1Page {
     );
   }
 
-  async updateEstado(){
+  async updateEstado(estado){
     return this.http.put('http://localhost:8092/v1/departamento/gerencia/pedidos/update',{
       id: this.modalData.id,
-      estado: this.modalData.estado,
+      estado: estado,
       codigo: this.modalData.codigo,
       tiempo_ingreso: this.modalData.tiempo_ingreso,
       tiempo_entrega: this.modalData.tiempo_entrega,
@@ -174,25 +177,22 @@ export class Tab1Page {
     }).subscribe
     ((data) => {
       console.log(data);
+      window.location.reload();
       this.getPedidos(this.tipoUser);
     }
     );
   }
 
-  modificarEstado(){
-    this.modalData.estado++;
-    this.updateEstado();
+  avanzar(){
+    if(this.modalData.estado == "EN DESARROLLO"){
+      this.updateEstado(1);
+    }
+    if(this.modalData.estado == "EN CAMINO"){
+      this.updateEstado(2);
+    }
+    if(this.modalData.estado == "ENTREGADO"){
+      alert("El pedido ya ha sido entregado");
+    }
     console.log(this.modalData.estado);
-    var input = document.getElementById('estadoModal') as HTMLInputElement | null;
-      if(this.modalData.estado == 0){
-        this.modalData.estado = "EN DESARROLLO";
-      }
-      if(this.modalData.estado == 1){
-        this.modalData.estado = "EN CAMINO";
-      }
-      if(this.modalData.estado == 2){
-        this.modalData.estado = "ENTREGADO";
-      }
-      input.value = this.modalData.estado;
   }
 }

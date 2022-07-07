@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (window.location.href == sitiosRestringidos[i] && !isLogged()) {
             window.location.href = "http://localhost:8000/sign-in/";
         }
+        if(window.location.href == sitiosRestringidos[i] && localStorage.getItem('sessionType') != 0){
+            console.log("usuario sin autorización");
+            window.location.href = "http://localhost:8000/sign-in/";
+        }
     }
     /* if(){} */
 
