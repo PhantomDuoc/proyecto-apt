@@ -8,36 +8,44 @@ function validarFormulario(evento) {
     var password = document.getElementById('password').value;
 
     fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + usuario, {
-        'method': 'GET',
-        'headers': {
-            'Content-type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type',
-        }
-    }).then(function (data) {
-        console.log(data);
-        if (data.length === 0) {
-            alert('Usuario no existe');
-            return;
-        }
-        if (data.password !== password) {
-            alert('Contraseña Incorrecta');
-            return;
-        } else {
-            if (data.password === password) {
-                localStorage.setItem('sessionId', data.id);
-                localStorage.setItem('sessionType', data.type);
-                if (data.type == 0) {
-                    window.location.href = "http://localhost:8000/dashboard";
-                }
-                if (data.type != 0) {
-                    alert('Sesión Iniciada Exitosamente')
-                    /* window.location.href = "http://localhost:8000/home"; */
+            'method': 'GET',
+            'headers': {
+                'Content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type',
+            }
+        })
+        .then(function (data) {
+            console.log(data);
+            if (data.length === 0) {
+                alert('Usuario no existe');
+                return;
+            }
+            if (data.password !== password) {
+                alert('Contraseña Incorrecta');
+                return;
+            } else {
+                if (data.password === password) {
+                    localStorage.setItem('sessionId', data.id);
+                    localStorage.setItem('sessionType', data.type);
+                    localStorage.setItem('sessionUsername', data.username);
+                    if (data.type == 0) {
+                        window.location.href = "http://localhost:8000/dashboard";
+                    }
+                    if (data.type == 1) {
+                        window.location.href = "http://localhost:8000/landing-page";
+                    }
+                    if (data.type == 2) {
+                        alert('Usuario no autorizado');
+                        localStorage.removeItem('sessionId');
+                        localStorage.removeItem('sessionType');
+                        localStorage.removeItem('sessionUsername');
+                        window.location.reload();
+                    }
                 }
             }
-        }
-    });
+        });
 }
 
 async function fetchAsync(url) {

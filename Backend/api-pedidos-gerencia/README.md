@@ -125,6 +125,6 @@ who participated in this project.
 
 mvn clean install -s configuration/settings.xml
 
-docker build --tag=api-productos-gerencia:latest .
+docker build --tag=api-pedidos-gerencia:latest .
 
 docker-compose up -d

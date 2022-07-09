@@ -34,7 +34,7 @@ public class ProductoController {
 	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")
 	public Page<Producto> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
 
-		Pageable pageRequest = PageRequest.of(page, 6, org.springframework.data.domain.Sort.by("id"));
+		Pageable pageRequest = PageRequest.of(page, 10, org.springframework.data.domain.Sort.by("id"));
 		Page<Producto> participants = participantService.findAll(pageRequest);
 		return participants;
 
@@ -46,26 +46,6 @@ public class ProductoController {
 
 		Pageable pageRequest = PageRequest.of(page, 50, org.springframework.data.domain.Sort.by("id"));
 		Page<Producto> participants = participantService.findByCategoria(categoria, pageRequest);
-		return participants;
-
-	}
-
-	@GetMapping("/findByCodigo/{codigo}")
-	public Page<Producto> findByCodigo(@PathVariable String codigo,
-			@RequestParam(name = "page", defaultValue = "0") int page) {
-
-		Pageable pageRequest = PageRequest.of(page, 5);
-		Page<Producto> participants = participantService.findByCodigo(codigo, pageRequest);
-		return participants;
-
-	}
-
-	@GetMapping("/findByDescripcion/{descripcion}")
-	public Page<Producto> findByDescripcion(@PathVariable String descripcion,
-			@RequestParam(name = "page", defaultValue = "0") int page) {
-
-		Pageable pageRequest = PageRequest.of(page, 5);
-		Page<Producto> participants = participantService.findByDescripcion(descripcion, pageRequest);
 		return participants;
 
 	}

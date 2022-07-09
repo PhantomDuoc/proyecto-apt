@@ -1,16 +1,21 @@
 package cl.adasoft.pedidos.gerencia.models.entity;
 
-import cl.adasoft.productos.gerencia.models.entity.Producto;
-
+/* import cl.adasoft.productos.gerencia.models.entity.Producto; */
+/* import cl.adasoft.productos.gerencia.models.entity.listaProductos; */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -45,9 +50,9 @@ public class Pedido {
 	@Column(name = "tiempo_entrega")
 	private String tiempo_entrega;
 
-	@NotBlank
+	@ElementCollection
 	@Column(name = "lista_productos")
-	private List<Producto> lista_productos = new ArrayList<Producto>();
+	private List<Long> listaProductos = new ArrayList<Long>();
 
 	@NotBlank
 	@Column(name = "total")
@@ -55,10 +60,10 @@ public class Pedido {
 
 	@NotBlank
 	@Column(name = "cliente")
-	private String cliente;
+	private Long cliente;
 
-	@Column(name = "direccion")
-	private String repartidor;
+	@Column(name = "repartidor")
+	private Long repartidor;
 
 	@NotBlank
 	@Column(name = "direccion")
@@ -66,7 +71,7 @@ public class Pedido {
 
 	@NotBlank
 	@Column(name = "telefono")
-	private String telefono;
+	private Long telefono;
 
 	@NotBlank
 	@Column(name = "email")
@@ -76,68 +81,4 @@ public class Pedido {
 	@Column(name = "comentario")
 	private String comentario;
 
-	public List<Producto> getListaProductos() {
-		return lista_productos;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Long estado) {
-		this.estado = estado;
-	}
-
-	public String getTiempo_ingreso() {
-		return tiempo_ingreso;
-	}
-
-	public void setTiempo_ingreso(String tiempo_ingreso) {
-		this.tiempo_ingreso = tiempo_ingreso;
-	}
-
-	public String getTiempo_estimado() {
-		return tiempo_estimado;
-	}
-
-	public void setTiempo_estimado(String tiempo_estimado) {
-		this.tiempo_estimado = tiempo_estimado;
-	}
-
-	public String getTiempo_entrega() {
-		return tiempo_entrega;
-	}
-
-	public void setTiempo_entrega(String tiempo_entrega) {
-		this.tiempo_entrega = tiempo_entrega;
-	}
-
-	public Pedido() {
-		super();
-	}
-
-	public Pedido(Long id, Long estado, String tiempo_ingreso, String tiempo_estimado,
-			String tiempo_entrega) {
-		super();
-		this.id = id;
-		this.estado = estado;
-		this.tiempo_ingreso = tiempo_ingreso;
-		this.tiempo_estimado = tiempo_estimado;
-		this.tiempo_entrega = tiempo_entrega;
-	}
-
-	@Override
-	public String toString() {
-		return "Pedido [id=" + id + ", estado=" + estado + ", tiempo_ingreso=" + tiempo_ingreso
-				+ ", tiempo_estimado=" + tiempo_estimado + ", tiempo_entrega=" + tiempo_entrega
-				+ "]";
-	}
 }

@@ -14,21 +14,6 @@ function registrar() {
 
 }
 
-function checkUser(username, email, telefono, rut) {
-    /* fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + username, ).then(function (data) {
-        if (data.length != 0) {
-            alert('Ya existe un usuario con ese nombre de usuario');
-            return;
-        }
-    });
-    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByRut/" + rut, ).then(function (data) {
-        if (data.length != 0) {
-            alert('Ya existe un usuario con ese rut');
-            return;
-        }
-    }); */
-}
-
 function crearUser(username, password, email, direccion, telefono, rut, type) {
     fetch('http://localhost:8091/v1/departamento/gerencia/usuario/update', {
             method: "PUT",
@@ -51,44 +36,56 @@ function crearUser(username, password, email, direccion, telefono, rut, type) {
         .then(res => {
             if (res.ok) {
                 console.log("HTTP request successful")
+                alert('Usuario Creado Exitosamente');
+                this.cargarUser();
             } else {
                 console.log("HTTP request unsuccessful")
+                alert('Usuario No Creado');
+                window.location.reload();
             }
             return res
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data);
+        })
         .catch(error => console.log(error))
-    window.location.reload();
+
 }
 
-
-function validarFormulario(evento) {
+function cargarUser() {
     var usuario = document.getElementById('username').value;
     var password = document.getElementById('password').value;
 
-    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + usuario, ).then(function (data) {
-        console.log(data);
-        if (data.length === 0) {
-            alert('Usuario no existe');
-            return;
-        }
-        if (data.password !== password) {
-            alert('Contraseña Incorrecta');
-            return;
-        } else {
-            if (data.password === password) {
-                localStorage.setItem('sessionId', data.id);
-                if (data.type == 0) {
-                    window.location.href = "http://localhost:8000/dashboard";
-                }
-                if (data.type != 0) {
-                    alert('Sesión Iniciada Exitosamente')
-                    /* window.location.href = ""; */
+    fetchAsync("http://localhost:8091/v1/departamento/gerencia/usuario/findByUsername/" + usuario, {
+            'method': 'GET',
+            'headers': {
+                'Content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type',
+            }
+        })
+        .then(function (data) {
+            console.log(data);
+            if (data.length === 0) {
+                alert('Usuario no existe');
+                return;
+            }
+            if (data.password !== password) {
+                alert('Contraseña Incorrecta');
+                return;
+            } else {
+                if (data.password === password) {
+                    localStorage.setItem('sessionId', data.id);
+                    localStorage.setItem('sessionType', data.type);
+                    localStorage.setItem('sessionUsername', data.username);
+                    if (data.type == 1) {
+                        window.location.href = "http://localhost:8000/";
+                    }
                 }
             }
-        }
-    });
+        });
 }
 
 async function fetchAsync(url) {

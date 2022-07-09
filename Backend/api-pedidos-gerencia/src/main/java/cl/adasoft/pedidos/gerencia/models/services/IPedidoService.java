@@ -19,8 +19,11 @@ public interface IPedidoService {
 
 	public Optional<Pedido> findById(Long id);
 
-	public Optional<Pedido> findByEstado(Long estado);
+	public Page<Pedido> findByEstado(Long estado, Pageable pageRequest);
+/* 
+	public Page<Pedido> getAll(Pageable pageRequest); */
 
-	public Page<Pedido> getAll(Pageable pageRequest);
+	public Page<Pedido> findByRepartidor(Long repartidor, Pageable pageRequest);
 
+	public Page<Pedido> findByCliente(Long cliente, Pageable pageRequest);
 }

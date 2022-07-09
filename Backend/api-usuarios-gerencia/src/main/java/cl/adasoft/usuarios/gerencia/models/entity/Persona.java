@@ -24,11 +24,16 @@ public class Persona {
 	
 	@NotBlank
 	@Size(min = 10, max = 100, message = "The name cannot exceed 100 characters")
+<<<<<<< HEAD
 	@Column(name="username", unique = true, nullable = false)
+=======
+	@Column(name="username", unique = true)
+>>>>>>> hai
 	private String username;
 
 	@NotBlank
-	@Column(name="password", nullable = false)
+	@Size(min = 8, max = 16, message = "The password must be between 8 and 16 characters")
+	@Column(name="password")
 	private String password;
 	
 	@NotBlank
@@ -36,7 +41,7 @@ public class Persona {
 	private Long type;
 
 	@NotBlank
-	@Column(name="rut", unique = true, nullable = false)
+	@Column(name="rut", unique = true)
 	private Long rut;
 
 	@Column(name="direccion")
