@@ -24,7 +24,11 @@ public class Persona {
 	
 	@NotBlank
 	@Size(min = 10, max = 100, message = "The name cannot exceed 100 characters")
+<<<<<<< HEAD
 	@Column(name="username", unique = true, nullable = false)
+=======
+	@Column(name="username", unique = true)
+>>>>>>> hai
 	private String username;
 
 	@NotBlank
@@ -37,7 +41,7 @@ public class Persona {
 	private Long type;
 
 	@NotBlank
-	@Column(name="rut", unique = true, nullable = false)
+	@Column(name="rut", unique = true)
 	private Long rut;
 
 	@Column(name="direccion")
