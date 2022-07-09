@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import cl.adasoft.productos.gerencia.models.entity.Producto;
 
 public interface IProductoService {
+	
+	public Producto save(Producto producto);
 
 	public void delete(Long id);
 
@@ -17,11 +19,11 @@ public interface IProductoService {
 
 	public Optional<Producto> findById(Long id);
 
-	public Page<Producto> findByNombre(String nombre, Pageable pageRequest);
+	public Page<Producto> findByNombre(String nombre, Pageable pageable);
 
-	public Page<Producto> findByPrecio(Long precio, Pageable pageRequest);
+	public Page<Producto> findByCodigo(Long codigo, Pageable pageable);
 
-	public Page<Producto> findByStock(Long stock, Pageable pageRequest);
+	public Page<Producto> findByPrecio(Long precio, Pageable pageable);
 
-	public Producto save(Producto persona);
+	public Page<Producto> findByStock(Long stock, Pageable pageable);
 }

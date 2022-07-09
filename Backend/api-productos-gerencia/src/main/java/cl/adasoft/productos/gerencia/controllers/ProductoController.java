@@ -97,8 +97,14 @@ public class ProductoController {
 		return new ResponseEntity<>(participantService.save(producto), HttpStatus.CREATED);
 	}
 
+<<<<<<< HEAD:Backend/api-productos-gerencia/src/main/java/cl/adasoft/departamento/gerencia/controllers/ProductoController.java
+	@GetMapping("/findByCodigo/{codigo}")
+	public Page<Producto> findByCodigo(@PathVariable Long codigo,
+			@RequestParam(name = "page", defaultValue = "0") int page) {
+=======
 	@DeleteMapping("/delete/{id}")
 	public void update(@PathVariable Long id) {
+>>>>>>> hai:Backend/api-productos-gerencia/src/main/java/cl/adasoft/productos/gerencia/controllers/ProductoController.java
 
 		participantService.delete(id);
 	}

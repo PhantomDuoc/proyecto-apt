@@ -11,18 +11,11 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 
-@Data
+
+@Data 
 @Entity
-@Table(name = "products")
+@Table(name="products")
 public class Producto {
-
-	@NotBlank
-	@Column(name = "categoria")
-	private String categoria;
-
-	@NotBlank
-	@Column(name = "codigo")
-	private String codigo;
 
 	@NotBlank
 	@Column(name = "descripcion")
@@ -33,12 +26,8 @@ public class Producto {
 	private Long id;
 
 	@NotBlank
-	@Column(name = "imagen")
-	private String imagen;
-
-	@NotBlank
 	@Size(min = 10, max = 100, message = "The name cannot exceed 100 characters")
-	@Column(name = "nombre")
+	@Column(name="nombre", nullable = false)
 	private String nombre;
 
 	@NotBlank
@@ -46,7 +35,19 @@ public class Producto {
 	private Long precio;
 
 	@NotBlank
-	@Column(name = "stock")
+	@Column(name = "codigo")
+	private Long codigo;
+
+	@NotBlank
+	@Column(name="stock", nullable = false)
 	private Long stock;
+
+	@NotBlank
+	@Column(name="categoria", nullable = false)
+	private String categoria;
+
+	@NotBlank
+	@Column(name = "imagen")
+	private String imagen;
 
 }

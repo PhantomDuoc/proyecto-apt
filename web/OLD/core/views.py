@@ -5,8 +5,7 @@ from django.template import RequestContext
 import requests
 from core.models import Usuarios
 
-urlUsers='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
-urlProductos='http://localhost:8090/v1/departamento/gerencia/producto/findAll'
+url='http://localhost:8091/v1/departamento/gerencia/usuario/findAll'
 
 
 
@@ -26,7 +25,7 @@ def index(request):
 
     
 def login(request):  #login
-    response = requests.get(urlUsers).json()  #obtenemos la respuesta de la api
+    response = requests.get(url).json()  #obtenemos la respuesta de la api
     context = response['content'] #obtenemos el contenido de la respuesta
     return render(request, 'core/login.html', {'context': context})  #enviamos el contenido a la vista
 
@@ -68,9 +67,7 @@ def eventolog(request):
     return render(request,'core/eventolog.html')    
 
 def dashboard(request):
-    response = requests.get(urlProductos).json()  #obtenemos la respuesta de la api
-    context = response['content'] #obtenemos el contenido de la respuesta
-    return render(request, 'core/dashboard.html', {'context': context})  #enviamos el contenido a la vista
+    return render(request, 'core/dashboard.html')
 
 def estadistica(request):
     return render(request, 'core/estadistica.html')

@@ -46,16 +46,15 @@ public class ProductoServiceImp implements IProductoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<Producto> findByNombre(String nombre, Pageable pageRequest) {
+	public Page<Producto> findByNombre(String nombre, Pageable pageable) {
 
-		return participantsDao.findByNombre(nombre, pageRequest);
+		return participantsDao.findByNombre(nombre, pageable);
 	}
 
 	@Override
 	public Page<Producto> findByPrecio(Long precio, Pageable pageRequest) {
 		// TODO Auto-generated method stub
-		return participantsDao.findByPrecio(precio, pageRequest);
-	}
+		return participantsDao.findByPrecio(precio, pageRequest);	}
 
 	@Override
 	public Page<Producto> findByStock(Long cantidad, Pageable pageRequest) {
@@ -68,6 +67,11 @@ public class ProductoServiceImp implements IProductoService {
 	public Producto save(Producto participant) {
 
 		return participantsDao.save(participant);
+	}
+
+	@Override
+	public Page<Producto> findByCodigo(Long codigo, Pageable pageRequest) {
+		return participantsDao.findByCodigo(codigo, pageRequest);
 	}
 
 }

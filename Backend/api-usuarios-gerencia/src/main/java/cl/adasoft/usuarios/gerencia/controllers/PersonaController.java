@@ -9,11 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,13 +23,13 @@ import cl.adasoft.usuarios.gerencia.models.services.IPersonaService;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import io.swagger.v3.oas.annotations.Operation;
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RestController
 public class PersonaController {
 	
 	@Autowired 
 	private IPersonaService participantService;
-
+	
 	@GetMapping("/findAll")
 	@Operation(summary = "Get users by name", description = "Returns the users filtered by name")
 	public Page<Persona> findAll(@RequestParam(name="page", defaultValue="0") int page){
@@ -51,20 +49,21 @@ public class PersonaController {
 		
 	}
 	
-	@PostMapping("/create")  //para indicarle a spring que es una peticion post
-	public ResponseEntity<Persona>  save(@RequestBody Persona persona) {  
+	@PostMapping("/create")
+	public ResponseEntity<Persona>  save(@RequestBody Persona persona) {
 		
-		return new ResponseEntity<>(participantService.save(persona),HttpStatus.CREATED);  //para retornar el objeto persona y el codigo de estado
+		return new ResponseEntity<>(participantService.save(persona),HttpStatus.CREATED);
 	}
 	
 	
-	@DeleteMapping("/delete/{id}")  //para indicarle a spring que es una peticion delete
-	public void  update(@PathVariable Long id) {  
+	@DeleteMapping("/delete/{id}")
+	public void  update(@PathVariable Long id) {
 		
-		participantService.delete(id);  //para eliminar el objeto persona
+		participantService.delete(id);
 	}	
 	
-	@GetMapping("/findByRut/{rut}")	 	
+/* 	Reemplazar por buscar por nombre de usuario
+ */	@GetMapping("/findByRut/{rut}")
 	public ResponseEntity<Persona> findByRut(@PathVariable Long rut){
 		Persona response = participantService.findByRut(rut);
 		
@@ -86,11 +85,6 @@ public class PersonaController {
 		
 		return response;
     }
-
-	@PutMapping("/update")
-	public ResponseEntity<Persona> update(@RequestBody Persona persona){
-		return new ResponseEntity<>(participantService.save(persona),HttpStatus.CREATED);
-	}
 	
 	@GetMapping("/findByUsername/{username}")
 	public Optional<Persona>  findByUsername(@PathVariable String username){
